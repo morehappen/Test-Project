@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //（1）split 将separate作为切割字符，结果存在一个字符串中。
+    //var str='abcadeafg'     str.split('a') //["", "bc", "de", "fg"]
+    var arr = 'a b c c b a';
+    var b = arr.split(' ');//传入空格字符串
+    console.log(arr);//'a b c c b a'原字符串不变
+    console.log(b);// ["a", "b", "c", "c", "b", "a"]，返回值
+    //split传入正则表达式
+    console.log(arr.split(/\s/));// ["a", "b", "c", "c", "b", "a"]
+    var arr1 = 'abccba';
+    var b1 = arr1.split();
+    console.log(b1);//["abccba"]//参数为空时，相当于字符串转为了数组。
+    var b2 = arr1.split('');
+    console.log(b2);//["a", "b", "c", "c", "b", "a"]当传入空字符串，变为数组
+    //（2）split两个参数的控制（这种双参的使用，必须是使用了正则）
+    var string = 'sky,moon,fly,cat';
+    console.log(string.split(/,/,3));//["sky", "moon", "fly"]
+    console.log(string.split(/(,)/,3));//["sky", ",", "moon"]
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<body>
+	<a href="/jsref/dom_obj_attributes.asp" target="_blank">Attr 对象</a>
+	<p id="demo">请点击按钮来显示上面这个链接的 target 属性值。</p>
+	<button onclick="myFunction()">试一下</button>
+<script>
+	function myFunction(){
+		var a=document.getElementsByTagName("a")[0];
+//【1】获得属性的值。下述代码会是_blank（可理解为知道属性名获取属性值，参数是字符串形式）
+		document.getElementById("demo").innerHTML=a.getAttribute("target");
+//【2】获取属性节点。获取的属性节点是个对象。
+//（可以理解为知道属性名获取属性节点，参数是字符串形式）
+		console.log(a.getAttributeNode("target"));
+		//上述代码会输出一个对象：形式是target="_blank"
+//【3】设置dom的属性值：   元素节点.setAttribute(“属性名”,”新的属性值”);
+//{双参，字符串形式，逗号间隔}
+		a.setAttribute('target','#');
+//【4】删除dom属性的值:    元素节点.removeAttribute(“要移除的属性名”);
+		a.removeAttribute('target');
+	}
+</script>
+</body>
+</html>

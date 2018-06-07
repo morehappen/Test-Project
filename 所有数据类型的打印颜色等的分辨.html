@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //(1)Number
+    var num = 1;
+    console.log(1);//1  类型Number:蓝颜色
+    //(2)String
+    var str = "sky";
+    console.log(str);//sky 类型String:黑色
+    //@这里我们要注意：json是字符串，外围肯定是引号包裹的。但是如果写在后缀是json的文件
+    //中，就算是没有被引号包裹，也是字符串。这是因为，[]只有写在script标签里，才是数组。
+    //(3-1)json，第一种中括号写法
+    var json1 = '[{"name":"sky","age":10},{"name":"moon","age":20}]';
+    //[{"name":"sky","age":10},{"name":"moon","age":20}] JSON的本质也是String：黑色
+    console.log(json1);//
+    console.log(typeof (json1));//string
+    //(3-2)json，第二种写法，花括号
+    var json2 = '{"name":"sky","age":10}';
+    console.log(json2);//{"name":"sky","age":10}
+    console.log(typeof (json2));//string
+    //(4)布尔
+    var bul = true;
+    console.log(bul);//true 颜色：蓝色
+    //(5)未定义undefined
+    var und = undefined;
+    console.log(und);//undefined    颜色：灰色
+    //(6)null
+    var nul = null;
+    console.log(nul);//null     颜色：灰色
+    //(7-1)对象object
+    var obj = {"name":"sky","age":10};
+    console.log(obj);//Object {name: "sky", age: 10} 颜色：多种颜色，四种颜色。
+    console.log(typeof (obj));//object
+    //(7-2)对象：函数。typeof输出function
+    var fun = function(){
+        var a = 1;
+    };
+    console.log(fun);//如下：          颜色：两种颜色
+//    var fun = function(){
+//        var a = 1;
+//    }
+    console.log(typeof (fun));//function
+
+</script>
+</body>
+</html>

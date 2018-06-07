@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery.min.js"></script>
+    <style>
+        .sky{
+            border: 1px solid red;
+        }
+    </style>
+    <script>
+        $(function () {
+            var appendTo1 = $("<h1>标题1,用来插入到类名为sky的div中</h1>");
+            appendTo1.appendTo($(".sky"));
+            var append1 = $("<h2>标题2,用来插入到类名为sky的div中</h2>");
+            $(".sky").append(append1);
+            var prependTo1 = $("<h3>标题3,用来插入到类名为sky的div中</h3>");
+            prependTo1.prependTo($(".sky"));
+            var prepend1 = $("<h4>标题4,用来插入到类名为sky的div中</h4>");
+            $(".sky").prepend(prepend1);
+            var after1 = $("<h5>标题5,用来插入到类名为sky的div中</h5>");
+//            $(".sky").after(after1);//该方法和insertAfter一样，只是主仆关系对调
+            after1.insertAfter($(".sky"));
+            var before1 =  $("<h6>标题6,用来插入到类名为sky的div中</h6>");
+            $(".sky").before(before1);
+//            before1.insertBefore($(".sky"));
+        })
+    </script>
+</head>
+<body>
+<div class="sky">这是类名为sky的原始节点，其他元素都插入到它</div>
+</body>
+</html>

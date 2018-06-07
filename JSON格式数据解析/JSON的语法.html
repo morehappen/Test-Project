@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+   /* 是一种数据格式
+    写法和对象字面量的区别：属性名必须加上双引号（而对象字面量是可以省略双引号的）*/
+
+
+    //@这里我们要注意：json是字符串，外围肯定是引号包裹的。但是如果写在后缀是json的文件
+    //中，就算是没有被引号包裹，也是字符串。这是因为，[]只有写在script标签里，才是数组。
+    //(3-1)json，第一种中括号写法
+    var json1 = '[
+            {
+                "name":"sky",
+                "age":10
+            },
+            {
+                "name":"moon",
+                "age":20
+            }
+            ]';
+    //[{"name":"sky","age":10},{"name":"moon","age":20}] JSON的本质也是String：黑色
+    console.log(json1);//
+    console.log(typeof (json1));//string
+    //(3-2)json，第二种写法，花括号
+    var json2 = '{"name":"sky","age":10}';
+    console.log(json2);//{"name":"sky","age":10}
+    console.log(typeof (json2));//string
+</script>
+</body>
+</html>

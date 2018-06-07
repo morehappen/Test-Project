@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery.min.js"></script>
+    <script>
+        $(function () {
+            var a = 3;
+//（1）nth-child选择器的索引是从1开始的。
+            $("li:nth-child(1)").css("color","red");
+//            $("li:nth-child(even)").css("color","blue");
+//            $("li:nth-child(odd)").css("color","yellow");
+//            $("li:nth-child("+a+")").css("color","yellow");
+
+//（2）第一个元素
+            $("li:first-child").css("color","blue");
+//（3）末尾元素
+            $("li:last-child").css("color","pink");
+//(4)唯一子元素：如果p是div的唯一子元素，那么p就会被选中。
+            $("div p:only-child").css("color","blue");
+//（5）div是不可以作为p元素的子元素的，这种布局是错误的。
+//            $("p div:only-child").css("color","blue");
+        })
+    </script>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+    <div>
+        <p>div元素唯一的子元素p</p>
+    </div>
+    <p>
+        <div>这是个div元素，是p元素的唯一子元素，p中有div是错误的书写方式。
+        因为p会先给自己闭合，然后才接着加载div元素。
+        </div>
+    </p>
+    <div>
+        序号写法：<br>
+        li:nth-child(3){background:orange;}
+        /*把第3个LI的背景设为橙色*/<br>
+        倍数写法：<br>
+        li:nth-child(3n){background:orange;}
+        /*把第3、第6、第9、…、所有3的倍数的LI的背景设为橙色*/
+        <br>
+        倍数分组匹配：<br>
+        li:nth-child(3n+1){background:orange;}
+        /*匹配第1、第4、第7、…、每3个为一组的第1个LI*/<br>
+        li:nth-child(3n+5){background:orange;}
+        /*匹配第5、第8、第11、…、从第5个开始每3个为一组的第1个LI*/<br>
+        li:nth-child(5n-1){background:orange;}
+        /*匹配第5-1=4、第10-1=9、…、第5的倍数减1个LI*/
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<html>
+<head>
+    <script type="text/javascript">
+        function getText()
+        {
+            //iframeObject.contentDocument@@contentDocument 属性能够以 HTML 对象来返回 iframe 中的文档。
+            var x=document.getElementById("frame1").contentDocument;//这是一个object对象
+            console.log(x.head);//返回iframe内部的head
+            console.log(x.body);//返回iframe内部的body
+            console.log(x.body.textContent);//textContent能返回相应dom内的文本内容
+            console.log(typeof (x));
+            console.log(x.getElementsByTagName("h3")[0].childNodes[0].nodeValue);
+        }
+    </script>
+</head>
+<body>
+<iframe src="fram_a.html" id="frame1" ></iframe>
+<br /><br />
+<input type="button" onclick="getText()" value="Get text" />
+
+</body>
+</html>

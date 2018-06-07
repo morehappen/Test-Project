@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery.min.js"></script>
+    <script>
+        $(function () {
+            $(".moon").css("color","red");//（1）查找元素节点
+            console.log($(".moon").attr("data-id"));//（2）查找属性节点
+            $(".moon").data("fly","haipeng");//这是jq中存储数据的一种方法。
+            console.log($(".moon").data("fly"));
+        })
+    </script>
+</head>
+<body>
+    <div class="moon" data-id="sky">
+        获取自定义属性
+    </div>
+</body>
+</html>

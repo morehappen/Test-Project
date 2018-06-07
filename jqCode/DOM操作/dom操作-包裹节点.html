@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery.min.js"></script>
+    <script>
+        $(function () {
+//（1）每个li都包裹。
+//            $("li").wrap("<div>wrap</div>");
+//（2）一大堆li包裹起来。
+            $("li").wrapAll("<div>wrapAll</div>");
+//（3）每个li次一级全部被包裹起来。
+            $("li").wrapInner("<div>wrapInner</div>");
+        })
+    </script>
+</head>
+<body>
+<ul>
+    <li title='apple'><span>苹果</span></li>
+    <li title='oro'>橘子</li>
+    <li title='菠萝'>菠萝</li>
+</ul>
+</body>
+</html>

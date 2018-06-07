@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <script src="../../jquery.min.js"></script>
+    	<div id="sky" style="color: red;font-size:50px">1
+    		<div id="son">
+    			son
+    		</div>
+    	</div>
+    	<a class="moon" style="color: yellow" href="_blank">2</a>
+    	<div class="girl" style="color: pink">3</div>
+    	<a class="star" href="#">4</a>
+    	<form action="#">
+    		<input type="checkbox" placeholder="fuck" checked="true">
+    		<input type="text" placeholder="fuck">
+    	</form>
+    	<ul>
+    		<li id="fly">11</li>
+    		<li>22</li>
+    		<li>33</li>
+    		<li>44</li>
+    		<li>55</li>
+    	</ul>
+		<ul class="jiaoji">
+			<li>1</li>
+			<li>1</li>
+			<li>1</li>
+		</ul>
+    	<script>
+    		$(function(){//测试基本选择器
+//此处：id选择器，@@@设置单个属性操作：$(“img”).attr(“title”,”哎哟，不错哦”);
+    			$("#sky").attr("style","color:blue");
+//此处：类名选择器（也是伪数组），@设置多个属性操作：$("img").attr({
+										//     title:"哎哟，不错哦",
+										//     alt:"哎哟，不错哦",
+										//     style:"opacity:.5"
+										// });
+    			$(".moon").attr({style:"color:blue",href:"#"});
+// 此处：标签选择器（伪数组），@@@attr单个参数获取属性
+    			console.log($("div").attr("style"));
+//此处：@@@removeAttr移除属性
+    			console.log($("div").removeAttr("style"));
+//此处：交集选择器(简单选择器和后面的类名不可有空格)，@@@css样式操作设置单个样式
+    			$("ul.jiaoji").attr("style","color:red");
+//此处：表单选择器，注意这里的设置属性方法：@@@prop设置属性
+    			$(":text").attr("placeholder","ok");
+    			$(":checked").prop("checked",false);
+    			$(":checked").prop("checked");//注意这里的@@@prop输入单参是获取属性
+
+//此处：属性选择器，@@@css样式操作单参获取样式
+    			$("div[class]").css("color");
+    			$("：header").css("color");
+
+//此处有伪类选择器，@@@css样式操作传入对象设置多个样式
+    			$("li:eq(0)").css({"color":"pink","font-size":"20px"});
+//此处：伪类选择器（奇数子元素选择器），@@@样式操作之添加样式类
+    			$("li:odd").addClass("one");
+//此处：属性选择器，@@@样式操作之移除所有样式类
+    			$("li[id]").removeClass();
+//此处：伪类选择器（子元素选择器），@@@样式操作之移除单个样式类
+    			$("li:nth-child(2n)").removeClass("one");
+//此处：伪类选择器（子元素选择器），@@@样式操作之移除单个样式类
+    			$("li:nth-child(2n)").hasClass("one");
+//此处：伪类选择器（子元素选择器），@@@样式操作之切换样式类
+    			$("li:nth-child(2n)").toggleClass("one");
+
+
+
+    		})
+    	</script>
+    </body>
+</html>

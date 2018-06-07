@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function callerDemo() {
+        if (arguments.caller) {
+            var a = callerDemo.caller.toString();
+            alert(a);
+        } else {
+            alert("this is a top function");
+        }
+    }
+    function handleCaller() {
+        callerDemo();
+    }
+    handleCaller();
+    function calleeDemo() {
+        alert(arguments.callee);
+    }
+    calleeDemo();
+</script>
+</body>
+</html>

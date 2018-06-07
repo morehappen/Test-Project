@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="result"></div>
+<script src="sky_down_template.js"></script>
+<script id="test" type="text/html">
+    <h1>{{title}}</h1>
+    <ul>
+        {{each list as value i}}
+            <li>索引 {{i + 1}} ：{{value}}</li>
+        {{/each}}
+        <!--var data = {
+        title: '标签',
+        list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
+        };-->
+<!--//@@@这里有个地方值得注意，list本来是data下面的，需要钻进去一层，但是封装的js插件内
+        已经把list的层级提高一层，所以，所有的元素层级都提高一个层级。-->
+        <!--<% for(var i=0; i<list.length; i++) { %>-->
+        <!--<li><%= list[i] %></li>-->
+        <!--<% } %>-->
+    </ul>
+</script>
+<!--这是姜家薪写的代码参考下
+    <script id="knowledgePoint_add_cdName_template" type="text/html">
+    {{ each list as value i }}
+        <option value="{{value.id}}">{{value.name}}</option>
+    {{ /each }}
+</script>-->
+<script>
+    //这里的模板引擎插件js代码，是我直接从github粘贴出来的。
+    var data = {
+        title: '标签',
+        list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
+    };
+
+    // 模板库提供了一个template的函数
+    var html = template('test', data);
+
+    console.log(html);
+
+    document.querySelector('.result').innerHTML = html;
+</script>
+</body>
+</html>

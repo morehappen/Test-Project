@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .sky{
+            width: 1400px;
+            height: 1000px;
+            background-color: pink;
+        }
+        .left{
+            float: left;
+            background-color: yellow;
+            width: 600px;
+            height: 600px;
+        }
+        .right{
+            float: right;
+            background-color: greenyellow;
+            width: 600px;
+            height: 600px;
+        }
+    </style>
+    <script src="../jquery.min.js"></script>
+    <script>
+        $(function () {
+            console.log($(".sky").children().length);
+            var arr= [1,"1right",2,"2right",3,"3right"];
+            var resLeft = '<div class="left">左侧';
+            var resRight = '<div class="right">右侧';
+            for(var i=0;i<arr.length;i++){
+                console.log(typeof (arr[i]));
+                if(typeof (arr[i])== "number"){
+                    resLeft += arr[i];
+                }else{
+                    resRight += arr[i];
+                }
+//                result += '<span class="opWrap">' + getValue(obj[i].optionNum)+'.&nbsp;&nbsp</span>';
+//                result +=getValue(obj[i].content);
+//                result +='</br>';
+            };
+            resLeft += '</div>';
+            resRight += '</div>';
+
+            $(".sky").html(resLeft)
+            $(".sky").append(resRight)
+        })
+    </script>
+</head>
+<body>
+    <div class="sky">
+        <!--<div class="left">-->
+            <!--左侧-->
+        <!--</div>-->
+        <!--<div class="right">-->
+            <!--右侧-->
+        <!--</div>-->
+    </div>
+</body>
+</html>

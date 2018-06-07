@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var arr = [1,2,3,1,23,4,3];
+    var arrnew = [];
+    for(var i = 0;i<arr.length;i++){
+        if(arrnew.indexOf(arr[i]) == -1){
+            arrnew[arrnew.length] = arr[i];
+        }
+    }
+    console.log(arrnew);
+    function norepeat(arr){
+        var newarr = [],
+            newObj= {};
+        for(var i = 0;i < arr.length;i++){
+            if(!newObj[arr[i]]){
+                newObj[arr[i]] = 1;
+                newarr[newarr.length] = arr[i];
+            }
+        }
+        return newarr;
+    }
+    console.log(norepeat(arr));
+    var url = "http://witmax.cn/index.php?sky=0&moon=1&fly=2";
+    var a = url.split('?')[1];
+    console.log(a);
+    var b = a.split('&');
+    console.log(b);
+    var c = {};
+    for(var i = 0;i< b.length;i++){
+        var d = b[i].split('=');
+        c[d[0]] = d[1];
+    }
+    console.log(c);//
+
+</script>
+</body>
+</html>

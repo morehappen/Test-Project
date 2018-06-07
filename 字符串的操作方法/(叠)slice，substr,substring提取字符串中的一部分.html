@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>//【该页面只有slice方法同时适用字符串和数组】
+    var arr = 'abcdefg';
+    //(1)@@@slice(x,y) 返回从x到y(不包括y) 位置颠倒时，结果为空字符串【方法适用数组】
+    // 1，不包含end   2，不改变原有字符串   3，返回获取到的两点之间的元素
+    var s = arr.slice(1,3);
+    console.log(arr);//abcdefg原有字符串不改变
+    console.log(s);    //返回为截取到的元素 bc
+    var one = arr.slice(1);
+    console.log(one);//bcdefg单参，返回从此参数开始之后的所有字符串
+    var s1 = arr.slice(3,1);//颠倒位置，即起始位置大于结束位置
+    console.log(s1);   //  ""返回为空
+    var s2 = arr.slice();//不传参，截取到整个字符串
+    console.log(s2);//不传参数的话，返回原来的字符串。
+    var s3 = arr.slice(0);
+    console.log(s3);//abcdefg
+//（2）@@@substring(x,y) 返回从x到y（不包括y） 位置颠倒时，封装函数自动互换参数位置。
+// 1，不包含end   2，不改变原有字符串   3，返回获取到的两点之间的元素
+    var s_again = arr.substring(1,3);
+    console.log(arr);//abcdefg原有字符串不改变
+    console.log(s_again);// "bc"
+    var s_again1 = arr.substring(3,1);
+    console.log(s_again1);// "bc"
+//输入负值时将负值变为0，哪个较小作为开始位置
+    var s_end = arr.substring(-1,1);//
+    console.log(s_end);//a
+//（3）substr(x,y) 返回从x开始的长度为y的字符串
+// 1，y表示长度   2，不改变原有字符串   3，返回获取到的两点之间的元素
+    var s_and = arr.substr(1,3);
+    console.log(arr);//abcdefg不改变原有字符串
+    console.log(s_and);    // 变量s_and"返回截取到的字符串bcd"
+    var s_again = arr.substr(1);
+    console.log(s_again);//bcdefg。传入单参，认为起始位置为1，后面的长度是截取到末尾。
+</script>
+</body>
+</html>

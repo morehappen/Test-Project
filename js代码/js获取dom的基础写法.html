@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <div id="father">
+    	<div id="sky">通过id名获取</div>
+    	<div class="moon">通过类名获取</div>
+    	<p>此处通过标签名获取</p>
+    </div>
+    </body>
+    <script>
+    var a = document.getElementById('sky');//下面方法都是使用的属性。
+    console.log(a);//第一个子元素
+    var b = document.getElementsByClassName('moon')[0];//类名
+    console.log(b);//第二个子元素
+    var c = document.getElementsByTagName('p')[0];//标签名
+    console.log(c);//第三个子元素
+    var father = document.getElementById('father');//三个子元素的父元素
+    //获取到第一个子节点
+    console.log(father.firstChild);//console.log(father.lastChild);
+    //获取到第一个元素子节点
+    console.log(father.firstElementChild);//console.log(father.lastElementChild);
+    //获取到所有的元素子节点
+    console.log(father.children);
+    //获取到所有的子节点(包括文本节点)
+    console.log(father.childNodes);
+    //获取到前一个兄弟元素子节点
+    console.log(c.previousElementSibling);//对应的是c.nextElementSibling
+    //获取到前一个兄弟子节点（包含文本节点）
+    console.log(c.previousSibling);//对应的是c.nextSibling
+    //获取到父节点（只能是元素节点）
+    console.log(c.parentNode);
+    
+
+
+
+    </script>
+</html>

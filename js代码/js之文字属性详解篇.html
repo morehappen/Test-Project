@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box">
+    我是一个div
+    <span>我是span</span>
+</div>
+<div id="box1"></div>
+<img id="pic" src="" alt="">
+<input  id="ipt" type="text" value="我是一个ipt">
+<script>
+    var box = document.getElementById("box");
+    //此处是获得一个标签的文字属性，或者只能说是innerHTML属性
+    console.log(box.innerHTML);//输出：我是一个div换行<span>我是span</span>
+    //一旦这样书写后，div标签内的子元素会被重置，以前的子元素都没有了（innerHTML兼容性很强，ie能很好兼容）
+    box.innerHTML = "<div>123</div>"
+    //这是ie的单纯获取文字属性的方法，高级火狐是兼容的
+    console.log(box.innerText);
+    //这是火狐的单纯获取文字属性的方法。高级ie兼容，低级不兼容
+    console.log(box.textContent);
+
+//@@@附加章节，单标签<input>文字属性的获取和设置
+    //input语法的详细语法，比如type可以写text，也可以是button
+    var box1 = document.getElementById("box1");
+    var pic = document.getElementById("pic");
+    pic.src = "jd1.png";//这里还是需要去注意的
+    //&&老师说对于这种意境存在的属性直接使用就行了。属性使用字符串形式。“jd1.png”
+    //添加类名（类名也是标签的一种属性，注意在类名的属性添加时候，权重和。的使用）
+    //注意设置样式时的权重， ！important
+    box1.className = "show";
+    var ipt = document.getElementById("ipt");
+    //此处是获得input的文字属性
+    var a=ipt.value;
+    //此处是设置input的文字属性
+    ipt.value = "我是js设置的";
+    //此处注意，这是表单input的语法。它是单标签，而button是双标签包围的。
+    //@@@ 单标签也是有属性的，只是他的文字属性是value，双标签包围的文字则是用innerhtml
+    document.write('fuck');
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //（1）trim ： 去除两端的空格，不影响之前的字符串（半角全角空格、中英文空格、tab键一招根除。）
+    var arr = '  abcdefg     ';
+    var a = arr.trim();
+    console.log(arr);// '  abcdefg     '//不改变原有字符串
+    console.log(a);  //abcdefg
+    //（2）toLowerCase 、toUpperCase ：转为大小写，原来的不变。
+    var b = arr.toUpperCase();
+    console.log(b);    //"    ABCDEFG   "
+    var b_again = b.toLowerCase();
+    console.log(b_again);// "  abcdefg   "
+
+</script>
+</body>
+</html>

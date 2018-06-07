@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>//$$$该函数方法经常和正则一起应用【该页面讨论5种用法】
+    //语法：stringObj.replace(regexp/substr,replacement)；
+    //第一个参数：必需。字符串中要替换的【子串】或【正则RexExp】；
+    //第二个参数：必需，一个字符串值，规定了【替换文本】或【生成替换文本的函数】。
+    //返回值：注意它的返回值是一个新的字符串，并没有更改原有字符串，是用
+    // replacement 替换了 regexp 的第一次匹配或所有匹配之后得到的。
+    //（1）两个参数都是字符串
+    var str1 = '这是一段文本，要替换"这要替换"！';
+    var newStr = str1.replace('这要替换','need replace');
+    console.log( newStr );//输出：这是一段文本，要替换"need replace"！
+    //（2）第一个参数是正则，第二个参数是字符串
+    var str2 = '这是一段文本，要替换"ac这要替换bb"！';
+    var newStr = str2.replace( /([a-z])+/g,'qqq' );
+    console.log(str2);//原有字符串并不改变
+    console.log( newStr );//返回值：这是一段文本，要替换"qqq这要替换qqq"！
+    //（3） 第一个参数是正则，第二个参数是带$符的字符串
+    var str3 = '这是一段原始文本,"3c这要替换4d"!';
+    var newStr = str3.replace( /([0-9])([a-z])/g,"$1" );
+    console.log( newStr );//这是一段原始文本,"3这要替换4"!';
+    //（4）第一个参数是正则，第二个参数函数
+    //上面的例子函数的第一个参数为匹配的regexp的整体，
+    // 根据长度函数返回值为相应替换的文本；
+    var str4 = '这是原始文本，要替换"aa这要bbb替换ccccc"！';
+    var newStr = str4.replace( /[a-z]+/g,function ($0){
+        var str = '';
+        for (var i = 0; i < $0.length; i++) {
+            str += '*';
+        };
+        return str;
+    } );
+    console.log( newStr );//这是原始文本，要替换"**这要***替换*****"！
+    //（5）第一个参数是正则且有子表达式，第二个参数函数且带有多个参数
+    var str5 = '这是原始文本，要替换"3c这要替换4d"！';
+    var newStr = str5.replace(/([0-9])([a-z])/g,function (arg1,arg2,arg3,arg4,arg5){
+        console.log( arg1 );//3c//4d
+        console.log( arg2 );//3//4
+        console.log( arg3 );//c//d
+        console.log( arg4 );//11//17
+        console.log( arg5 );//这是原始文本，要替换"3c这要替换4d"！//这是原始文本，要替换"3c这要替换4d"！
+    });
+</script>
+</body>
+</html>

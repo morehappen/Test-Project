@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--cc:ie6(tab后生成如下,然后自己可以改7)-->
+<!--[if lte IE 6]>
+    <script src="./js/json2.js"></script>
+<![endif]-->
+<script>
+    //@@@我以前老疑惑为什么ajax请求到的后端数据可以被直接遍历，其实是因为，jq封装的
+    // ajax工具函数内部，已经将请求后端拿到的json转换为了js对象。
+    var obj = {
+        name: 'sky',
+        age: 10
+    }
+    //（1）js代码中，将js对象转为json【JSON.stringify(obj)】
+    var json = JSON.stringify(obj);
+    console.log(typeof (json));//string
+    console.log(json);//"{"name":"sky","age":10}"
+    var a = "moon";
+    console.log(a);
+    //    var b =
+    document.write(a);
+    document.write(obj);
+    document.write(json);
+    //(2)js代码中，将json转为js对象【JSON.parse(json1)】
+    var json1 ='{"name":"sky","age":10}';
+    console.log(typeof (json1));
+    var obj_chagne = JSON.parse(json1);
+    console.log(obj_chagne);//Object {name: "sky", age: 10}
+    var c1 = {"name":"sky","age":10};
+    console.log(typeof (c1));
+    document.write(json1);
+    //(3)ie[小于等于ie7]中，使json数据能够运行：eval('(' + 变量名 + ')')
+    var str1 = 'console.log(1)';
+    // eval可以将字符解析成JS可以别的语法
+    eval('(' + str1 + ')');
+    // 定义了一个字符串
+    var json = '{"name": "evalPractice", "age": 10}';
+    var obj = eval('(' + json + ')');
+    console.log(obj);//Object {name: "evalPractice", age: 10}
+</script>
+</body>
+</html>

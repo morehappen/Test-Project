@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery.min.js"></script>
+    <script>
+        $(function () {
+//（1）选择拥有某项属性的选择器，下面选中了拥有id属性的div元素
+            $("div[id]").css("font-size","33px");
+//（2）选择属性值等于某个值的元素
+            $("div[id=skydetail]").css("color","red");
+//（3）选择属性值以s开头的元素
+            $("div[id^=s]").css("color","blue");
+//（4）选择属性值以z结尾的元素
+            $("div[id$=z]").css("color","green");
+//（5）选择属性值不等于sky的元素
+            $("div[id!=sky]").css("font-size","14px");
+//（6）选择属性值含有m的元素
+            $("div[id*=m]").css("font-size","33px");
+//（7）属性选择器可以复合使用
+            $("div[id!=sky][class=fly]").css("font-size","23px");
+        })
+    </script>
+</head>
+<body>
+    <div id="sky">
+        拥有属性为sky的div元素
+    </div>
+    <div id="skydetail">
+        拥有属性为sky的div元素
+    </div>
+    <div id="skydetailz">
+        拥有属性为sky的div元素
+    </div>
+    <div id="moon">
+        拥有属性为sky的div元素
+    </div>
+    <div id="minem" class="fly">
+        拥有属性为sky的div元素11
+    </div>
+</body>
+</html>

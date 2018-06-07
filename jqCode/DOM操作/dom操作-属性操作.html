@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery.min.js"></script>
+    <script>
+        $(function () {
+//（1）获取属性：对于固有属性，attr和prop都能获取到。
+//（1-1）像checkbox，radio和select这样的元素，最好使用prop，使用attr返回的有可能不
+// 是布尔值。而是checked和undefined。
+            console.log($(".sky").attr("title"));
+            console.log($(".sky").prop("title"));
+//（2）更改属性：对于自定义属性，获取和设置，都必须使用attr。
+            console.log($(".sky").prop("data-mao"));
+            console.log($(".sky").attr("data-mao"));
+            $(".sky").attr("data-mao","更改自定义属性的值");
+            $(".sky").prop("data-mao","更改自定义属性的值");
+//（3）删除属性：删除元素的特定属性 。
+            $(".sky").removeAttr("data-mao");
+            $(".sky").removeAttr("title");
+        });
+    </script>
+</head>
+<body>
+    <p title="skytitle" class="sky" data-mao="自定义属性">1212</p>
+</body>
+</html>

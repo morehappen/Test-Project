@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <div id="father">
+    	<div id="box1">1</div>
+    	<div id="box2">2</div>
+    </div>
+    <div id="tar">3</div>
+    </body>
+    <script>
+    var father = document.getElementById('father');
+    var box1 = document.getElementById('box1');
+    var box2 = document.getElementById('box2');
+    var tar = document.getElementById('tar');
+    //（1-1）增dom（也可称为移动）：father.appendChild(newnode);，位置是father的子节点队列末尾。
+     father.appendChild(tar);
+    //（1-2）增dom（也可叫移动）同样是father调用，fathernode.insertBefore(要插入的元素 , 在哪个元素之前)
+    father.insertBefore(tar, box2);
+    //(2-1删)移除dom:father.removeChild(子节点)
+    father.removeChild(box1);
+    // (2-2换)替换dom:father.replaceChild(newnode,oldnode);
+    father.replaceChild(tar,box1);
+    // (3复制)克隆dom：node.cloneNode(true);如果您需要克隆所有后代，请把 deep 参数设置 true，否则设置为 false。
+    var clonesky = tar.cloneNode(true);
+    father.appendChild(clonesky);
+    // (4-1新建)动态创建一个元素:innerHTML，该方法能够将原来内容覆盖掉。
+    father.innerHTML='<div>动态创建1</div>';
+    // (4-2新建)动态创建一个元素：document.write('');<注意创建出来的这个标签会放在所有标签的后面>
+    document.write('<div>动态创建2</div>');
+// (4-3新建)动态创建一个元素:document.createElement(“div”);此处传参只能是字符串包裹标签
+    var moon = document.createElement('div');
+    moon.innerHTML = '动态创建3';
+    father.appendChild(moon);
+    </script>
+</html>

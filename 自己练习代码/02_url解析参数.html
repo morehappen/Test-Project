@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script>
+	var url = "http://witmax.cn/index.php?sky=0&moon=1&fly=2";
+	function urlChange(url){
+		var arr = url.split('?')[1];
+		var arr2 = arr.split('&');
+		var obj = {};
+		for(var i = 0;i<arr2.length;i++){
+			var arr3 = arr2[i].split('=');
+			obj[arr3[0]] = arr3[1];
+		}
+		return obj;
+	}
+	console.log(urlChange(url));
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var arr = [["projectname1","projectnumber1"],["projectname2","projectnumber2"],["projectname3","projectnumber3"]];
+//    var jsonarr = [{"projectname":projectname1,"projectnumber":projectnumber1},{"projectname":projectname2,"projectnumber":projectnumber2},{"projectname":projectname3,"projectnumber":projectnumber3}];
+    function toJSON(arr){
+        if(!arr.length) return null;
+        var i = 0;
+        len = arr.length,
+                array = [];
+        for(;i<len;i++){
+            array.push({"projectname":arr[i][0],"projectnumber":arr[i][1]});
+        }
+        return JSON.stringify(array);
+    };
+    var result = toJSON(arr);
+    console.log(result);//
+</script>
+</body>
+</html>

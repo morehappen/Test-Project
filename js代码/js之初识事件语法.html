@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            /*border: 1px solid;*/
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<button id="btn1">改变宽</button>
+<button id="btn2">改变高</button>
+<button id="btn3">改变背景色</button>
+<button id="btn4">改变文字</button>
+<script>
+    //事件源.事件类型=function(){
+    //事件处理程序
+    //}
+    //获取页面元素
+    //var box = document.getElementById("box");
+    //var button = document.getElementById("btn");
+    //点击按钮，然后，让盒子添加样式
+    //事件源是谁button  事件类型 onclick  事件处理程序 改变样式
+    //事件处理程式：事件导致的结果 函数（注意事件的重点是函数）
+
+    //第一步获取页面元素
+    //    var box = document.getElementById("box");
+
+    var btn1 = $id("btn1");
+
+    btn1.onclick= function () {
+        box.style.width = "200px";
+    };
+
+    function $id(id) {
+        return document.getElementById(id);
+    }
+
+</script>
+</body>
+</html>

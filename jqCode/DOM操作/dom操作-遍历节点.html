@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery.min.js"></script>
+    <style>
+        .tip{
+            border: 1px red solid;
+            padding: 11px;
+        }
+    </style>
+    <script>
+        $(function () {
+//（1）children（）是个方法，可以获取到所有的元素子节点，不获取文本子节点
+            console.log($(".sky").children());
+//（2）next（）是个方法，可以获取到元素节点紧挨着的后面的元素节点，不获取文本子节点
+            console.log($(".sky1").next().text());
+//（3）prev（）是个方法，可以获取到元素节点紧挨着的前面的元素节点，不获取文本子节点
+            console.log($(".sky1").prev().length);
+//（4）siblings（）是个方法，可以获取到元素节点前后的所有元素节点，不获取文本子节点，不包括自身。
+            console.log($(".sky3").siblings().length);
+//（5）parent（）是个方法，可以获取到直接父元素
+            console.log($(".sky").parent().length);
+//（6）parents（）是个方法，可以获取到祖先元素，并成为数组。可传参限制范围。
+            console.log($(".sky").parents().length);
+//传参将向上查找范围缩小在某个位置。
+            $(".sky").parents(".grandFather").css({"padding":"11px","border":"1px solid green"});
+        });
+    </script>
+</head>
+<body>
+<div class="tip">
+    <div class="grandFather">
+        <div class="father">
+            <div class="sky">
+                这里有个文本节点
+                <p>123</p>
+                这里有个文本节点
+                <li class="sky1">1</li>
+                这里有个文本节点
+                <li class="sky2">2</li>
+                <li class="sky3">3</li>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

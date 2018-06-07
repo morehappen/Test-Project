@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery.min.js"></script>
+    <script>
+        $(function () {
+//（1）使用$来创建元素节点。然后插入到指定的dom中。
+            var $new = $("<li>新建的li元素</li>");
+//（2）使用$来创建元素节点附加文本节点。然后插入到指定的dom中。
+            var $new = $("<li>这些文本是文本节点</li>");
+            $(".sky").append($new);//习惯上以$开头命名
+//（3）使用$来创建元素节点附加属性节点。然后插入到指定的dom中。
+            var $newAttr = $("<div title='fly'>新的div元素，内有属性title为fly</div>");
+            $newAttr.appendTo($(".sky"));
+        })
+    </script>
+</head>
+<body>
+    <div class="sky">
+        这是一个类名为sky的div元素
+    </div>
+</body>
+</html>

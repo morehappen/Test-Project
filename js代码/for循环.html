@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		p{
+			height: 20px;
+			background-color: pink;
+		}
+	</style>
+</head>
+<body>
+<p>1</p>  
+<p>2</p>  
+<p>3</p>  
+<p>4</p>  
+<p>5</p> 
+<script>
+	for(var i=0;i<10;i++){
+		console.log(i);//0-9
+	}
+	window.onload=function() {  
+		//（1）直接绑定事件
+		var ps = document.getElementsByTagName("p");  
+		// for(var i=0; i<ps.length; i++){ 
+		// 	ps[i].onclick = function() {  
+		// 	//这是一个事件，是要放在队列末尾的，等for循环同步执行完毕后，此时去执行，都会弹出5了。
+		// 		alert(i);  //都弹出5
+		// 	}  
+		// };
+		// （2）加一层闭包，i以函数参数形式传递给内层函数 
+		// for( var i=0; i<ps.length; i++ ) {  
+		// 	(function(arg){   
+		// 		ps[i].onclick = function() {   
+		// 			alert(arg);  
+		// 		};  
+		// 	})(i);//调用时参数  
+		// }   	 
+		// （3）:加一层闭包，返回一个函数作为响应事件（注意与2的细微区别） 
+		// for( var i=0; i<ps.length; i++ ) {  
+		// 	(function () {  
+		// 		var temp = i;//调用时局部变量  
+		// 		ps[i].onclick = function() {  
+		// 			alert(temp);  
+		// 		}  
+		// 	})();  
+		// }
+		// （4）save4:将变量 i 保存给在每个段落对象（p）上 
+		// for( var i=0; i<ps.length; i++ ) {  
+		// 	ps[i].i = i;  
+		// 	ps[i].onclick = function() {  
+		// 		alert(this.i);  
+		// 	}  
+		// }
+		//save5:将变量 i 保存在匿名函数自身  
+		// for( var i=0; i<ps.length; i++ ) {  
+		// 	(ps[i].onclick = function() {  
+		// 		alert(arguments.callee.i);  
+		// 		}).i = i;  
+		// }   
+		//save6:用Function实现，实际上每产生一个函数实例就会产生一个闭包
+		// for( var i=0; i<ps.length; i++ ) {  
+		// 	ps[i].onclick = new Function("alert(" + i + ");");
+		// 	//new一次就产生一个函数实例 
+		// } 
+		//save7:用Function实现，注意与6的区别  
+		for( var i=0; i<ps.length; i++ ) {  
+			ps[i].onclick = Function('alert('+i+')'); 
+		}
+ 
+	}	
+</script>
+</body>
+</html>

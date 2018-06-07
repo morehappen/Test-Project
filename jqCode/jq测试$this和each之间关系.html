@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery.min.js"></script>
+    <script>
+//        $(function () {
+//            $(".sky").css("color","red");
+//            var testType;
+//            $(".sky").each(function (index, ele) {
+//                if($(ele).css("display") === "block"){
+//                    debugger;
+//                    testType = $(ele);
+//                }
+//            });
+//
+//            debugger;
+//            hongjing(testType);
+//
+//            function hongjing(obj) {
+//                $this = $(obj);
+//                $this.find(".moon").each(function (i,e) {
+//                    debugger;
+//                    var a = $(this).text();//此处的$(this)等价于$(e)，$this是外围存储的
+//
+//                    var b = $(e);
+//                })
+//            };
+//
+//
+//
+////            function  maomao() {
+////                $(".moon").each(function (i,e) {
+////                    console.log($(e));
+////                    console.log($(this));//each内部能使用$(this)，等价于$(e)
+//////                    console.log($this);//each内部也不能使用$this
+////                })
+////            };
+////            maomao();
+////            for(var i = 0;i<$(".moon").length;i++){
+////                debugger;
+////                console.log($(this));
+////                console.log($this);//即便是for循环，也不能使用$this,只能是$(this)；
+////                console.log($(this).text());
+////            }
+//
+//
+//        })
+
+        $(function () {
+            $(".fly").on("click",".moon",function () {
+                console.log($(this).html());
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="sky" display="block">
+        <p class="moon">1</p>
+        <p class="moon">2</p>
+        <p class="moon">3</p>
+        <p class="moon">4</p>
+    </div>
+    <div class="sky" display="block">
+        <p class="moon">21</p>
+        <p class="moon">22</p>
+        <p class="moon">23</p>
+        <p class="moon">24</p>
+    </div>
+    <div class="sky" display="block">
+        <p class="moon">31</p>
+        <p class="moon">32</p>
+        <p class="moon">33</p>
+        <p class="moon">34</p>
+    </div>
+    <div class="sky" display="none">
+        <p class="moon">41</p>
+        <p class="moon">42</p>
+        <p class="moon">43</p>
+        <p class="moon">44</p>
+    </div>
+    <div class="fly" display="none">
+        fuck
+        <p class="moon">51</p>
+        <p class="moon">52</p>
+        <p class="moon">53</p>
+        <p class="moon">54</p>
+    </div>
+</body>
+</html>

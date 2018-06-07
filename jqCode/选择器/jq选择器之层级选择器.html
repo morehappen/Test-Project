@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red{
+            color: red;
+        }
+    </style>
+    <script src="../../jquery.min.js"></script>
+    <script>
+        $(function () {
+//+号只能选中一个元素，还必须是紧挨着的那个。
+            $(".moon1 + li").addClass("red");
+//波浪线，能选中moon1的后面的所有的li元素【这个可以不是挨着的】
+            $(".moon1 ~ li").attr("style","font-size:29px");
+        })
+    </script>
+</head>
+<body>
+    <div class="sky">
+        <li>bofore1</li>
+        <li class="moon1">1</li>
+        <!--<p>1212</p>-->
+        <li class="moon2">1</li>
+        <li class="moon3">1</li>
+        <li class="moon4">1</li>
+        <p>123</p>
+    </div>
+</body>
+</html>

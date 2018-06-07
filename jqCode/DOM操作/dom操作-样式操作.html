@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery.min.js"></script>
+    <style>
+        .sky{
+            color:red
+        }
+        .fontz{
+            font-size:33px;
+            font-weight:700;
+        }
+        .underline{
+            text-decoration: underline;
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+    <script>
+        $(function () {
+            //（1）获取元素的类名
+            console.log($(".sky").attr("class"));
+            //（2）设置元素的类名
+            $(".sky").attr("class","fontz");
+            //（3）追加类名
+            $(".fontz").addClass("underline");
+            //（4）删除类名
+            $(".fontz").removeClass("underline");
+            //（5）切换类名
+            $(".toggle").click(function () {
+                $(".fontz").toggleClass("hide");
+                console.log($(".fontz").is(".hide"));//[此处有点]布尔值为其返回值
+                console.log($(".fontz").hasClass("hide"));//[此处无点]布尔值为其返回值
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="sky">
+        初始的时候，只有一个红色样式
+    </div>
+    <button class="toggle">切换按钮</button>
+</body>
+</html>

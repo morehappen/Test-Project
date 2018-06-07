@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        //onload是一个事件，是在window上的
+        window.onload=function(){
+            //当页面完全加载时，会触发window.onload事件
+            //这个地方的代码几乎等同于将一段放在script中的代码置于html底部，避免
+            //了提升带来的问题
+            //onload和onclick一样，也是一个事件
+            var box = document.getElementById("box");
+            console.log(box);
+        };
+    </script>
+</head>
+<body>
+
+<div id="box"></div>
+
+</body>
+</html>

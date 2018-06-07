@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<script>
+    $(function () {
+//（1）选取所有可用表单元素
+        $("input:enabled").css("height","50px")
+//只读状态还是可用的。只有当disabled为true的时候，才是不可用
+//（2）选取所有不可用表单元素
+        $("input:disabled").css("height","100px")
+//（3）选取所有被选中的表单元素，这个地方没有空格
+        console.log($("input:checked").val());
+//(4)注意这个地方有个空格
+        console.log($("select :selected").val());
+    })
+</script>
+<body>
+<input type="text" value="输入框">
+<input type="password" value="这是个密码框">
+<!--<input type="email" readonly="true">-->
+<input type="email" readonly="true" disabled="true">
+<form action="demo-form.php">
+    <input type="checkbox" name="vehicle[]" value="Bike"> 我有一辆自行车<br>
+    <input type="checkbox" name="vehicle[]" value="Car"> 我有一辆小轿车<br>
+    <input type="checkbox" name="vehicle[]" value="Boat" checked="checked"> 我有一艘船<br>
+    <input type="submit" value="提交">
+</form>
+<select name="sky_select" id="sky_select" style="width: 30px;height:18px">
+    <option>1</option>
+    <option selected="selected">2</option>
+    <option>3</option>
+</select>
+</body>
+</html>

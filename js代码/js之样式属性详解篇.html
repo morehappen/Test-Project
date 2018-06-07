@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="box" style="font-size: 12px">
+
+</div>
+
+<script>
+    var box = document.getElementById("box");
+   //这里要注意横杆和大写的问题，js里只有在box.style.backgroundColor的时候才会使用大写，其他地方都是小写。
+   //在js的script标签内样式设置中，我们没有使用{}去设置属性的。
+   //在js获取样式的通用函数，getComputedStyle(box, null)["height"]，我们使用的是[]中传入字符串来解决的。 
+    //（1-1单）【单属性设置】设置样式简单属性：此处使用了js方法对样式属性进行了设置
+    box.style.width = "100px";//已经将盒子宽度修改设置为100px。
+    //（1-1附：单）【单属性设置】设置样式属性之横杠去除问题，去掉横杠，并字母大写
+    box.style.backgroundColor="red";//注意和原来相比字母c的大写问题。这
+    //种写法设置的是还是行内属性。
+    //（1-2）【多属性设置】设置属性之写多个样式属性的语法<这个方法会将之前通过box.style.属性名方式设置的值都删除掉>
+    box.style.cssText="border:10px solid yellow;background-color:blue";
+    //（2-1）【属性获得（行内）】此处使用了js方法对样式属性进行获得。试图获得的是一个行内样式属性
+    var a=box.style.fontSize;
+    console.log(a);//输出的结果是12px
+    //（2-2）【属性获得（内嵌）】此处使用了js方法对样式属性进行获得。试图获得的是一个内嵌样式属性
+    var b=box.style.height;
+    console.log(b);//输出为空，因为js这样写只能去获得行内样式属性。
+    //（2-3）【属性获得】（这个方法行内和内嵌都能够获取）
+    console.log(getComputedStyle(box, null)["height"]);//能够获得内嵌设置的样式属性
+    //新方法试图获取通过行内式设置的样式
+    console.log(getComputedStyle(box, null)["width"]);//能够获得行内式设置的样式属性
+    // （2-附1）【火狐获取属性】getComputedStyle(tag,null)[“属性名”];  FF firefox
+    //（2-附2）【IE获取属性】tag.currentStyle[“属性名”]   IE
+    console.log(box.currentStyle["width"]);//此处报错，因为我用的是谷歌浏览器，这是ie方法
+
+
+</script>
+</body>
+</html>

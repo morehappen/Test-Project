@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+        /* 交集选择器 */
+            div.star{
+                width: 100px;
+                height: 100px;
+                background-color: red;
+            }
+            /* 后代选择器 */
+            .moon #son{
+                color: blue;
+            }
+            /* 并集选择器 */
+            #sky,li{
+                color: pink
+            }
+        </style>
+    </head>
+    <body>
+    <div>
+    	<div id="sky">通过id名获取</div>
+        <div class="moon">通过类名获取
+            <div id="son">这里将会尝试后代选择器</div>
+        </div>
+    	<div class="star">测试交集选择器</div>
+    	<p>此处通过标签名获取</p>
+        <li>这里将会尝试并集选择器</li>
+    </div>
+    </body>
+    <script>
+	//id名
+    var a = document.getElementById('sky');
+	//类名
+    var b = document.getElementsByClassName('moon')[0];
+	//标签名
+    var c = document.getElementsByTagName('p')[0];
+    </script>
+    </body>
+</html>

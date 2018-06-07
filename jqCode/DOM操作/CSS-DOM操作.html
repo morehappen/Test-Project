@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .fly{
+            width: 1200px;
+            height: 400px;
+            border: 1px green solid;
+        }
+        .sky{
+            color: red;
+            width: 1000px;
+            height: 400px;
+        }
+        .pink{
+            text-decoration: underline;
+        }
+    </style>
+    <script src="../../jquery.min.js"></script>
+    <script>
+        $(function () {
+//（1）css获取样式
+            console.log($(".sky").css("color"));
+//（2）css设置单个样式
+            $(".sky").css("color","green");
+//（3）css设置多个样式
+            $(".sky").css({"backGround":"pink","fontSize":"33px","border":"1px yellow solid"});
+//（4）addClass增加类名，控制样式
+            $(".sky").addClass("pink");
+//(5)height()方法设置元素的高度，也可以获取。也可以带有单位em，比如height(900em)
+            $(".sky").height(300);
+//（6）offset（）方法可以获取偏移坐标，也可以设置偏移坐标。
+            $(".设置偏移坐标").click(function () {
+                $(".sky").offset({top:200,left:100});
+            });
+//（7）position() 方法返回第一个匹配元素的位置（相对于它的父元素）。
+// 网上仅仅看到获取，没看到设置
+            $(".设置滚动条垂直距离").click(function () {
+                console.log($(".moon").scrollTop(110));;
+            });
+//（8）
+        })
+    </script>
+</head>
+<body>
+    <div class="moon" style="border:1px solid black;width:100px;height:150px;overflow:auto">
+        This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
+    </div><br>
+    <div class="fly">
+        <div class="sky">初始只有红色的样式</div>
+    </div>
+    <button class="设置偏移坐标">设置偏移坐标</button>
+    <button class="获取坐标">获取坐标</button>
+    <button class="设置滚动条垂直距离">设置滚动条垂直距离</button>
+</body>
+</html>

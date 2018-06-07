@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //(1)四舍五入，并且传入参数是决定小数点位数。
+    var a = 1.1252;
+    console.log(a.toFixed(2));// 1.13
+    //（2）parseInt只能转换为整数，是将字符串，从左到右，依次进行解析，直到遇到非数字为止，
+    // 返回之前能够解析的数字。比如它碰到非数字或者小数点的时候，直接取走前面的整数。
+    //@@@语法，parseInt（a,b），双参，首参是数字，二参时进制，比如首参17，二参是8，就是15（8+7）
+    //【字符串转数字】
+    var b = "24.12a";//var b = 24.12a也是同样的结果
+    console.log(parseInt(b));//24
+    console.log(parseInt(b,10));// 24
+    //(3)	parseFloat可以转换小数，比如它碰到了小数点，可以将小数转换进去。
+    //@@@语法，parseFloat（a）。单参。
+    // 【字符串转数字】
+    var c = "24.12a";
+    console.log(parseFloat(c));//24.12
+    //（4）Number()是将整个字符串进行一个转化，如果可以转化，就输出转化后的数字，
+    // 如果有一个不能转化为数字，则整体都不进行转化，返回一个NaN
+    //【强制类型转换为Number类型】
+    var d = "24.12";
+    console.log(Number(d));//24.12
+    //（5） 数字转字符toString
+    var e = 24.12;
+    console.log(e.toString());//'24.12'
+    //(6)数字转字符
+    var f = 24.12;
+    console.log(e + "");//'24.12'
+
+</script>
+</body>
+</html>

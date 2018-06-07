@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery.min.js"></script>
+    <script>
+        $(function () {
+            //（1）html（）方法：获取到的字符串包含标签
+            console.log($(".sky").html());//返回:<span>这是类名为sky的div元素</span>
+            //（2）text（）方法：不包含标签
+            console.log($(".sky").text());//返回:这是类名为sky的div元素
+            //（3）val（）方法：一般用来获取表单元素的value；
+            $(".shurukuang").on("blur",function () {
+                console.log($(this).val());
+                $(this).val("");
+                console.log($(this).val());
+                //可以修改文本域的默认值，该属性可以修改掉。$(this)访问不了该属性
+                $(this).val(this.defaultValue);
+                console.log($(this).val());
+            });
+            $("#sky").change(function () {
+                console.log($(this).val());//获取到被选择的option的value值。
+//option被选择后selected属性会变成true。
+                console.log($("#sky option:selected").text());//获取到被选择的option的text内容。
+            });
+            $("#sky").val("3");
+            $("#moon").val(["11","33"]);
+//            $("#moon").val("33");
+        })
+    </script>
+</head>
+<body>
+    <div class="sky"><span>这是类名为sky的div元素</span></div>
+    <input type="text" class="shurukuang" value="这是一个输入框">
+    <select name="" id="sky">
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </select>
+    <select name="" multiple="multiple" id="moon">
+        <option value="11">one</option>
+        <option value="22">two</option>
+        <option value="33">three</option>
+        <option value="44">four</option>
+    </select>
+</body>
+</html>

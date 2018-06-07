@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div.sky_hide,div.moon_show{
+            width: 150px;
+            height: 52px;
+            background-color: #fff;
+        }
+        .sky_show,.moon_hide{
+            height: 20px;
+        }
+        .sky_hide,.moon_hide,.fly_p_son{
+            display: none;
+        }
+        .sky_show,.moon_show{
+            visibility: visible;
+        }
+    </style>
+    <script src="../../jquery.min.js"></script>
+    <script>
+        $(function () {
+//（1）input的type为hidden的（2）元素display为none的（3）visibility为hidde的
+            $("p:hidden").show();
+//处理DOM的固有属性的时候，我们使用prop属性，如果使用attr，有些情况会失败。比如下面
+            $("input:hidden").prop("type","text");
+//（2）刚好和上面的选择器相反
+            $("div:visible").css("background","green");
+//            $("div:visible").hide();
+        })
+    </script>
+</head>
+<body>
+    <input type="hidden" value="隐藏域之输入框">
+    <input type="text" value="一个文本输入框">
+    <div class="sky_hide">
+        sky之隐藏
+        <div class="sky_show">
+            sky之显示
+        </div>
+        这个
+    </div>
+    <div class="moon_show">
+        moon之显示
+        <div class="moon_hide">
+            moon之隐藏
+        </div>
+    </div>
+    <p class="fly_p">
+        这里藏有一个不可见元素
+        <p class="fly_p_son">
+            这是一个隐藏元素，将隐藏元素抓出
+        </p>
+    </p>
+</body>
+</html>

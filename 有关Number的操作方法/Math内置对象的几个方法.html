@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //(1)Math.round(x)。将一个数字四舍五入，参数必须是数字
+    var a = 0.5;
+    console.log(Math.round(a));//1
+    //（2）向上取整和向下取整的方法。Math.ceil(a);Math.floor(a);
+    var b = 0.512;
+    console.log(Math.ceil(b));//1
+    console.log(Math.floor(b));//0
+    //(3)生成随机数
+    var c = Math.random();
+    console.log(c);//一个介于0-1之间的随机数
+    //（4）一组数据中找出最大数和最小数
+    console.log(Math.max(1, 2, 5, 2, 4));//5
+    console.log(Math.min(1, 2, 5, 2, 4));//1
+    //（5）取到一个数字的绝对值【比如是负数的话取到的就是正数】
+    var d = -12.11;
+    console.log(Math.abs(d));//12.11
+    //（6）取到一个数的几次方
+    console.log(Math.pow(3, 3));//27
+</script>
+</body>
+</html>

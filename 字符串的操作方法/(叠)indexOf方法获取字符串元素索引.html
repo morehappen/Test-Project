@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //(1)indexOf、lastIndexOf，确定一个字符串在另一个字符串中的第一次出现的位置，
+    // 一个从头部开始，一个从尾部开始。【第一个索引是0】
+    //@@@它们还可以接受第二个参数，对于indexOf，表示从该位置开始向后匹配；
+    // 对于lastIndexOf，表示从该位置起向前匹配。
+    //@@@注意输入的参数的数据类型
+    var arr = 'abccba';
+    var b = arr.indexOf('b');
+    console.log(b);    // 1
+    var stringTest = "sky test skyde this string"
+    var testresult = stringTest.indexOf("sky");
+    console.log(testresult);//0
+    var testresult2 = stringTest.indexOf("skyde");
+    console.log(testresult2);//9
+    var c = arr.lastIndexOf('c');
+    console.log(c);    // 3
+</script>
+</body>
+</html>

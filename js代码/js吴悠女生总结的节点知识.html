@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>text</title>
+</head>
+<body>
+<div id="idName" class="parentNode">
+    <!--注释内容-->
+    <h1 class="previousElementSibling"></h1>
+    previousSibling
+    <p id="mySelf">
+        pFirstChild
+        <label class="firstElementChild"></label>
+        <span></span>
+        <button class="lastElementChild"></button>
+        pLastChild
+    </p>
+    nextSibling
+    <h2 class="nextElementSibling"></h2>
+</div>
+<script>
+    console.log("-----------------------节点属性的获取方式------------------------------");
+    var div = document.getElementById("idName");
+    console.log("元素节点:");
+    console.log("nodeType:" + div.nodeType);//元素节点的类型1（节点类型）
+    console.log("nodeName:" + div.nodeName);//这个nodeName（节点名称）是DIV
+    console.log("nodeValue:" + div.nodeValue);//div.nodeValue是null，不可用（节点值）
+
+    var idAttr = div.attributes.item(0);
+    console.log("id属性节点:");
+    console.log("nodeType:" + idAttr.nodeType);//2
+    console.log("nodeName:" + idAttr.nodeName);//id
+    console.log("nodeValue:" + idAttr.nodeValue);//idName（即一个id的名字sky）
+
+    var result = div.firstChild;
+    console.log("文本节点:");
+    console.log("nodeType:" + result.nodeType);//3
+    console.log("nodeName:" + result.nodeName);//#text
+    console.log("nodeValue:" + result.nodeValue);//一个空格
+    console.log(result);//打印一个文本节点和一个文本节点的nodeName输出的都是#text
+
+    var anno = div.childNodes[1];
+    console.log("注释节点:");
+    console.log("nodeType:" + anno.nodeType);//8
+    console.log("nodeName:" + anno.nodeName);//#comment
+    console.log("nodeValue:" + anno.nodeValue);//注释内容
+
+    console.log("文档节点:");
+    console.log("nodeType:" + document.nodeType);//9
+    console.log("nodeName:" + document.nodeName);//#document
+    console.log("nodeValue:" + document.nodeValue);//null。不可用
+
+    console.log("-----------------------节点父子兄访问关系------------------------------");
+
+    var mySelf = document.getElementById("mySelf");
+
+    console.log("父节点");
+    var parentNode = mySelf.parentNode;//$$父节点的访问语法
+    console.log("父节点的节点名称为:"+parentNode.nodeName);
+    console.log("父节点的节点类型为:"+parentNode.nodeType+",[说明父节点永远是元素节点]");
+    console.log("父节点的节点值为:"+parentNode.nodeValue);
+
+    console.log("\n兄弟节点");
+    var nextSibling = mySelf.nextSibling;//$$下一个兄弟节点语法
+    console.log("下一个兄弟节点名称为:"+nextSibling.nodeName);
+    console.log("下一个兄弟节点类型为:"+nextSibling.nodeType);
+    console.log("下一个兄弟节点值为:"+nextSibling.nodeValue);
+
+    console.log("\n");
+
+    var nextElementSibling = mySelf.nextElementSibling;//下一个兄弟元素节点语法
+    console.log("下一个兄弟元素节点名称为:"+nextElementSibling.nodeName);
+    console.log("下一个兄弟元素节点类型为:"+nextElementSibling.nodeType);
+    console.log("下一个兄弟元素节点值为:"+nextElementSibling.nodeValue);
+
+    console.log("\n");
+
+    var previousSibling = mySelf.previousSibling;//上一个兄弟节点
+    console.log("上一个兄弟节点名称为:"+previousSibling.nodeName);
+    console.log("上一个兄弟节点类型为:"+previousSibling.nodeType);
+    console.log("上一个兄弟节点值为:"+previousSibling.nodeValue);
+
+    console.log("\n");
+
+    var previousElementSibling = mySelf.previousElementSibling;//上一个兄弟元素节点
+    console.log("上一个兄弟元素节点名称为:"+previousElementSibling.nodeName);
+    console.log("上一个兄弟元素节点类型为:"+previousElementSibling.nodeType);
+    console.log("上一个兄弟元素节点值为:"+previousElementSibling.nodeValue);
+
+    console.log("\n子节点");
+
+    var firstChild = mySelf.firstChild;//$$第一个子节点
+    console.log("第一个子节点名称为:"+firstChild.nodeName);
+    console.log("第一个子节点类型为:"+firstChild.nodeType);
+    console.log("第一个子节点值为:"+firstChild.nodeValue);
+
+    console.log("\n");
+
+    var firstElementChild = mySelf.firstElementChild;//第一个子元素节点
+    console.log("第一个子元素节点名称为:"+firstElementChild.nodeName);
+    console.log("第一个子元素节点类型为:"+firstElementChild.nodeType);
+    console.log("第一个子元素节点值为:"+firstElementChild.nodeValue);
+
+    console.log("\n");
+
+    var lastChild = mySelf.lastChild;//最后一个元素节点
+    console.log("最后一个子节点名称为:"+lastChild.nodeName);
+    console.log("最后一个子节点类型为:"+lastChild.nodeType);
+    console.log("最后一个子节点值为:"+lastChild.nodeValue);
+
+    console.log("\n");
+
+    var lastElementChild = mySelf.lastElementChild;//最后一个字元素节点
+    console.log("最后一个子元素节点名称为:"+lastElementChild.nodeName);
+    console.log("最后一个子元素节点类型为:"+lastElementChild.nodeType);
+    console.log("最后一个子元素节点值为:"+lastElementChild.nodeValue);
+
+    console.log("\n");
+
+    var childNodes = mySelf.childNodes;//所有子节点
+    console.log("所有子节点:");
+    console.log(childNodes);
+
+    var children = mySelf.children;//所有子元素节点(这个不规范，但是很实用)
+    console.log("所有子元素节点:");
+    console.log(children);
+
+
+</script>
+</body>
+</html>

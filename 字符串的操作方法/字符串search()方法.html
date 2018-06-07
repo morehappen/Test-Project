@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //（1）直接检索特定字符串
+    var str="Visit Runoob!";
+    var n=str.search("Runoob");
+    console.log(n);//6
+    //（2）检索与正则表达式匹配的子字符串
+    var regex = /\d/;
+    var string = 'abc123';
+    console.log(string.search(regex));//3
+</script>
+</body>
+</html>

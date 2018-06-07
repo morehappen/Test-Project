@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>删除节点</title>
+    <script src="../../jquery.min.js"></script>
+    <style>
+        .moon{
+            border: 1px solid red;
+            width: 1200px;
+            height: 100px;
+        }
+    </style>
+    <script>
+        $(function () {
+//            $(".sky").remove();//（1）删除某个节点
+//            $(".moon").empty();//（2）清空子元素[注意会清空所有的文本子节点]
+            $(".sky").on("click",function () {
+                alert(1);
+            })
+            //（3）复制节点，true后还要复制绑定的事件。
+            $(".sky").clone(true).appendTo($(".moon"));
+            //（4）li的最好一个使用replaceWidth去替换。
+//            $(".moon li:last").replaceWith($("<p>这是h1标题</p>"));
+            //（5）前者去替换replaceAll参数里的dom。
+            $("<p>这是h1标题</p>").replaceAll($(".moon li:last"));
+        })
+    </script>
+</head>
+<body>
+<div class="sky">类名为sky</div>
+<div class="moon">
+    类名为moon
+    <li>1</li>
+    <li>1</li>
+    <li>1</li>
+</div>
+</body>
+</html>

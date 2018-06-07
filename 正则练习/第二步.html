@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //（1）写一个正则表达式的思路
+    // 以下案例将尝试匹配qq号码
+    // 合法qq号规则：1、5-15位；2、全是数字；3、不以0开头
+    var reg =/^[1-9][0-9]{4,14}$/;//【这个是正确的】
+    var regError =/[1-9][0-9]{4,14}/;
+    console.log(reg.test('0589563'));
+    console.log(reg.test('1589563'));
+    //true，虽然有0，但是'589563'片段符合[regError]
+    console.log(reg.test('168876726736788999'));
+    //true,这个字符串长度超出15位，达到18位，但是有符合的字符串片段[regError]
+    //（2）复杂化扩展
+    // 【除了RegExp对象提供的方法，以下四个是String对象可用正则的方法】
+    //1》match()方法；在字符串内检索指定的值,匹配成功返回存放匹配结果的数组，否则返回null。
+    // 这里需要注意的一点事，如果没有设置全局匹配g，返回的数组只存第一个成功匹配的值。
+    var reg1=/javascript/i;
+    var reg2=/javascript/ig;//【i和g是可以同时使用的】
+    console.log('hello Javascript Javascript Javascript'.match(reg1));
+    //['Javascript']
+    console.log('hello Javascript Javascript Javascript'.match(reg2));
+    //['Javascript','Javascript','Javascript']
+    //2》search()方法；在字符串内检索指定的值,匹配成功返回第一个匹配成功的字符串片
+    // 段开始的位置，否则返回-1。
+    var reg=/javascript/i;
+    console.log('hello Javascript Javascript Javascript'.search(reg));//6
+    //3》replace()方法；替换与正则表达式匹配的子串，并返回替换后的字符串。在不设置
+    // 全局匹配g的时候，只替换第一个匹配成功的字符串片段。
+    var reg1=/javascript/i;
+    var reg2=/javascript/ig;
+    console.log('hello Javascript Javascript Javascript'.replace(reg1,'js'));
+    //hello js Javascript Javascript
+    console.log('hello Javascript Javascript Javascript'.replace(reg2,'js'));
+    //hello js js js
+    //4》split()方法；把一个字符串分割成字符串数组。
+    var reg=/1[2,3]8/;
+    console.log('hello128Javascript138Javascript178Javascript'.split(reg));
+    //['hello','Javascript','Javascript178Javascript']
+</script>
+</body>
+</html>

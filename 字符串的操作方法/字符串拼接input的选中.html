@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery.min.js"></script>
+</head>
+<body>
+<div class="sky">
+    此处是测试区域
+</div>
+<script>
+    var checStr = "checked";
+    var str = '<li>' +
+//一定注意此处，checked尽量放置在末尾，不然会和id粘在一起，导致出现自定义属性
+            '<input type="checkbox" id="slu"'+checStr+'>' +
+//下面将会出现自定义属性：checkedid
+//            '<input type="checkbox"' + checStr + 'id="slu">' +
+            '<label>' + '测试' + '</label>' +
+            '</li>';
+    debugger;
+    console.log(str);
+    $(".sky").append(str);
+</script>
+</body>
+</html>

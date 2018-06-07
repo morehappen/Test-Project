@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //（1）此处显示数组数据类型和document.write的输出
+    var a = [1];
+    console.log(typeof (a));
+    document.write(a);
+    //（2）exec返回的数据为数组，未匹配到的时候返回为null。
+    var sky = /e/.exec("The best things in life are free!");
+    var sky1 = /z/.exec("The best things in life are free!");
+    console.log(sky[0]);
+    console.log(sky1);
+    //（3）RegExp 对象的概念
+    /**
+     *这里需要注意的是,第二种方法中由于字符串转义问题，"\\"代表"\"。
+     */
+    //第一种“/正则表达式/”
+    var reg1=/hello \w{3,12}/g;
+    //第二种new RegExp('正则表达式')
+    var reg2=new RegExp("hello \\w{3,12}",'g');//实例化的2参可以传入修饰符
+    //（4）修饰符的概念
+    //i大小写不敏感，g全局,m多行匹配
+    //（5）$$$RegExp对象中的方法，有三种供我们掌握
+    //1》test（）方法。检索字符串中指定的值。返回 true 或 false。
+    // 这个是我们平时最常用的方法
+    var reg=/hello \w{3,12}/;
+    alert(reg.test('hello js'));//false
+    alert(reg.test('hello javascript'));//true
+    //2》exec()方法。检索字符串中指定的值。匹配成功返回一个数组，匹配失败返回null。
+    var reg=/hello/;
+    console.log(reg.exec('hellojs'));//['hello']
+    console.log(reg.exec('javascript'));//null
+    //3》compile() 方法用于改变 RegExp。
+    //compile() 既可以改变检索模式，也可以添加或删除第二个参数。
+    var reg=/hello/;
+    console.log(reg.exec('hellojs'));//['hello']
+    reg.compile('Hello');
+    console.log(reg.exec('hellojs'));//null
+    reg.compile('Hello','i');
+    console.log(reg.exec('hellojs'));//['hello']
+</script>
+</body>
+</html>

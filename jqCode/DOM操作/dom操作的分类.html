@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery.min.js"></script>
+    <script>
+        $(function () {
+//（1）DOM Core是任何支持dom的程序设计语言都可以去操作的，比如xml文档等。HTML DOM是DOM core的子集。
+            var sky1 = document.getElementById("fly");//这是Dom Core的获取元素的方法
+            console.log(sky1.getAttribute("id"));//这是DOM Core的获取节点的方法
+//（2）HTML DOM是js仅仅去操作HTML格式文档时候的处理，有一定局限性，当然也有兼容性问题【core dom兼容性更强】。
+            var sky = document.getElementsByClassName("moon");
+            // 这是html的dom里的方法，dom core里面没有
+            console.log(sky[0].id);//这是典型的HTML DOM方式
+            console.log(sky[0].innerHTML);
+//（3）CSS-DOM是JavaScript操作页面显示样式的方式、如document.style.fontSize= 11px等
+//主要是指通过操作元素的style对象的各种属性来改变或获取样式。
+//而在jq中，可以认为css(),height(),width(),offset(),positon(),scrollTop(),scrollLeft()都是CSS DOM
+            $(".sky").css("font-size","44px");
+        })
+    </script>
+</head>
+<body>
+    <div class="sky">
+        sky类名的div元素
+    </div>
+    <div class="moon" id="fly">
+        moon类名的div元素
+    </div>
+</body>
+</html>
