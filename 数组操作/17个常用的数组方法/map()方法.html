@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //语法：
+    //callback(value, index, array)分别是当前值，索引，被遍历数组【不用全部使用】
+    //callback原数组中的元素经过该方法后返回一个新的元素。这个return是我们自己写的，
+    //必须写，不然会报各种undefined。
+    const numbers = [2, 3, 4, 5];
+    const dollars = numbers.map( number => '$' + number);
+    // dollars will be equal to ['$2', '$3', '$4', '$5']
+</script>
+</body>
+</html>
