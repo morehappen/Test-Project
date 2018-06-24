@@ -5,39 +5,52 @@
     <title>Title</title>
 </head>
 <body>
+<input type="text" class="everyAdd_input">
+
+</body>
+<script src="../jquery.min.js"></script>
 <script>//各种方法的练手
+var regex_reName = /^[\s\S]{1,32}$/;
+$(".everyAdd_input").blur(function () {
+    debugger;
+    var _name = $.trim($(".everyAdd_input").val());
+    if (regex_reName.test(_name)) {
+
+    } else {
+        alert("错误")
+    }
+});
 //（1）test（）方法；判断是否 是数字
-    var strNum = "123234a";
-    var re1 = /\D/;//这是一个基本元字符，查找非数字字符。
-    var res1 = re1.test(strNum);//true;因为在字符串中有非数字字符a；
+var strNum = "123234a";
+var re1 = /\D/;//这是一个基本元字符，查找非数字字符。
+var res1 = re1.test(strNum);//true;因为在字符串中有非数字字符a；
 //（2）search（）方法；获取匹配到的首个匹配的索引位置
-    var strStr = 'abcfdsficl1';
-    var re2 = /i/i;
-    var res2 = strStr.search(re2);//7。
-    console.log(res2);
+var strStr = 'abcfdsficl1';
+var re2 = /i/i;
+var res2 = strStr.search(re2);//7。
+console.log(res2);
 //(3) match()方法；在字符串中搜索复合规则的内容，搜索成功就返回内容，
 // 格式为数组，失败就返回null。
-    var str = 'haj123sdk54hask33dkhalsd879';
-    var re = /\d+/g;   // 每次匹配至少一个数字  且全局匹配  如果不是全局匹配，当找到数字123，它就会停止了。就只会弹出123.加上全局匹配，就会从开始到结束一直去搜索符合规则的。如果没有加号，匹配的结果就是1，2，3，5，4，3，3，8，7，9并不是我们想要的，有了加号，每次匹配的数字就是至少一个了。
-    console.log( str.match(re) );   // [123，54，33，879]
+var str = 'haj123sdk54hask33dkhalsd879';
+var re = /\d+/g;   // 每次匹配至少一个数字  且全局匹配  如果不是全局匹配，当找到数字123，它就会停止了。就只会弹出123.加上全局匹配，就会从开始到结束一直去搜索符合规则的。如果没有加号，匹配的结果就是1，2，3，5，4，3，3，8，7，9并不是我们想要的，有了加号，每次匹配的数字就是至少一个了。
+console.log( str.match(re) );   // [123，54，33，879]
 //（4）replace()方法；查找符合正则的字符串，就替换成对应的字符串。返回替换后的内容。
-    var str = "我爱北京天安门，天安门上太阳升。";
-    var re = /北京|天安门/g;  //  找到北京 或者天安门 全局匹配
-    var str2 = str.replace(re,'*');
-    console.log(str2)  //我爱**，*上太阳升
+var str = "我爱北京天安门，天安门上太阳升。";
+var re = /北京|天安门/g;  //  找到北京 或者天安门 全局匹配
+var str2 = str.replace(re,'*');
+console.log(str2)  //我爱**，*上太阳升
 //（4-1）()：小括号，叫做分组符。就相当于数学里面的括号。如下：
-    var str = '2013-6-7';
-    var re = /(\d+)(-)/g;
-    str = str.replace(re,function($0,$1,$2){
-        //replace()中如果有子项，
-        //第一个参数：$0（匹配成功后的整体结果  2013-  6-）,
-        // 第二个参数 : $1(匹配成功的第一个分组，这里指的是\d   2013, 6)
-        //第三个参数 : $1(匹配成功的第二个分组，这里指的是-    - - )
-        return $1 + '.';  //分别返回2013.   6.
-    });
-    console.log( str );   //2013.6.7
-    //整个过程就是利用子项把2013- 6- 分别替换成了2013. 6.  最终弹出2013.6.7
+var str = '2013-6-7';
+var re = /(\d+)(-)/g;
+str = str.replace(re,function($0,$1,$2){
+    //replace()中如果有子项，
+    //第一个参数：$0（匹配成功后的整体结果  2013-  6-）,
+    // 第二个参数 : $1(匹配成功的第一个分组，这里指的是\d   2013, 6)
+    //第三个参数 : $1(匹配成功的第二个分组，这里指的是-    - - )
+    return $1 + '.';  //分别返回2013.   6.
+});
+console.log( str );   //2013.6.7
+//整个过程就是利用子项把2013- 6- 分别替换成了2013. 6.  最终弹出2013.6.7
 //（5）
 </script>
-</body>
 </html>
