@@ -31,6 +31,7 @@ var couponName = '',//优惠券名称
 /**日历组件初始化代码*/
 $(function () {
     debugger;
+    checkAll('leaf_arr');
     //渲染三级分类包含
     category_threePull(category_threeUrl);
     // initTree("treeDemo",url,null,param,timeSign,mainKnowledgeSelect);
