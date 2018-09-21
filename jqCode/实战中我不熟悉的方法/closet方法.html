@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>菜鸟教程(runoob.com)</title>
+    <style>
+        .ancestors * {
+            display: block;
+            border: 2px solid lightgrey;
+            color: lightgrey;
+            padding: 5px;
+            margin: 15px;
+        }
+    </style>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script>
+        //相关知识点：parents(),parent(),parentsUntil()都是近似的方法。以后注意补全笔记。
+        $(document).ready(function() {
+            //查找祖先元素中的匹配，层级最近的那个元素。
+            $("span").closest("ul").css({
+                "color": "red",
+                "border": "2px solid red"
+            });
+        });
+    </script>
+</head>
+
+<body class="ancestors">body (曾曾祖先节点)
+
+
+    <div style="width:500px;">div (曾祖先节点)
+        <ul>
+            ul (第二祖先 - 第二祖先节点)
+            <ul>
+                ul (第一祖先 - 第一祖先节点)
+                <li>
+                    li (直接父节点)
+                    <span>
+                        span
+                    </span>
+                </li>
+            </ul>
+        </ul>
+    </div>
+</body>
+
+<!-- 在这个例子中, $("span").closest("ul") 指我们查找一个span元素的第一个ul祖先。最靠近span的祖先是li,但是由于查到一个div，jQuery 跳过li元素继续查找下一个祖先，直到它找出我们要查找的ul.假如我们用parents() 方法替代，它将返回ul的祖先 。 -->
+
+</html>

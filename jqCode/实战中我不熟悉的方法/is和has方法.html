@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>菜鸟教程(runoob.com)</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js">
+    </script>
+
+</head>
+
+<body>
+    <ul class="fly">
+        <li>
+            <strong>
+                list
+            </strong> item 1 - one strong tag
+        </li>
+        <li>
+            <strong>
+                list
+            </strong> item
+            <strong>
+                2
+            </strong> - two
+            <span>
+                strong tags
+            </span>
+        </li>
+        <li>list item 3</li>
+        <li>list item 4</li>
+        <li>list item 5</li>
+    </ul>
+    <!-- <div class="sky">
+        <p>点我查看父元素是否是 div。</p>
+    </div>
+    <div class="moon">
+        <span>点我查看父元素是否是moon。</span>
+    </div> -->
+</body>
+<script>
+    //is() 方法用于查看选择的元素是否匹配选择器。【参数如果直接输入选择器，返回值是布尔值】
+    //如果is传参为函数，则返回值为符合回调函数的各个元素。
+    debugger;
+    console.log($(".fly"))
+
+    $("li").click(function() {
+        debugger;
+        var $li = $(this),
+            isWithTwo = $li.is(function() {
+                //@@@@此处有个知识点，strong是选择器，this是查询的上下文。
+                return $('strong', this).length === 2;
+            });
+        if (isWithTwo) {
+            $li.css("background-color", "green");
+        } else {
+            $li.css("background-color", "red");
+        }
+    });
+
+    $(document).ready(function() {
+        $("p").click(function() {
+            if ($("p").parent().is(".sky")) {
+                alert("p 的父元素是 div");
+            }
+        });
+    });
+</script>
+
+</html>

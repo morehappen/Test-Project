@@ -11,25 +11,14 @@ var backLeaf_AllUrl = localUrl_W + '/goods/GoodsClassification/showAllLeafClass'
 var brand_AllUrl = localUrl_W + '/goods/brand/showBrandLeafClassOpenClose';
 //顶部所有商品类型的请求地址
 var goods_AllUrl = localUrl_W + '/goods/service/showAll';
-var _ct_id = $.getUrlParam("_id");//
-var _area = "";
 $.sidebarMenu($('.sidebar-menu'));
 var storage_data=[];
 var check_arr = [];
 var checkSpu_arr = [];
-var checkRight_dom;
 var spu_page_arr = [];
-var check_arrStr = [];
-var shop_arrStr = [];
 var _isMore = 1;
 var _currentPage = 1,
-    _pageSize = 10,
-    _lcid,
-    _brandId,
-    _type,
-    _sorts,
-    _ids,
-    _state;
+    _pageSize = 10;
 $(function () {
     //模拟按钮事件绑定
     // checkAll("show");//测试代码

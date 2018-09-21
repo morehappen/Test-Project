@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title></title>
+    <meta charset='utf-8' />
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+</head>
+
+<body>
+    <table id="table">
+        <thead>
+            <tr>
+                <th>水果</th>
+                <th>肉类</th>
+                <th>蔬菜</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>香蕉</td>
+                <td>猪肉</td>
+                <td>青椒</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        hello world
+    </div>
+    <span>
+        heihei
+    </span>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            $("thead tr", "#table").each(function() {
+                $(this).css("color", "red");
+            });
+            $("div, span").css("color", "red"); //逗号为并集选择
+        });
+    </script>
+</body>
+
+</html>

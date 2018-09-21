@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js">
+    </script>
+</head>
+
+<body>
+    <script>
+        //  $.extend( [deep ], target, object1 [, objectN ] )；
+
+        //  deep 
+        // 类型: Boolean 
+        // 如果是true，合并成为递归（又叫做深拷贝）。【递归拷贝又称为深拷贝】
+
+        //  target 
+        // 类型: Object 
+        // 对象扩展。这将接收新的属性。
+
+        //  object1 
+        // 类型: Object 
+        // 一个对象，它包含额外的属性合并到第一个参数。
+
+        // objectN 
+        // 类型: Object 
+        // 包含额外的属性合并到第一个参数。
+        //【1】浅拷贝
+        var obj1 = {
+            apple: 0,
+            banana: {
+                weight: 52,
+                price: 100
+            },
+            cherry: 97
+        };
+        var obj2 = {
+            banana: {
+                price: 200
+            },
+            durian: 100
+        };
+        $.extend(obj1, obj2);
+        console.log(obj1);
+        // var obj1 = {
+        //     apple: 0,
+        //     banana: {
+        //         price: 200
+        //     },
+        //     cherry: 97,
+        //     durian: 100
+        // };
+        //被obj2覆盖:如果obj2上有的属性，obj1上也有，那么obj2就会将obj1上相同属性的属性值覆盖掉。
+        //【2】深拷贝
+        var obj11 = {
+            apple: 0,
+            banana: {
+                weight: 52,
+                price: 100
+            },
+            cherry: 97
+        };
+        var obj22 = {
+            banana: {
+                price: 200
+            },
+            durian: 100
+        };
+        $.extend(true, obj11, obj22);
+        console.log(obj11);
+        // var obj1 = {
+        //     apple: 0,
+        //     banana: {
+        //         weight:52,
+        //         price: 200
+        //     },
+        //     cherry: 97,
+        //     durian: 100
+        // };
+        //object2的banner覆盖了object1的banner，但是weight属性也被继承了呦
+    </script>
+</body>
+
+</html>

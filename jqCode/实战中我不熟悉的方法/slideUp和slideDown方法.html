@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>菜鸟教程(runoob.com)</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script>
+        //slideUp和slideDown方法的传参问题
+        //$(selector).slideUp(speed,easing,callback)
+        //1参，控制动画的速度。2参控制速率变化曲线
+        //3参，控制动画结束后的执行函数.
+        $(document).ready(function() {
+            $(".btn1").click(function() {
+                $("p").slideUp(function() {
+                    alert(2);
+                }); //slideUp() 方法以滑动方式隐藏被选元素。
+            });
+            $(".btn2").click(function() {
+                $("p").slideDown(); //slideDown() 方法以滑动方式显示被选元素。
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <p>这是一个段落。</p>
+    <button class="btn1">上滑</button>
+    <button class="btn2">下滑</button>
+
+</body>
+
+</html>
