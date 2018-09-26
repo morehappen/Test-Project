@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>菜鸟教程(runoob.com)</title>
+</head>
+
+<body>
+
+    <p>在文本框中尝试输入触发函数。</p>
+    <br>
+    <input type="text" id="myInput" oninput="myFunction()">
+    <br>
+    <br>
+    <textarea name="" id="myInput1" cols="30" rows="10" oninput="myFunction1()"></textarea>
+    <br>
+    <p id="demo"></p>
+    <br>
+    <div>分割线</div>
+    <br>
+
+    <br> 输入你的名字: <input type="text" id="fname" onchange="myFunction3()">
+    <br>
+    <p>当你离开输入框后，函数将被触发，将小写字母转为大写字母。</p>
+    <br>
+    <script>
+        //【1】oninput事件，当用户在表单尝试输入时候触发。[该方法ie是独有的，对应的是onpropertychange事件，该事件的意思就是属性发生改变。版本为678]
+        //此处最好是综合两者做个封装，做到谷歌在谷歌里执行，ie在ie里执行。
+        function myFunction() {
+            var x = document.getElementById("myInput").value;
+            document.getElementById("demo").innerHTML = "你输入的是: " + x;
+        }
+
+        function myFunction1() {
+            var x = document.getElementById("myInput1").value;
+            document.getElementById("demo").innerHTML = "你输入的是: " + x;
+        }
+        //【2】onchange事件，当表单内容发生变化时候会触发；也可应用于单选复选框的变化。【onchange触发的条件是焦点失焦】
+        function myFunction3() {
+            var x = document.getElementById("fname").value;
+            document.getElementById("demo").innerHTML = "你输入的是: " + x;
+        }
+    </script>
+
+</body>
+
+</html>
