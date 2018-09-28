@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // hasOwnProperty 是 JavaScript 中唯一一个处理属性但是不查找原型链的函数。【即唯一一个判断挂载在构造函数自身上的属性的方法】
+        // 修改Object.prototype
+        Object.prototype.bar = 1;
+        var foo = {
+            goo: undefined
+        };
+
+        foo.bar; // 1
+        'bar' in foo; // true
+
+        foo.hasOwnProperty('bar'); // false
+        foo.hasOwnProperty('goo'); // true
+    </script>
+</body>
+
+</html>

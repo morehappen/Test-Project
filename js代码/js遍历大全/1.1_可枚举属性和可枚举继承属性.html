@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //【1】对象属性的可枚举性
+        const obj = {
+            name: '云库网',
+            domain: 'http://yunkus.com',
+            age: '3年2月19日'
+        };
+        //枚举属性
+        for (let key in obj) {
+            console.log(key, obj[key]);
+        };
+        //Object.defineProperty(obj, prop, descriptor)这样设置的属性，默认是不可枚举的
+        Object.defineProperty(obj, 'type', {
+            value: "前端技术"
+        });
+        for (let key in obj) {
+            console.log(key, obj[key]);
+        };
+        //【2】继承的可枚举属性
+        // 我们不妨把这个词拆开两部分来看， 继承和可枚举， 如果这样一分， 其实我们就只需要看一个就可以了， 因为可枚举前面我们已经介绍过了， 所以只说继承。
+        // 说到继承， 我们得先了解了解下 Object.create(prototype, descriptors) 方法。
+        // prototype 必需。 要用作原型的对象。 可以为 null
+        // descriptors 属性自定义特性， 同 Object.defineProperty() 方法上的 descriptors 属性
+        // Object.create() 方法返回一个具有指定的内部原型且包含指定的属性（ 如果有） 的新对象。
+        // 在这里我们不妨把继承看作是 JavaScript 中的原型链， 父类为原型。
+        // 于是我们就可以通过 Object.create() 方法 来创建一个子对象并继承原型对象。
+        const obj = {
+            name: '云库网',
+            domain: 'http://yunkus.com',
+            age: '3年2月19日'
+        };
+        const subObj = Object.create(obj, {
+            type: {
+                value: "前端技术",
+                enumerable: true
+            },
+            owner: {
+                value: "朝夕熊",
+                enumerable: true
+            }
+        });
+        for (let key in subObj) {
+            console.log(key, subObj[key]);
+        }
+        // 结果：
+        // type 前端技术
+        // owner 朝夕熊
+        // name 云库网
+        // domain http://yunkus.com
+        // age 3年2月19日
+    </script>
+</body>
+
+</html>

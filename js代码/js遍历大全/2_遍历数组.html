@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li class="sky"></li>
+        <li class="sky"></li>
+        <li class="sky"></li>
+    </ul>
+    <script>
+        //【1】常规for循环
+        var arr = ["张三", "李四", "王五", "赵六"];
+
+        for (var i in arr) {
+
+            console.log(i, ":", arr[i]);
+
+        }
+        //【2】for in遍历
+        var arr = ["张三", "李四", "王五", "赵六"];
+
+        for (var i in arr) {
+
+            console.log(i, ":", arr[i]);
+
+        };
+        //【3】使用for-of遍历
+        // 不仅支持数组，还支持大多数类数组对象，例如DOM NodeList对象.
+        // 也支持字符串遍历，它将字符串视为一系列的Unicode字符来进行遍历.
+        var arr = ["张三", "李四", "王五", "赵六"];
+        for (var value of arr) {
+
+            console.log(value); //打印每一个元素值
+
+        }
+        //【3-1】
+
+        var obj11 = { //对象不可遍历
+            '0': 'a',
+            '1': 'b',
+            '3': 'c'
+        };
+
+        //【3-2】
+        var domobj = document.getElementsByTagName('li'); //类数组对象，这是dom，可以遍历
+        for (var value of domobj) {
+
+            console.log(value); //打印每一个元素值
+
+        };
+        //【3-3】
+        var strObj = 'abdcsd';
+        for (var value of strObj) {
+
+            console.log(value); //打印每一个字母
+
+        }
+    </script>
+</body>
+
+</html>

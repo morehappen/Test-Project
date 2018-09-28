@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.2.5.1.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <div>
+            <todo-item v-for='todo in groceryList' :todo='todo' v-bind:key='todo.id'></todo-item>
+        </div>
+
+    </div>
+
+    <script>
+        //【1】创建一个vue实例   //你只需要明白所有的 Vue 组件都是 Vue 实例，并且接受相同的选项对象 (一些根实例特有的选项除外)。
+        var vm = new Vue({
+                //选项viewmodel的缩写，vm
+            })
+            //【2】数据方法
+            //我们的数据对象
+        var data = {
+            a: 1
+        };
+
+        //该对象被加入到一个vue实例中，vm的属性值将会和data.a相等。
+        var vm = new Vue({
+            data: data
+        })
+
+        //实例上属性更改映射到数据源
+        vm.a = data.a;
+
+        //数据源更改映射到实例的属性
+        data.a = 3;
+        vm.a == 3; //
+
+        //【1.1】实例初始化之后，操作未注册是属性，是没有效果的。
+        vm.b = 'h22'; //比如这里b属性是不存在的，这个时候操作是不会和视图有映射的。
+
+        //如果试图使用某些属性，初始化时候就要将它们注册。
+        data: {
+            newTodoText: '', //空字符串
+            visitCount: 0, //数值
+            hideCompletedTodos: false, //布尔值
+            todos: [], //空数组
+            error: null //null
+        }
+    </script>
+</body>

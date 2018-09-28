@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //【1】isPrototypeOf()：确定对象之间是否存在这种指向关系。如果 [[Prototype]] 指向调用
+        //语法：Person.prototype.isPrototypeOf(person1)；原型对象调用，传参实例，解释为原型是不是这个实例的原型
+        //返回结果为true或者false
+        //构造函数
+        function Person() {}
+
+        //构造函数原型对象
+        Person.prototype.name = "LeCheng";
+        Person.prototype.age = "21";
+        Person.prototype.job = "Web Developer";
+        Person.prototype.sayName = function() {
+            alert(this.name);
+        };
+
+        //调用构造函数 创建实例对象 调用实例对象方法sayName()
+        var person1 = new Person();
+        person1.sayName(); //"LeCheng";
+
+        //检测 person1 中 [[Prototype]] 是否指向 Person.prototype
+        alert(Person.prototype.isPrototypeOf(person1)); //true
+        //【2】Object.getPrototypeOf()
+        //传参实例，返回实例的原型对象
+        alert(Object.getPrototypeOf(person1) == Person.prototype); //true
+        alert(Object.getPrototypeOf(person1).name); //"LeCheng"
+        //【3】检测一个值是存在于实例还是原型中（该方法由Object继承而来），true表明在实例上。
+        //检测属性是存在实例还是构造函数原型对象中
+        console.log(person1.hasOwnProperty('name')); //false
+    </script>
+</body>
+
+</html>

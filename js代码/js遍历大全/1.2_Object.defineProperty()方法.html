@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //what is Object.defineProperty
+        //【0】我们可以通过Object.defineProperty这个方法，直接在一个对象上定义一个新的属性，或者是修改已存在的属性。最终这个方法会返回该对象。
+        //【语法】Object.defineProperty(object, propertyname, descriptor)
+        //object 必需。 要在其上添加或修改属性的对象。 这可能是一个本机 JavaScript对象（即用户定义的对象或内置对象）或 DOM 对象。
+        //propertyname 必需。 一个包含属性名称的字符串。
+        //descriptor 必需。 属性描述符。 它可以针对数据属性或访问器属性。
+
+        //descriptor：
+        //value：默认值是undefined
+        //writable，configurable，enumerable；三个字段，如果是对象直接添加属性，默认值都是true。而通过Object.defineProperty（）设置的属性，默认都是false。
+
+        //[1]writable,布尔值控制是否可以修改  默认值true
+        var someOne = {};
+        Object.defineProperty(someOne, "name", {
+            value: "coverguo", //由于设定了writable属性为false 导致这个量不可以修改
+            writable: false
+        });
+        console.log(someOne.name); // 输出 coverguo
+        someOne.name = "linkzhu";
+        console.log(someOne.name); // 输出coverguo
+        //[2]configurable,如果为false，则任何尝试删除目标属性或修改属性以下特性（writable, configurable, enumerable）的行为将被无效化【不能再调用Object.defineProperty（）对属性的行为进行修改】  默认值true
+        var someOne = {};
+        Object.defineProperty(someOne, "name", {
+            value: "coverguo",
+            configurable: false
+        });
+        delete someOne.name;
+        console.log(someOne.name); // 输出 coverguo
+        someOne.name = "linkzhu";
+        console.log(someOne.name); // 输出coverguo
+
+        //[3]【enumerable】 是否能在for-in循环中遍历出来或在Object.keys中列举出来。对于像前面例子中直接在对象上定义的属性，这个属性该特性   默认值为为 true。
+        var someOne = {};
+        Object.defineProperty(someOne, "name", {
+            value: "coverguo",
+            configurable: false
+        });
+        delete someOne.name;
+        console.log(someOne.name); // 输出 coverguo
+        someOne.name = "linkzhu";
+        console.log(someOne.name); // 输出coverguo
+
+
+        //【附加】【get】一旦目标对象访问该属性，就会调用这个方法，并返回结果。默认为 undefined。
+        // 【set】 一旦目标对象设置该属性， 就会调用这个方法。 默认为 undefined。
+        // 从上面， 可以得知， 我们可以通过使用Object.defineProperty， 来定义和控制一些特殊的属性， 如属性是否可读， 属性是否可枚举， 甚至修改属性的修改器（ setter） 和获取器(getter)
+    </script>
+</body>
+
+</html>

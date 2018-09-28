@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //【1】【自身可枚举属性：不抓取原型上的可枚举属性】如果支持ES5+的浏览器（即IE8以上），可以通过JS内建方法：
+        //语法：Object.keys(obj); // 返回的是所有属性组成的数组
+
+        var Person = function(name) {
+            this.name = name;
+        };
+
+        // 创建原型属性
+        Person.prototype.age = 26;
+
+        // 创建实例
+        var person = new Person('xiaog');
+
+        // 在person实例中创建不可枚举属性"job"
+        Object.defineProperty(person, 'job', {
+            value: 'FEDer',
+            enumerable: false,
+            configurable: true,
+            writable: true,
+        });
+
+        // 只能返回自身可枚举属性
+        Object.keys(person); // ["name"]
+        //【2】自身+原型可枚举属性
+        //如果需要兼容IE8及以下浏览器，可使用for...in。
+        //语法：for (property in object) { ...}
+        var Person = function(name) {
+            this.name = name;
+        };
+
+        // 创建原型属性
+        Person.prototype.age = 26;
+
+        // 创建实例
+        var person = new Person('xiaog');
+
+        // 在person实例中创建不可枚举属性"job"
+        Object.defineProperty(person, 'job', {
+            value: 'FEDer',
+            enumerable: false,
+            configurable: true,
+            writable: true,
+        });
+
+        var person = new Person('xiaog');
+        for (p in person) {
+            // 只能打印自身+原型中可枚举属性
+            console.log(p); // "name", "age"
+        }
+        //【2-1】结合过hasOwnProperty滤掉原型上的方法，就可以兼容ie8以下的获取自身可枚举属性
+        var Person = function(name) {
+            this.name = name;
+        };
+
+        // 创建原型属性
+        Person.prototype.age = 26;
+
+        // 创建实例
+        var person = new Person('xiaog');
+
+        // 在person实例中创建不可枚举属性"job"
+        Object.defineProperty(person, 'job', {
+            value: 'FEDer',
+            enumerable: false,
+            configurable: true,
+            writable: true,
+        });
+
+        for (p in person) {
+            // 只有是自身属性时，打印
+            if (Object.hasOwnProperty(p)) {
+                console.log(p); // "name"
+            }
+        };
+        //【3】自身所有属性【构造函数上的可枚举属性和不可枚举属性】
+        //语法：Object.getOwnPropertyNames(obj);
+        var Person = function(name) {
+            this.name = name;
+        };
+
+        // 创建原型属性
+        Person.prototype.age = 26;
+
+        // 创建实例
+        var person = new Person('xiaog');
+
+        // 在person实例中创建不可枚举属性"job"
+        Object.defineProperty(person, 'job', {
+            value: 'FEDer',
+            enumerable: false,
+            configurable: true,
+            writable: true,
+        });
+
+        var ownAllProperties = Object.getOwnPropertyNames(person);
+
+        // 可以打印自身可枚举属性"name"以及不可枚举属性"job"
+        console.log(ownAllProperties); // ["name", "job"]
+        //【4】自身+原型所有属性【自身加原型，枚举和不可枚举全包含】
+        // 获取所有属性方法封装
+        function getAllPropertyNames(obj) {
+            var props = [];
+
+            do { //执行一次再判断，先将自身属性遍历，然后将自身置换为原型
+                Object.getOwnPropertyNames(obj).forEach(function(prop) {
+                    if (props.indexOf(prop) === -1) {
+                        props.push(prop);
+                    }
+                });
+            } while (obj = Object.getPrototypeOf(obj));
+
+            return props;
+        }
+
+        // 测试
+        var Person = function(name) {
+            this.name = name;
+        };
+
+        // 创建原型属性
+        Person.prototype.age = 26;
+
+        // 创建实例
+        var person = new Person('xiaog');
+
+        // 在person实例中创建不可枚举属性"job"
+        Object.defineProperty(person, 'job', {
+            value: 'FEDer',
+            enumerable: false,
+            configurable: true,
+            writable: true,
+        });
+
+        var allPropertiesNames = getAllPropertyNames(person);
+        console.log(allPropertiesNames); // 返回的数组中会包括"name", "job", "age", 还有原型对象中其他默认不可枚举属性
+
+        //【4-1】上述代码可简化
+        function getAllPropertyNames(obj) {
+            var props = [];
+
+            do {
+                props = props.concat(Object.getOwnPropertyNames(obj));
+            } while (obj = Object.getPrototypeOf(obj));
+
+            return props;
+        }
+    </script>
+</body>
+
+</html>

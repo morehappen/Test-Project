@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.2.5.1.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <div v-if='bol'>
+            条件判断显示
+        </div>
+        <div v-for='item in arrs'>
+            <li>{{item.apple}}</li>
+        </div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                bol: true,
+                arrs: [{
+                    apple: 1
+                }, {
+                    apple: 2
+                }, {
+                    apple: 33
+                }]
+            }
+        })
+    </script>
+</body>

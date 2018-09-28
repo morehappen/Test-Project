@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //【1】demo演示：
+        function Person(name, sex) {
+            this.name = name;
+            this.sex = sex;
+        }
+        Person.prototype.getInfo = function() {
+            console.log('getInfo: [name:' + this.name + ', sex:' + this.sex + ']');
+        }
+        var a = new Person('jojo', 'femal'); //a就是对象Person的实例，a.__proto__ === Person.prototype
+        var b = Object.create(Person.prototype); //b是对象F的一个实例，并且b.__proto__ === Person.prototype的。
+        //【2】F是什么
+        //它就是生成了一个实例，这个实例的原型由我来指定，但是它的构造函数F被隐藏了。同时新属性的添加，被作为其余参数传入。
+        if (typeof Object.create !== "function") {
+            //此方法未考虑create的第二个参数的实现
+            Object.create = function(proto, propertiesObject) {
+                if (typeof proto !== 'object' && typeof proto !== 'function') {
+                    throw new TypeError('Object prototype may only be an Object: ' + proto);
+                } else if (proto === null) {
+                    throw new Error("This browser's implementation of Object.create is a shim and doesn't support 'null' as the first argument.");
+                }
+
+                if (typeof propertiesObject != 'undefined') throw new Error("This browser's implementation of Object.create is a shim and doesn't support a second argument.");
+                //实现一个隐藏函数
+                function F() {}
+                //函数的原型设置为参数传进来的原型
+                F.prototype = proto;
+                // 返回一个F函数的实例，即此实例的__proto__指向为参数proto
+                return new F();
+            };
+        }
+        //【3】原型链继承的代码
+        function Student(name, sex, age) {
+            Person.call(this, name, sex);
+            this.age = age;
+        }
+        //原型链拼接
+        Student.prototype = Object.create(Person.prototype);
+        //@@@构造函数弯了，纠正。这个地方注意下，Student.prototype.constructor可以理解为就是F的实例,所以F的实例指向了Student，Student的原型对象也指向了Student。
+        Student.prototype.constructor = Student;
+        Student.prototype.getInfo = function() {
+            console.log('getInfo: [name:' + this.name + ', sex:' + this.sex + ', age:' + this.age + '].');
+        }
+
+        var s = new Student('coco', 'femal', 25);
+        //【3-1】既然说到了这里，那如果想要一个对象继承多个类怎么办呢？在上面的代码基础上使用mixin加工下就可啦。
+        //再创建一个基类
+        function Animal(age) {
+            this.age = age;
+        }
+        Animal.prototype.say = function(language) {
+            console.log('you say ' + language);
+        }
+
+        function Student(name, sex, age) {
+            Person.call(this, name, sex);
+            Animal.call(this, age);
+        }
+        //原型链拼接
+        Student.prototype = Object.create(Person.prototype);
+        Object.assign(Student.prototype, Animal.prototype);
+        Student.prototype.constructor = Student;
+        Student.prototype.getInfo = function() {
+            console.log('getInfo: [name:' + this.name + ', sex:' + this.sex + ', age:' + this.age + '].');
+        };
+        var s = new Student('coco', 'femal', 25);
+
+        // s的原型仍是一个F实例，其原型指向了Person，但是这个F实例上mixin了Animal的方法。但是原型链上并没有Animal什么事，
+        // 通过instanceof可以验证这一点。 这种方式比较适合父类为同级别， 子类只要拥有相同的属性和方法、 即可的情况。
+    </script>
+</body>
+
+</html>
