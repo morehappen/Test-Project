@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.2.5.1.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        {{msg_text}}
+        <div>
+            <span type="text" :title='msg_attrid'> 鼠标悬停显示</span>
+        </div>
+        <div v-html='msg_html'></div>
+        <div>
+            {{8+8}}
+        </div>
+        <div>
+            {{msg_bullen?'YES':'NO'}}
+        </div>
+        <div>
+            {{msg_text.split('').reverse().join('')}}
+        </div>
+        <div v-bind:id='"list"+msg_attrid'>属性的表达式</div>
+        <div v-if='msg_bullen'>
+            指令v-if控制能看的见
+        </div>
+        <div v-if='msg_bullen_false'>
+            看不见
+        </div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                msg_text: 'sky',
+                msg_html: '<h1>菜鸟教程</h1>',
+                msg_attrid: 111,
+                msg_bullen: true,
+                msg_bullen_false: false
+            }
+        })
+    </script>
+</body>
