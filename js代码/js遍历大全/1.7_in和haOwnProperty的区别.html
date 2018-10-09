@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 【1】in判断的是对象的所有属性，包括对象实例及其原型的属性； 
+        // 而hasOwnProperty则是判断对象实例的是否具有某个属性。
+
+        function Person() {}
+        Person.prototype.name = "allen";
+
+        var person = new Person();
+        console.log(person.hasOwnProperty("name")); //false
+        console.log("name" in person); //true
+        console.log(person.name); //"allen"
+
+        person.name = "justforse";
+        console.log(person.hasOwnProperty("name")); //true
+        console.log("name" in person); //true
+        console.log(person.name); //"justforuse"
+
+        delete person.name;
+        console.log(person.hasOwnProperty("name")); //false
+        console.log("name" in person); //true
+        console.log(person.name); //"allen"
+        //【2】for in，只能抓取可枚举属性
+        var num = new Number();
+        for (var pro in num) {
+            console.log("num." + pro + " = " + num[pro]); //它的输出结果会是空。这是因为Number中内置的属性是不可枚举的，所以不能被for…in访问到。
+        }
+        //如果判断的属性存在于Object对象的原型内，不管它是否可枚举都会返回false。
+    </script>
+</body>
+
+</html>
