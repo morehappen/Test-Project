@@ -18,7 +18,7 @@
         //【1】常规for循环
         var arr = ["张三", "李四", "王五", "赵六"];
 
-        for (var i in arr) {
+        for (var i = 0; i < arr.length; i++) {
 
             console.log(i, ":", arr[i]);
 
@@ -40,7 +40,7 @@
             console.log(value); //打印每一个元素值
 
         }
-        //【3-1】
+        //【3-1】for-of方法不能遍历对象
 
         var obj11 = { //对象不可遍历
             '0': 'a',
@@ -48,14 +48,14 @@
             '3': 'c'
         };
 
-        //【3-2】
+        //【3-2】for-of可以遍历DOM对象
         var domobj = document.getElementsByTagName('li'); //类数组对象，这是dom，可以遍历
         for (var value of domobj) {
 
             console.log(value); //打印每一个元素值
 
         };
-        //【3-3】
+        //【3-3】for-of可以遍历字符串
         var strObj = 'abdcsd';
         for (var value of strObj) {
 
