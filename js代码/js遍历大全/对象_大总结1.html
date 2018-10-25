@@ -11,7 +11,8 @@
 <body>
     <script>
         //writable，configurable，enumerable；三个字段，如果是对象直接添加属性，默认值都是true。而通过Object.defineProperty（）设置的属性，默认都是false。
-        // 【enumerable】决定了是否可枚举
+        //【enumerable】决定了是否可枚举
+
 
         // 可枚举性，非继承属性，继承属性
         //【1】可枚举性：
@@ -26,14 +27,14 @@
         console.log(res); //{"name":"goatling"} 方法用于将 JavaScript 值转换为 JSON 字符串，然后传给后台
         //【2】实战举例
         //【访问：】
-        // 自身+原型可枚举属性//语法：for (property in object) { ...}【自身+原型可枚举属性】
+        // 自身+原型可枚举属性//语法：【for (property in object) { ...}】【自身+原型可枚举属性】
         // 抓出对象的属性值为数组【 Object.values()】【 Object.values(obj1)】【自身+原型可枚举属性】
         // 抓出对象的属性名为数组【 Object.keys()】 Object.keys(obj1)；【只能返回自身可枚举属性】
         //Object.entries方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（ enumerable ）属性的键值对数组【只能返回自身可枚举属性】
         //【操作：】
-        // 合并多个数组【 Object.assign()】【 var res = Object.assign(target, source1, source2, source3);】【自身可枚举属性】
+        // 合并多个对象【 Object.assign()】【 var res = Object.assign(target, source1, source2, source3);】【自身可枚举属性】
         // 停止新增， 允许修改【 Object.seal();】【Object.seal(obj);】【自身属性】
-        // 停止新增， 停止修改【 Object.freeze(obj);】【Object.freeze(obj);】【自身可枚举属性】
+        // 停止新增， 停止修改【 Object.freeze();】【Object.freeze(obj);】【自身可枚举属性】
     </script>
 </body>
 

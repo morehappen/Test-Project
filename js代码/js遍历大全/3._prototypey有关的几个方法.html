@@ -34,7 +34,7 @@
         //传参实例，返回实例的原型对象
         alert(Object.getPrototypeOf(person1) == Person.prototype); //true
         alert(Object.getPrototypeOf(person1).name); //"LeCheng"
-        //【3】检测一个值是存在于实例还是原型中（该方法由Object继承而来），true表明在实例上。
+        //【3】检测一个值是存在于实例还是原型中（该方法由Object继承而来），true表明在实例上。【该方法往往和for in配合使用】
         //检测属性是存在实例还是构造函数原型对象中
         console.log(person1.hasOwnProperty('name')); //false
     </script>
