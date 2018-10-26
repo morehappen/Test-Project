@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //【1】下面的例子中
+        // 当我们用 bind() 实现柯里化时, greet() 函数参数中除了最后一个参数都被预定义好了, 所以当我们调用柯里化后的新函数时只需要指定最后一位参数.
+        function greet(gender, age, name) {
+            // if a male, use Mr., else use Ms.
+            var salutation = gender === "male" ? "Mr. " : "Ms. ";
+
+            if (age > 25) {
+                return "Hello, " + salutation + name + ".";
+            } else {
+                return "Hey, " + name + ".";
+            }
+        };
+        // 在 greet 函数中我们可以传递 null, 因为函数中并未使用到 this 关键字
+        var greetAnAdultMale = greet.bind(null, "male", 45);
+        console.log(greetAnAdultMale("John Hartlove")); // Hello, Mr. John Hartlove.
+        //总结：bind() 方法允许我们明确指定对象方法中的 this 指向, 我们可以借用, 复制一个方法或者将方法赋值为一个可作为函数执行的变量. 我们以可以借用 bind 实现函数柯里化.
+    </script>
+</body>
+
+</html>

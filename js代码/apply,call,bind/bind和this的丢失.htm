@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //【1】兼容性问题
+        //bind() 函数在 ECMA-262 第五版才被加入；它可能无法在所有浏览器上运行。你可以部份地在脚本开头加入以下代码，就能使它运作，让不支持的浏览器也能使用 bind() 功能。 - MDN
+        if (!Function.prototype.bind) {
+            Function.prototype.bind = function(oThis) {
+                if (typeof this !== "function") {
+                    // closest thing possible to the ECMAScript 5
+                    // internal IsCallable function
+                    throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+                }
+
+                var aArgs = Array.prototype.slice.call(arguments, 1),
+                    fToBind = this, // 此处的 this 指向目标函数
+                    fNOP = function() {},
+                    fBound = function() {
+                        return fToBind.apply(this instanceof fNOP ?
+                            this // 此处 this 为 调用 new obj() 时所生成的 obj 本身
+                            :
+                            oThis || this, // 若 oThis 无效则将 fBound 绑定到 this
+                            // 将通过 bind 传递的参数和调用时传递的参数进行合并, 并作为最终的参数传递
+                            aArgs.concat(Array.prototype.slice.call(arguments)));
+                    };
+
+                // 将目标函数的原型对象拷贝到新函数中，因为目标函数有可能被当作构造函数使用
+                fNOP.prototype = this.prototype;
+                fBound.prototype = new fNOP();
+
+                return fBound;
+            };
+        }
+        //【2】如果我们将包含 this 的方法赋值给一个变量, 那么 this 的指向也会绑定到另一个对象上, 如下所示:
+        // 全局变量 data
+        var data = [{
+            name: "Samantha",
+            age: 12
+        }, {
+            name: "Alexis",
+            age: 14
+        }]
+
+        var user = {
+            // 局部变量 data
+            data: [{
+                name: "T. Woods",
+                age: 37
+            }, {
+                name: "P. Mickelson",
+                age: 43
+            }],
+            showData: function(event) {
+                var randomNum = ((Math.random() * 2 | 0) + 1) - 1; // random number between 0 and 1
+
+                console.log(this.data[randomNum].name + " " + this.data[randomNum].age);
+            }
+
+        }
+
+        // 将 user 对象的 showData 方法赋值给一个变量【继续之前的例子, 如果我们将包含 this 的方法赋值给一个变量, 那么 this 的指向也会绑定到另一个对象上, 如下所示:】
+        var showDataVar = user.showData;
+
+        showDataVar(); // Samantha 12 (来自全局变量数组而非局部变量数组)
+        //【3】怎么纠正上面的情况
+        // Bind the showData method to the user object
+        var showDataVar = user.showData.bind(user);
+    </script>
+</body>
+
+</html>

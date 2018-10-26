@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../jquery.min.js"></script>
+</head>
+
+<body>
+    <script>
+        // 全局变量
+        var avgScore = "global avgScore";
+
+        // 全局函数
+        function avg(arrayOfScores) {
+            // 分数相加并返回结果
+            var sumOfScores = arrayOfScores.reduce(function(prev, cur, index, array) {
+                return prev + cur;
+            });
+
+            // 这里的 "this" 会被绑定到全局对象上, 除非使用 Call 或者 Apply 明确指定 this 的指向
+            this.avgScore = sumOfScores / arrayOfScores.length;
+        }
+
+        var gameController = {
+            scores: [20, 34, 55, 46, 77],
+            avgScore: null
+        }
+
+        // 调用 avg 函数, this 指向 window 对象
+        avg(gameController.scores);
+        // 证明 avgScore 已经被设置为 window 对象的属性
+        console.log(window.avgScore); // 46.4
+        console.log(gameController.avgScore); // null
+
+        // 重置全局变量
+        avgScore = "global avgScore";
+
+        // 使用 call() 方法明确将 "this" 绑定到 gameController 对象
+        avg.call(gameController, gameController.scores);
+
+        console.log(window.avgScore); // 全局变量 avgScore 的值  [global avgScore]
+        console.log(gameController.avgScore); // 46.4
+    </script>
+</body>
+
+</html>

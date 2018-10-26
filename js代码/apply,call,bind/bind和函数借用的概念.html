@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../jquery.min.js"></script>
+</head>
+
+<body>
+    <script>
+        var data = [{
+            name: "Samantha",
+            age: 12
+        }, {
+            name: "Alexis",
+            age: 14
+        }];
+
+        var user = {
+            // 局部变量 data
+            data: [{
+                name: "T. Woods",
+                age: 37
+            }, {
+                name: "P. Mickelson",
+                age: 43
+            }],
+            showData: function(event) {
+                var randomNum = ((Math.random() * 2 | 0) + 1) - 1; // random number between 0 and 1
+
+                console.log(this.data[randomNum].name + " " + this.data[randomNum].age);
+            }
+
+        };
+        // cars 对象
+        var cars = {
+            data: [{
+                name: "Honda Accord",
+                age: 14
+            }, {
+                name: "Tesla Model S",
+                age: 2
+            }]
+
+        };
+        //【1】在 JavaScript 中, 我们可以传递函数, 返回函数, 借用他们等等。下面这个案例是借用函数
+
+        // 我们从之前定义的 user 对象借用 showData 方法
+        // 这里我们将 user.showData 方法绑定到刚刚新建的 cars 对象上【即我们从其他对象借用了一个方法】
+        // 这里还有一个问题，就是借用的时候，如果我们本来就有一个同名函数，这个时候会被覆盖，就需要我们使用apply或者call了
+        cars.showData = user.showData.bind(cars);
+        cars.showData(); // Honda Accord 14
+    </script>
+
+</body>
+
+</html>
