@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var num1 = 10;
+        var num2 = 20;
+        //【1】中间变量承接
+        var temp = num1;
+        var num1 = num2;
+        var num2 = temp;
+        console.log(num1);
+        console.log(num2);
+        //【2】加减法（适用于数字的交换）
+        var num1 = num1 + num2;
+        var num1 = num1 - num2;
+        var num2 = num1 - num2;
+        //【3】装逼的写法【适用各种类型变量】
+        var num11 = 'sky',
+            num22 = 'moon';
+        num11 = [num22, num22 = num11][0];
+        console.log(num11); // 2
+        console.log(num22); // 1
+        //【4】装逼装的更稳的一点的写法【仅仅适用数字】
+        var num1_ = 1,
+            num2_ = 2;
+        num1_ ^= num2_; // num1 = num1 ^ num2 = 1 ^ 2 = 3
+        num2_ ^= num1_; // num2 = num2 ^ (num1 ^ num2) = 2 ^ (1 ^ 2) = 1
+        num1_ ^= num2_; // num1 = num1 ^ num2 = 3 ^ 1 = 2
+        console.log(num1_); // 2
+        console.log(num2_); // 1
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="sky">
+        <input type="text" class="fly">
+        <input type="text" class="fly1">
+        <input type="text" class="fly4">
+    </div>
+    <div>
+        <select name="" id="mao" class="fly2">
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
+    </div>
+    <div class="tip">
+
+    </div>
+    <button class="bus">按钮</button>
+    <script>
+        $(document).ready(function() {
+            // oninput和onchange都是事件对象，当输入框的值发生改变时触发该事件。不同的是，
+            // oninput是在值改变时立即触发，而onchange是在值改变后失去焦点才触发，并且可以用在非输入框中，如：select等。
+            $(".fly").on("input oninput", function() {
+                alert(1);
+                $(".tip").text("输入框的值发生改变时触发该事件，立即触发")
+            });
+            $(".fly1").on("input onchange", function() {
+                $(".tip").text("输入框的值发生改变时触发该事件，失焦触发")
+            });
+
+            $(".fly2").change(function() {
+                console.log(1);
+                // $(".tip").text("输入框的值发生改变时触发该事件，失焦触发")
+            });
+            // propertychange,功能同oninput，用以替代oninput在IE9以下的不兼容性。
+            $(".fly4").on("input propertychange", function() {
+                $(".tip").text("输入框的值发生改变时触发该事件，失焦触发")
+            })
+            $(".bus").on("click", function() {
+                alert(1);
+                $(".tip").text("输入框的值发生改变时触发该事件，立即触发")
+            });
+        });
+    </script>
+</body>
+
+</html>

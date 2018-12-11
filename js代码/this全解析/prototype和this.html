@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //【1-1】你创建的每一个函数都是函数对象。它们会自动获得一个特殊的属性prototype，你可以给这个属性赋值。
+    // 当你用new的方式调用一个函数的时候，你就能通过this访问你给prototype赋的值了
+    function Thing() {
+        console.log(this.foo);
+    }
+
+    Thing.prototype.foo = "bar";
+
+    var thing = new Thing(); //logs "bar"
+    console.log(thing.foo);  //logs "bar"
+    //【1-2】实例里面的this是一个特殊的对象。你可以把this想成一种获取prototype的值的一种方式。
+    // 当你在一个实例里面直接给this添加属性的时候，会隐藏prototype中与之同名的属性。
+    // 如果你想访问prototype中的这个属性值而不是你自己设定的属性值，你可以通过在实例里面删除你自己添加的属性的方式来实现。
+    function Thing() {
+    }
+
+    Thing.prototype.foo = "bar";
+    Thing.prototype.logFoo = function () {
+        console.log(this.foo);
+    }
+    Thing.prototype.setFoo = function (newFoo) {
+        this.foo = newFoo;
+    }
+    Thing.prototype.deleteFoo = function () {
+        delete this.foo;
+    }
+    var thing = new Thing();
+    thing.setFoo("foo");
+    thing.logFoo(); //logs "foo";
+    thing.deleteFoo();
+    thing.logFoo(); //logs "bar";
+    thing.foo = "foobar";
+    thing.logFoo(); //logs "foobar";
+    delete thing.foo;
+    //如果你想访问prototype中的这个属性值而不是你自己设定的属性值，你可以通过在实例里面删除你自己添加的属性的方式来实现。
+    thing.logFoo(); //logs "bar";
+
+    // 【1-3】你也能直接通过引用函数对象的prototype 来获得你需要的值。
+    //构造函数和原型上存在同名属性的时候，直接通过prototype访问该属性，可以避免就近查询原则
+    function Thing() {
+    }
+
+    Thing.prototype.foo = "bar";
+    Thing.prototype.logFoo = function () {
+        console.log(this.foo, Thing.prototype.foo);
+    }
+
+    var thing = new Thing();
+    thing.foo = "sky";
+    thing.logFoo(); //logs "sky bar";
+</script>
+</html>

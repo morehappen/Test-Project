@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>菜鸟教程(runoob.com)</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script>
+        //该方法的本质，是为了让挂载鼠标进入和离开某个dom，两次触发的事件。
+        //hover() 方法规定当鼠标指针悬停在被选元素上时要运行的两个函数。
+        //【语法】$(selector).hover(inFunction,outFunction)
+
+        //【等同于】$( selector ).mouseover( handlerIn ).mouseout( handlerOut );
+        $(document).ready(function() {
+            $("p").hover(function() {
+                $("p").css("background-color", "yellow");
+            }, function() {
+                $("p").css("background-color", "pink");
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <p>鼠标移动到该段落。</p>
+
+</body>
+
+</html>

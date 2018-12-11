@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //【1】借用js本身就有的各种方法来处理arguments
+        function transitionTo(name) {
+            // 因为 arguments 是一个类数组对象, 所以我们可以使用 slice()来处理它
+            // 参数 "1" 表示我们返回一个从下标为1到结尾元素的数组
+            console.log(arguments); //["contact", "Today", "20", callee: ƒ, Symbol(Symbol.iterator): ƒ]
+            var args = Array.prototype.slice.call(arguments, 1);
+
+            // 添加该行代码用于查看 args 的值
+            console.log(args); // ["Today", "20"]
+
+            // 注释本例不需要使用到的代码
+            //doTransition(this, name, this.updateURL, args);
+        }
+
+        // 使用案例[我们可以写一个得到快速得到传递给函数的所有参数(以数组形式)的函数:]
+        transitionTo("contact", "Today", "20"); // ["Today", "20"]
+        function doSomething() {
+            var args = Array.prototype.slice.call(arguments);
+            console.log(args);
+        };
+
+        doSomething("Water", "Salt", "Glue"); // ["Water", "Salt", "Glue"];
+        //【2】借用我们自定义的各种方法
+        // 【案例】我们也可以用他们借用我们自定义的方法；我们定义的 gameController 对象借用了 appController 对象的 avg() 方法. 
+        var gameController = {
+            scores: [1, 2, 1, 2, 4],
+            avgScore: null,
+            players: [{
+                name: "Tommy",
+                playerID: 987,
+                age: 23
+            }, {
+                name: "Pau",
+                playerID: 87,
+                age: 33
+            }]
+        }
+
+        var appController = {
+            scores: [900, 845, 809, 950],
+            avgScore: null,
+            avg: function() {
+                var sumOfScores = this.scores.reduce(function(prev, cur, index, array) {
+                    return prev + cur;
+                });
+                this.avgScore = sumOfScores / this.scores.length;
+            }
+        }
+
+        // Note that we are using the apply() method, so the 2nd argument has to be an array
+        appController.avg.apply(gameController);
+        console.log(gameController.avgScore); // 2
+
+        // appController.avgScore is still null; it was not updated, only gameController.avgScore was updated
+        console.log(appController.avgScore); // null
+        //【3】正如我们所期望的那样, 如果我们修改原始的方法, 这样的变化会在借用实例的方法上体现出来。借用的时候，方法属于联动的
+        // 如果我们借用的函数定义发生了变化, 那么我们的代码会发生什么变化.
+        appController.maxNum = function() {
+            this.avgScore = Math.max.apply(null, this.scores);
+        }
+
+        appController.maxNum.apply(gameController, gameController.scores);
+        console.log(gameController.avgScore); // 4
+    </script>
+</body>
+
+</html>

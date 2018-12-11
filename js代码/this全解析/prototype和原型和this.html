@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //【1】实际上你可以通过把多个函数的prototype链接起来的从而形成一个原型链，
+    // 因此this就会魔法般地沿着这条原型链往上查找直到找你你需要引用的值。
+    function Thing1() {
+    }
+
+    Thing1.prototype.foo = "bar";
+
+    function Thing2() {
+    }
+
+    Thing2.prototype = new Thing1();
+
+
+    var thing = new Thing2();
+    console.log(thing.foo); //logs "bar"
+    //【2】一些人利用原型链的特性来在JavaScript模仿经典的面向对象的继承方式。
+    // 任何给用于构建原型链的函数的this的赋值的语句都会隐藏原型链上游的相同的属性。
+    function Thing1() {
+    }
+
+    Thing1.prototype.foo = "bar";
+
+    function Thing2() {
+        this.foo = "foo";
+    }
+
+    Thing2.prototype = new Thing1();
+
+    function Thing3() {
+    }
+
+    Thing3.prototype = new Thing2();
+
+
+    var thing = new Thing3();
+    console.log(thing.foo); //logs "foo"
+</script>
+</html>

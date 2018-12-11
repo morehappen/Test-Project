@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js">
+    </script>
+</head>
+
+<body>
+<script>
+    //【1】引入空对象
+    // extend的使用最基础语法：extend(dest,src1,src2,src3...);
+    //它的含义是将src1,src2,src3...合并到dest中,返回值为合并后的dest,由此可以看出该方法合并后，
+    //是修改了dest的结构的。如果想要得到合并的结果却又不想修改dest的结构，可以如下使用：
+
+    // var newSrc=$.extend({},src1,src2,src3...)//也就是将"{}"作为dest参数。
+
+    // 那么合并后的结果：result={name:"Jerry",age:21,sex:"Boy"}
+    //【2】省略其余参数
+    //【2-1】$.extend(src)该方法就是将src合并到jquery的全局对象中去，如
+    $.extend({
+        // 就是将hello方法合并到jquery的全局对象中。
+        hello: function () {
+            alert('hello');
+        }
+    });
+    //【2-2】$.fn.extend(src)该方法将src合并到jquery的实例对象中去，如:
+    $.fn.extend({
+        hello: function () {
+            alert('hello');
+        }
+    });
+    //【2-2-1】下面例举几个常用的扩展实例：
+    $.extend({net: {}});
+    //这是在jquery全局对象中扩展一个net命名空间。将hello方法扩展到之前扩展的Jquery的net命名空间中去。
+    $.extend($.net, {
+        hello: function () {
+            alert('hello');
+        }
+    });
+    //【3】Jquery的extend方法还有一个重载原型：
+    var result = $.extend(true, {},
+        {name: "John", location: {city: "Boston", county: "USA"}},
+        {last: "Resig", location: {state: "MA", county: "China"}});
+    //我们可以看出src1中嵌套子对象location:{city:"Boston"},
+    //src2中也嵌套子对象location:{state:"MA"},第一个深度拷贝参数为true，那么合并后的结果就是：
+    result = {
+        name: "John", last: "Resig",
+        location: {city: "Boston", state: "MA", county: "China"}
+    }
+
+
+    // 它会将src中的嵌套子对象也进行合并，而如果第一个参数boolean为false，我们看看合并的结果是什么，如下：
+    var result = $.extend(false, {},
+        {name: "John", location: {city: "Boston", county: "USA"}},
+        {last: "Resig", location: {state: "MA", county: "China"}}
+    );
+    //那么合并后的结果就是:
+    result = {name: "John", last: "Resig", location: {state: "MA", county: "China"}}
+</script>
+</body>
+</html>

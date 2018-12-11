@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //【1】在浏览器里，在全局范围内，this等价于window对象。
+    console.log(this === window); //true
+
+    //【2】在浏览器里，在全局范围内，用var声明一个变量和给this或者window添加属性是等价的。
+    var foo = "bar";
+    console.log(this.foo); //logs "bar"
+    console.log(window.foo); //logs "bar"
+
+</script>
+</body>
+</html>

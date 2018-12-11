@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //【1】通过一个函数创建的实例会共享这个函数的prototype属性的值，
+    // 如果你给这个函数的prototype赋值一个Array，那么所有的实例都会共享这个Array，
+    // 除非你在实例里面重写了这个Array[此处意思是直接在构造函数上挂载]，这种情况下，函数的prototype的Array就会被隐藏掉。
+    function Thing() {
+    }
+
+    Thing.prototype.things = [];
+
+
+    var thing1 = new Thing();
+    var thing2 = new Thing();
+    thing1.things.push("foo");
+    console.log(thing2.things); //logs ["foo"]
+    //【2】给一个函数的prototype赋值一个Array通常是一个错误的做法。
+    // 如果你想每一个实例有他们专属的Array，你应该在函数里面创建而不是在prototype里面创建。
+    function Thing() {
+        this.things = [];
+    }
+
+
+    var thing1 = new Thing();
+    var thing2 = new Thing();
+    thing1.things.push("foo");
+    console.log(thing1.things); //logs ["foo"]
+    console.log(thing2.things); //logs []
+</script>
+</html>

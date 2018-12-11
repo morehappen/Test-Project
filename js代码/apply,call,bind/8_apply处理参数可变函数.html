@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //可变参数的函数上应用apply
+
+        //【1】当函数参数是数组的时候，我们是不容易直接处理他们的。
+        // Math.max() 方法是 JavaScript 中一个常见的参数可变函数:
+        console.log(Math.max(23, 11, 34, 56)); // 56
+        // 但如果我们有一个数组要传递给 Math.max(), 是不能这样做的:
+        var allNumbers = [23, 11, 34, 56];
+        console.log(Math.max(allNumbers)); // NaN
+        // 使用 apply 我们可以像下面这样传递数组:
+        var allNumbers = [23, 11, 34, 56];
+        // 正如之前讨论, apply() 的第一个参数用于设置 this 的指向, 但是 Math.max() 并未使用到 this, 所以我们传递 null 给他.
+        console.log(Math.max.apply(null, allNumbers)); // 56
+        // 【1】为了更进一步解释 apply() 在 参数可变函数上的能力, 我们自定义了一个参数可变函数:
+        //welcomeStudents是一个参数可变函数
+        var students = ["Peter Alexander", "Michael Woodruff", "Judy Archer", "Malcolm Khan"];
+
+        // 不定义参数, 因为我们可以传递任意多个参数进入该函数
+        function welcomeStudents() {
+            var args = Array.prototype.slice.call(arguments);
+            console.log(args.join(", ")); //Peter Alexander, Michael Woodruff, Judy Archer, Malcolm Khan
+            console.log(args); //
+            var lastItem = args.pop();
+            console.log("Welcome " + args.join(", ") + ", and " + lastItem + ".");
+        }
+
+        welcomeStudents.apply(null, students); // Welcome Peter Alexander, Michael Woodruff, Judy Archer, and Malcolm Khan.
+    </script>
+</body>
+
+</html>

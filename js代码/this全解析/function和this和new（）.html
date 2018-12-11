@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    // 如果你在调用函数的时候在前面使用了new，this就会变成一个新的值，和global的this脱离干系。
+
+    // 函数里面的this其实相对比较好理解，如果我们在一个函数里面使用this，需要注意的就是我们调用函数的方式，
+    // 如果是正常的方式调用函数，this指代全局的this，如果我们加一个new，这个函数就变成了一个构造函数，
+    // 我们就创建了一个实例，this指代这个实例，这个和其他面向对象的语言很像。
+    // 另外，写JavaScript很常做的一件事就是绑定事件处理程序，
+    // 也就是诸如button.addEventListener(‘click’, fn, false)之类的，如果在fn里面需要使用this，
+    // this指代事件处理程序对应的对象，也就是button。
+    foo = "bar";
+    function testThis() {
+        this.foo = "foo";
+    }
+    console.log(this.foo);//logs "bar"
+    new testThis();
+    console.log(this.foo); //logs "bar"
+    console.log(new testThis().foo);//logs "foo"
+</script>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="sky">
+        <div>
+            <input type="text" placeholder="输入框1">
+        </div>
+        <div>
+            <input type="text" placeholder="输入框2">
+        </div>
+    </div>
+</body>
+<script>
+    //【1】这里有一个知识点：当我们绑定事件的时候，是可以使用$this去处理每个对应的dom元素的。
+    $(function() {
+        // //用户名验证
+        $("body").on("input propertychange", "input", function() {
+            valValidate($(this), /[^A-Za-z0-9]/gi, 4);
+        });
+    });
+    // 验证用户输入内容是否合法
+    //注意在jq中，这个this可以传入$(this)，后面的reg和maxlength则是我们传入的其他参数
+    function valValidate(this_, reg, maxlength) {
+        var this_ = this_,
+            currentVal = $.trim(this_.val()),
+            val = currentVal.replace(reg, "");
+        if (typeof maxlength === "number") {
+            val = val.length > maxlength ? val.slice(0, maxlength) : val;
+        }
+        this_.val(val);
+    }
+</script>
+
+</html>

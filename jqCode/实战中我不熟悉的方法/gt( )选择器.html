@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../jquery.min.js"></script>
+</head>
+
+<body>
+    <div>
+        这是第一行
+    </div>
+    <div>
+        这是第一行
+    </div>
+    <div>
+        这是第一行
+    </div>
+    <div>
+        这是第一行
+    </div>
+</body>
+<script>
+    //【1】这种方法，在做展开和隐藏的时候非常有用
+    //【1分析】当每次点击的时候，将展开和隐藏的按钮内部文本置换，同时将data存储属性值更改。然后依据不同的属性值，做出除了第一排的后面的所有元素的slideUp和slidedown
+    $(function() {
+        $("div:gt(1)").slideUp();
+    })
+</script>
+
+</html>

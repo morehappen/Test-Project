@@ -40,6 +40,7 @@
         avgScore = "global avgScore";
 
         // 使用 call() 方法明确将 "this" 绑定到 gameController 对象
+        // 例子中 call() 中的第一个参数明确了 this 的指向, 第二参数被传递给了 avg() 函数.
         avg.call(gameController, gameController.scores);
 
         console.log(window.avgScore); // 全局变量 avgScore 的值  [global avgScore]

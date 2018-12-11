@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 定义一个方法
+        var clientData = {
+            id: 094545,
+            fullName: "Not Set",
+            // clientData 对象中的一个方法
+            setUserName: function(firstName, lastName) {
+                this.fullName = firstName + " " + lastName;
+            }
+        }
+
+        function getUserInput(firstName, lastName, callback, callbackObj) {
+            // 使用 apply 方法将 "this" 绑定到 callbackObj 对象
+            callback.apply(callbackObj, [firstName, lastName]);
+        };
+        // 如下样例中传递给 callback 函数中的参数将会在 clientData 对象中被设置 / 更新.
+        getUserInput("Barack", "Obama", clientData.setUserName, clientData);
+        console.log(clientData.fullName); // Barack Obama
+    </script>
+</body>
+
+</html>

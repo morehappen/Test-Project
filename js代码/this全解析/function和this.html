@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //如果不是用new调用，在函数里面使用this都是指代全局范围的this。
+    foo = "bar";
+    function testThis() {
+        this.foo = "foo";
+    }
+    console.log(this);//window
+    //
+    console.log(this.foo); //logs "bar"
+    testThis();
+    console.log(this.foo); //logs "foo"
+</script>
+<script>
+    //使用严格模式的时候，函数中的this就会变成undefined
+    foo = "bar";
+    function testThis() {
+        "use strict";
+        this.foo = "foo";
+    }
+    console.log(this);//window
+    //
+    console.log(this.foo); //logs "bar"
+    testThis();//Uncaught TypeError: Cannot set property 'foo' of undefined
+</script>
+</html>
