@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active {
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button v-on={mouseenter:onEnter,mouseleave:onOut} v-on:click="onclick">
+            点我
+        </button>
+        <!-- <form action="" v-on:submit="onSubmit($event)"> -->
+        <form action="" v-on:submit.prevent="onSubmit">
+            <input type="text">
+        </form>
+        <div v-on:keyup.enter="onEnter">
+            按钮一个
+        </div>
+        <div @keyup.enter="onEnter">
+            <!-- v-on:这里连续四个部分，v，横杆，on，冒号，都可以直接缩写为@ -->
+            按钮一个
+        </div>
+
+    </div>
+</body>
+<script src="../lib/vue.2.4.2.js"></script>
+<script src="./js/main.js"></script>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="app">
+        <ul class="food">
+            <li v-for="food in foodList">{{food}}</li>
+        </ul>
+        <ul class="food1">
+            <li v-for="food in foodList1">{{food.name}}:￥{{food.price*food.discount}}</li>
+        </ul>
+        <ul class="food1">
+            <!-- 当遍历数组的对象中，某个属性不存在的时候，怎么规避显示nan问题 -->
+            <li v-for="food in foodList1">{{food.name}}:￥{{food.discount?food.price*food.discount:food.price}}</li>
+        </ul>
+    </div>
+</body>
+<script src="../lib/vue.2.4.2.js"></script>
+<script src="./js/main.js"></script>
+
+</html>

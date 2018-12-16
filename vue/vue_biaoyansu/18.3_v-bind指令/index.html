@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active {
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <a v-bind:href="href" v-bind:class='klass'>
+            点我
+            <!-- <img src="./baiduImg.jpg" alt=""> -->
+        </a>
+
+        <a v-bind:href="href" v-bind:class='{active:isActive}'>
+        点我
+        <!-- <img src="./baiduImg.jpg" alt=""> -->
+        </a>
+    </div>
+</body>
+<script src="../lib/vue.2.4.2.js"></script>
+<script src="./js/main.js"></script>
+
+</html>
