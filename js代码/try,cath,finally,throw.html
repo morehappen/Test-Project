@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // try...catch 语句是什么？
+        // try...catch 可以测试代码中的错误。try 部分包含需要运行的代码，而 catch 部分包含错误发生时运行的代码。
+        // 【1】语法
+        // 运行流程：try{...}包含块中的代码有错误，则运行catch(err){...}内的代码，
+        // 否则不运行catch(err){...}内的代码。
+
+        // 【1】try...catch语法
+        try {
+            //在此运行代码
+        } catch (err) {
+            //在此处理错误
+
+            // 现总结Error.name的六种值对应的信息：
+            // EvalError：eval()的使用与定义不一致
+            // RangeError：数值越界
+            // ReferenceError：非法或不能识别的引用数值
+            // SyntaxError：发生语法解析错误
+            // TypeError：操作数类型错误
+            // URIError：URI处理函数使用不当
+        }
+        // 【1-1】真实案例
+        var array = null;
+        try {
+            document.write(array[0]);
+        } catch (err) {
+            document.writeln("Error name: " + err.name + "</br>");
+            document.writeln("Error message: " + err.message);
+        }
+        // 【2】try...catch...finally 语法
+        // try {
+        //     tryStatements
+        // } catch (exception) {
+        //     catchStatements
+        // } finally {
+        //     finallyStatements
+        // }
+
+        // 参数   
+        //    tryStatement     
+        //    必选项。可能发生错误的语句。     
+        //    exception     
+        //    必选项。任何变量名。exception    的初始化值是扔出的错误的值。     
+        //    catchStatement     
+        //    可选项。处理在相关联的    tryStatement    中发生的错误的语句。     
+        //    finallyStatements     
+        //    可选项。在所有其他过程发生之后无条件执行的语句
+        // 【2-1】真实案例
+        var array1 = null;
+        try {
+            document.write(array1[0]);
+        } catch (err) {
+            document.writeln("</br>Error name: " + err.name + "");
+            document.writeln("</br>Error message: " + err.message);
+        } finally {
+            console.log("object is null");
+        }
+    </script>
+</body>
+
+</html>

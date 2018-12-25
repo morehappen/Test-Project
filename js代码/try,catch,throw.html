@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>My First JavaScript</h1>
+    <p>Please input a number between 5 and 10:</p>
+    <input id="demo" type="text">
+    <button type="button" onclick="myFunction()">Test Input</button>
+    <p id="mess"></p>
+</body>
+<script>
+    // throw 语句允许我们创建自定义错误。
+    // 正确的技术术语是：创建或抛出异常（exception）。
+    // 如果把 throw 与 try 和 catch 一起使用，那么您能够控制程序流，并生成自定义的错误消息。
+    function myFunction() {
+        try {
+            var x = document.getElementById("demo").value;
+            if (x == "") throw "empty";
+            if (isNaN(x)) throw "not a number";
+            if (x > 10) throw "too high";
+            if (x < 5) throw "too low";
+        } catch (err) {
+            var y = document.getElementById("mess");
+            y.innerHTML = "Error: " + err + ".";
+        }
+    }
+</script>
+
+</html>
