@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //【1】除了使用 function 来定义函数，还可以使用 Function() 来动态定义函数。
+        const multiply = new Function('x', 'y', 'return x+y');
+        console.log(multiply(3, 4));
+        // 【2】Function 属性
+        // 函数对象也是对象，我们可以直接给函数添加属性，但是很少这么用。这里有一些不错的用例：
+        //【2-1】实战案例：通过控制设置函数的属性，来更改函数内部的逻辑走向
+        // 可配置的 Functions
+        // 假如我们有一个 greet 函数。我们希望 greet 根据位置打印不同语言。这个位置是可以配置的。这时候使用 function 属性可以很方便做到这一点。
+        function greet() {
+            if (greet.locale === "fr") {
+                console.log(1)
+            } else if (greet.locale === "es") {
+                console.log(2)
+            } else {
+                console.log(3)
+            }
+        };
+        greet(); //3
+        greet.locale = "es";
+        greet(); //2
+    </script>
+</body>
+
+</html>

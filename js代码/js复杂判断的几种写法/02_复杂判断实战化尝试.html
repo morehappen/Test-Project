@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="onButtonClick(3)">
+        按钮
+    </button>
+    <script>
+        const actions = {
+            '1': ['sky1', 'moon1'],
+            '2': ['sky2', 'moon2'],
+            '3': ['sky3', 'moon3'],
+            '4': ['sky4', 'moon4'],
+            'deafult': ['sky0', 'moon0'],
+        }
+        const onButtonClick = (status) => {
+            let action = actions[status] || actions['default'],
+                logName = action[0],
+                pageName = action[1];
+            console.log(logName); //原文中使用了sendLog
+            console.log(pageName) //原文中使用了jumpTo
+        }
+    </script>
+
+</body>
+
+</html>

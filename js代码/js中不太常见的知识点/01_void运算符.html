@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //【语法】void操作符
+        // 重点在于：无论void后的表达式是什么，void操作符都会返回undefined. 
+
+        // 产生式 UnaryExpression : void UnaryExpression 按如下流程解释:
+        // 令 expr 为解释执行UnaryExpression的结果。
+        // 调用 GetValue(expr).
+        // 返回 undefined.
+        // 注意：GetValue一定要调用，即使它的值不会被用到，但是这个表达式可能会有副作用(side-effects)。
+
+        typeof void 0 //得到"undefined"
+        console.log(void 0); //输出undefined
+        // 【1】为什么要用void？实战1
+        // 因为undefined在javascript中不是保留字。换言之，你可以写出下面代码。使用void是为了确保我们肯定拿到void。即便有人在window上定义类似下面代码
+        function joke() {
+            var undefined = "hello world";
+            console.log(undefined); //会输出"hello world"
+        }
+        console.log(undefined); //输出undefined
+        // 【2】实战2
+        // href="javascript:void(0);
+
+        //副作用：GetValue(expr)肯定会调用，即便最后我们得到的是undefined。（但是这个表达式可能会有副作用(side-effects)。）
+        var happiness = 10;
+        var girl = {
+            get whenMarry() {
+                happiness--;
+                return 1 / 0; //Infinity
+            },
+            get happiness() {
+                return happiness;
+            }
+        };
+
+        console.log(girl.whenMarry); //调用了whenMarry的get方法
+        console.log(girl.happiness); // 9
+
+        void girl.whenMarry; //调用了whenMarry的get方法
+        console.log(girl.happiness); // 8
+
+        delete girl.whenMarry; //没有调用whenMarry的get方法
+        console.log(girl.happiness); //还是8
+    </script>
+</body>
+
+</html>

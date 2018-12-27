@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //【1】arguments 是函数内部的对象，通常用于表示函数的参数列表。他还有一些有趣的属性：
+        // arguments.callee：指当前调用的函数。
+        // arguments.callee.caller：指调用当前函数的函数。
+        const myFunction = function() {
+            console.log("Current function:", arguments.callee.name); //Current function: myFunction
+            // Invoked:英文翻译为调用的意思
+            console.log("Invoked by function:", arguments.callee.caller.name); //Invoked by function: main
+        };
+        void
+
+        function main() {
+            myFunction();
+        }();
+        //【2】实战举例
+        function factorial(n) {
+            if (n <= 1) {
+                return 1;
+            } else {
+                return n * factorial(n - 1);
+            }
+        }
+        console.log(factorial(3)); //求3的阶乘。打印出6
+        //【2-1】改进版本，很明显，内部将函数名写死了，这样就很难复用了
+        function factorial1(n) {
+            if (n <= 1) {
+                return 1;
+            } else {
+                return n * arguments.callee(n - 1);
+            }
+        }
+        console.log(factorial1(4)); //24
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //首先定义一个构造函数Hello
+        function Hello() {
+            console.log(1);
+        }
+        //定义一个函数表达式
+        var getName = function() {
+            console.log(2);
+        };
+        //【1】实例化对象，下面这两个如果构造函数没有形参的话，实例化的时候构造函数可以不加括号（推荐加上）;[不传参数可以不用小括号，但是推荐都加]
+        var p = new Hello;
+        var p1 = new Hello();
+        //但是用下边的方式调用getName函数的时候，构造函数有没有括号可就不一样了;
+        new Hello.getName(); //这种执行顺序是先执行Hello.getName()，然后在使用new关键字;
+        new Hello().getName; //这种是先new Hello()一个对象，然后对象调用getName方法;
+    </script>
+</body>
+
+</html>

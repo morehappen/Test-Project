@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //【1】惯例写法
+        (function() {
+            console.log("normal IIFE called"); //normal IIFE called
+        })();
+        //实际案例
+        result = (function() {
+            return 1
+        })();
+        console.log(result);
+        //【2】但是需要注意这里并没有返回任何内容，如果有呢？由于这里使用了 void 操作符，所有结果返回总是 undefined。
+        // 但如果我们只是关心返回值的话其实可以不实用 void 直接省略括号。
+        void
+
+        function() {
+            console.log(2)
+        }()
+        //【3】如果关心返回值，则不建议使用void语法
+        result = (function() {
+            return console.log(3);
+        })();
+        console.log(result); //undefined
+        // 但如果我们只是关心返回值的话其实可以不实用 void 直接省略括号。
+        result1 = function() {
+            //【警告】注意这个地方的写法，很奇怪
+            return console.log(4);
+        }();
+        console.log(result1); //undefined
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 【1】当 j = 2 的时候就退出所有的for语句，打印最后的 done ，你会怎么做？
+        for (var i = 0; i < 10; i++) {
+            console.log(i);
+            for (var j = 0; j < 5; j++) {
+                console.log(j);
+            }
+        };
+        console.log('done');
+        // 【2】常规思维
+        function foo() {
+            for (var i = 0; i < 10; i++) {
+                console.log(i);
+                for (var j = 0; j < 5; j++) {
+                    console.log(j);
+                    if (j === 2) return;
+                }
+            }
+        }
+        foo();
+        console.log('done');
+        // 【附加-1】你也一定见到过这样的写法：
+        // 假设str是你通过ajax接收到的JSON串
+        var str = '{"name": "liu", "age": 20}';
+        var obj = eval('(' + str + ')');
+        console.log(obj);
+        // 解析：如果不加小括号，执行语句会是{}
+        // {
+        //     "name": "liu",
+        //     "age": 20
+        // }
+        // 如果加上小括号，执行语句是（{}）
+        // ({
+        //     "name": "liu",
+        //     "age": 20
+        // })
+        //【3】C语言的一种写法，C的语法中有一个语句叫：goto
+        // void main() {
+        //     int a = 2, b = 3;
+
+        //     if (a > b) {
+        //         goto aa;当执行到a比b大的时候，会直接跳到aa那行代码，然后结束
+        //     }
+
+        //     printf("hello");
+
+        //     aa: printf("s");
+
+        //     return 0;
+        // }
+        //【4】Label Statement。这是js的标签声明语句的概念
+        // aa是标签声明，包裹一个代码块，break 的作用是跳出当前的循环，本来是无法跳出外面那层for循环的，但是 break aa，这里跳出了整个代码块。
+        // 当然，这种写法是完全不提倡的，这里只是用来说明JS中的Label Statement这个特性，大家千万不要这样写代码。
+        aa: {
+            for (var i = 0; i < 10; i++) {
+                console.log(i);
+                for (var j = 0; j < 5; j++) {
+                    console.log(j);
+                    if (j === 2) break aa; //跳出后连外层遍历都不会进行了
+                }
+            }
+        }
+
+        console.log('done');
+    </script>
+</body>
+
+</html>

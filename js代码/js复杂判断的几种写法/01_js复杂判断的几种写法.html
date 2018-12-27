@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+</head>
+
+<body>
+    <div></div>
+</body>
+<script>
+    // 按钮点击事件，@param{number} status 活动状态
+    // 1，团购进行中，2，开团失败，3商品售罄，4，开团成功 5，系统取消 
+    // 下面仅仅模拟一下
+
+    //【1】if和else if配合
+    const run_fun_send = function(parm) {
+        console.log(parm);
+    };
+    const run_fun_save = function(parm) {
+        console.log(parm);
+    };
+    const onButtonClick = (status) => {
+            if (status == 1) {
+                run_fun_send("sky1");
+                run_fun_save("moon1");
+            } else if (status == 2) {
+                run_fun_send("sky2");
+                run_fun_save("moon2");
+            } else if (status == 3) {
+                run_fun_send("sky2");
+                run_fun_save("moon2");
+            } else if (status == 4) {
+                run_fun_send("sky4");
+                run_fun_save("moon4");
+            }
+        }
+        //【2】switch的方法
+    const onButtonClick = (status) => {
+            swith(status) {
+                case 1:
+                    run_fun_send("sky1");
+                    run_fun_save("moon1");
+                    break
+                case 2:
+                case 3:
+                    run_fun_send("sky2");
+                    run_fun_save("moon2");
+                    break;
+                case 4:
+                    run_fun_send("sky4");
+                    run_fun_save("moon4");
+                    break
+                default:
+                    run_fun_send("sky0");
+                    run_fun_save("moon0");
+                    break
+            }
+        }
+        //【3】使用外部对象缓存技巧
+    const actions = {
+        '1': ['sky1', 'moon1'],
+        '2': ['sky2', 'moon2'],
+        '3': ['sky3', 'moon3'],
+        '4': ['sky4', 'moon4'],
+        'deafult': ['sky0', 'moon0'],
+    }
+    const onButtonClick = (status) => {
+            let action = actions[status] || actions['default'],
+                logName = action[0],
+                pageName = action[1];
+            run_fun_send(logName); //原文中使用了sendLog
+            run_fun_save(pageName) //原文中使用了jumpTo
+        }
+        //【4】第三版本上继续优化
+    const actions = new Map([
+        [1, ['sky1', 'moon2']],
+        [2, ['sky2', 'moon2']],
+        [3, ['sky2', 'moon2']],
+        [4, ['sky4', 'moon4']],
+        ['default', ['sky0'],
+            ['moon0']
+        ]
+    ])
+    const onButtonClick = (status) => {
+        let action = actions.get(status) || actions.get('default')
+        run_fun_send(action[0]); //原文中使用了sendLog
+        run_fun_save(action[1]) //原文中使用了jumpTo
+    }
+</script>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 【1】如果你像将字符串装换成数字，使用 + 操作符即可。
+        var s1 = "9.11";
+        var s2 = "9str";
+        console.log(+s1); //9.11
+        console.log(+s2); //NaN
+        console.log(parseInt(s2)); //9
+        //【2】有一个快速将其他类型转成 bool 值的方法，使用两个 ! 操作符即可
+        console.log(!![]); //true
+        console.log(!!{}); //true
+        console.log(!!" "); //true
+        console.log(!!""); //false
+
+        //【3】 ~ 取反操作符（简单记忆：一个数与自身的取反值相加等于-1。）
+        // ~ 运算符是对位求反，1变0, 0变1，也就是求二进制的反码。
+    </script>
+</body>
+
+</html>
