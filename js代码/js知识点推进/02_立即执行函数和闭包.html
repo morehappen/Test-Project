@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        第一个
+    </div>
+    <div>
+        第二个
+    </div>
+    <div>
+        第三个
+    </div>
+</body>
+<script>
+    //【1】立即执行函数与闭包的暧昧关系
+    //像普通的函数传参一样，立即执行函数也能传参数。如果在函数内部再定义一个函数，而里面的那个函数能引用外部的变量和参数（闭包），利用这一点，我们能使用立即执行函数锁住变量保存状态。
+
+    //【1-1】并不会像你想象那样的执行，因为i的值没有被锁住
+    // 当我们点击链接的时候，其实for循环已经执行完了
+    // 于是在点击的时候i的值其实已经是elems.length了
+    var elems = document.getElementsByTagName('div');
+
+    for (var i = 0; i < elems.length; i++) {
+
+        elems[i].addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('I am link #' + i);
+        }, 'false');
+
+    }
+
+
+    //【1-2】这次我们得到了想要的结果
+    // 因为在立即执行函数内部，i的值传给了lockedIndex，并且被锁在内存中
+    // 尽管for循环结束后i的值已经改变，但是立即执行函数内部lockedIndex的值并不会改变
+    var elems = document.getElementsByTagName('a');
+
+    for (var i = 0; i < elems.length; i++) {
+
+        (function(lockedInIndex) {
+
+            elems[i].addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('I am link #' + lockedInIndex);
+            }, 'false');
+
+        })(i);
+
+    }
+
+
+    // 你也可以这样，但是毫无疑问上面的代码更具有可读性
+    var elems = document.getElementsByTagName('a');
+
+    for (var i = 0; i < elems.length; i++) {
+
+        elems[i].addEventListener('click', (function(lockedInIndex) {
+            return function(e) {
+                e.preventDefault();
+                alert('I am link #' + lockedInIndex);
+            };
+        })(i), 'false');
+
+    }
+</script>
+
+</html>

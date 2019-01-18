@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //【1】立即执行函数的称谓：我为什么更愿意称它是“立即执行函数”而不是“自执行函数”
+    //我的理解是作者认为自执行函数是函数内部调用自己（递归调用），而立即执行函数就如字面意思，该函数立即执行即可。其实现在也不用去管它了，就叫IIFE好了。
+
+    // IIFE的称谓在现在似乎已经得到了广泛推广（不知道是不是原文作者的功劳？），而原文写于10年，似乎当时流行的称呼是自执行函数（Self-executing anonymous function），
+    // 接下去作者开始为了说明立即执行函数的称呼好于自执行函数的称呼开始据理力争，有点咬文嚼字，不过也蛮有意思的，我们来看看作者说了些什么。
+    // 这是一个自执行函数，函数内部执行的是自己，递归调用
+
+    function foo() {
+        foo();
+    }
+
+    // 这是一个自执行匿名函数，因为它没有函数名
+    // 所以如果要递归调用自己的话必须用arguments.callee
+    var foo = function() {
+        arguments.callee();
+    };
+
+    // 这可能也算是个自执行匿名函数，但仅仅是foo标志引用它自身
+    // 如果你将foo改变成其它的，你将得到一个used-to-self-execute匿名函数
+    var foo = function() {
+        foo();
+    };
+
+    // 有些人叫它自执行匿名函数，尽管它没有执行自己，只是立即执行而已
+    (function() { /* code */ }());
+
+    // 给函数表达式添加了标志名称，可以方便debug
+    // 但是一旦添加了标志名称，这个函数就不再是匿名的了
+    (function foo() { /* code */ }());
+
+    // 立即执行函数也可以自执行，不过不常用罢了
+    (function() {
+        arguments.callee();
+    }());
+    (function foo() {
+        foo();
+    }());
+    //【2】模块模式和立即执行匿名函数的关系
+    // 创建一个立即执行的匿名函数
+    // 该函数返回一个对象，包含你要暴露的属性
+    // 如下代码如果不使用立即执行函数，就会多一个属性i
+    // 如果有了属性i，我们就能调用counter.i改变i的值
+    // 对我们来说这种不确定的因素越少越好
+
+    var counter = (function() {
+        var i = 0;
+
+        return {
+            get: function() {
+                return i;
+            },
+            set: function(val) {
+                i = val;
+            },
+            increment: function() {
+                return ++i;
+            }
+        };
+    }());
+
+    // counter其实是一个对象
+
+    counter.get(); // 0
+    counter.set(3);
+    counter.increment(); // 4
+    counter.increment(); // 5
+
+    counter.i; // undefined i并不是counter的属性
+    i; // ReferenceError: i is not defined (函数内部的是局部变量)
+    //【3】一个有关IIFE的坑
+    //【3-1】在实际开发中，关于 IIFE 遇到了一个坑，即 IIFE 中使用 JSONP，很显然 JSONP 中的函数调用是获取不到匿名函数中定义的函数的：
+    ! function() {
+        // 回调函数定义在匿名函数内，JSONP回调找不到该函数
+        function callback() {
+            //...
+        }
+
+        T.getScript('..'); // 获取JSONP接口
+    }();
+    //【3-2】不仅仅是在 IIFE 中，如果是这样，也会出错：
+    // 为了封装，把一系列调用写在一个函数内
+    function fn() {
+
+        // 设置回调
+        function callback() {
+            //...
+        }
+
+        T.getScript('..'); // JSONP
+    }
+
+    fn();
+    //很显然是一样的道理，所以在用 JSONP 的时候，特别要注意它的回调函数定义必须是全局的，可以将回调函数手动设置为 window.callback() 的形式。
+</script>
+
+</html>
