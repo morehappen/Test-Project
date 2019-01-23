@@ -46,7 +46,7 @@
         // 而for和for...in仅仅是遍历数组的下标（当然你可以通过下标进一步获取值。遍历下标还是遍历值，
         // 仅仅在于语言层面的区别才有意义）。所以ES6的for...of可以说是实现了直接遍历数组的值的命令语句。
 
-        //【3】Interator接口概念
+        //【3】Interator接口概念【Interator英文是交互器的意思】
         // **在ES6中，数组内置了iterator接口，但是普通的对象不是。也就是说，for...of无法直接用于普通对象的遍历。**如下图所示。
         var myArray = ['a', 'b', 'c'];
         var it = myArray[Symbol.iterator]();
