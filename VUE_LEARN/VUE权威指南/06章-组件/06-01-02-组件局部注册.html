@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <didi-component></didi-component>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        // 【1】这是第一种写法
+        var Child = Vue.extend({
+            template: "<div>i am child!</div>"
+        });
+        var Parent = Vue.extend({
+            template: "<div>i am parent<br><childh></childh></div>",
+            // 此处使用了实例选项components注册
+            // childh只能用在父组件Parent模板内使用，如果在根实例中调用childh则会抛出异常。
+            components: {
+                "childh": Child
+            }
+        });
+        var app = new Vue({
+            el: "#app",
+            components: {
+                "didi-component": Parent
+            }
+        });
+        // 【2】这是第二种写法
+        var Parent = Vue.extend({
+            template: "<div>i am parent<br><childh></childh></div>",
+            // 此处使用了实例选项components注册
+            // childh只能用在父组件Parent模板内使用，如果在根实例中调用childh则会抛出异常。
+            components: {
+                "childh": {
+                    template: "<div>i am child!</div>"
+                }
+            }
+        });
+    </script>
+</body>

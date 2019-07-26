@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .sky {
+            color: red;
+            padding: 15px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <div v-if="show_flag">
+            指令v-if来控制是否显示
+        </div>
+        <div v-on:click="click_fun()" class="sky">
+            测试v-on指令绑定事件
+        </div>
+        <a :href="url_href">测试v-bind指令绑定a标签的属性地址</a>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                show_flag: true,
+                url_href: "www.baidu.com"
+            },
+            methods: {
+                click_fun: function click_fun() {
+                    console.log("测试指令v-on绑定事件")
+                }
+            }
+        })
+    </script>
+</body>

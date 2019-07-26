@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <div>
+            <!-- 知识点【1】：区别点：（1）初始渲染消耗成本：v-show具有更高的初始渲染成本，之后的隐藏都是通过css控制，如果某个地方
+            进行切换的频率特别高，适合使用v-show（2）切换消耗：v-if具有更高的切换消耗，每一次切换会合适地销毁与重建条件块内部的事件监听器和子组件。
+        v-if是惰性的，初始渲染为假，什么都不做 -->
+        </div>
+        <div v-show="show_flag">
+            测试内部指令v-show
+        </div>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                show_flag: true
+            }
+        })
+    </script>
+</body>

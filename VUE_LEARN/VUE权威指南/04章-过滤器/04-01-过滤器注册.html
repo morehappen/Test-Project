@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            {{html_data | datem("sky")}}
+        </div>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        // 【知识点1】全局过滤器注册的语法，此处单词为filter，不是filters
+        Vue.filter('datem', function(value) {
+            if (value == "过滤器") {
+                return "过滤器编写成功"
+            }
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {
+                html_data: "过滤器"
+            },
+            filters: {
+                // 【知识点2】局部过滤器注册
+                // datem: function datem(value, param) {
+                //     // 形参设置为2个，但是实参仅仅1个我们就能拿到两个值
+                //     if (value == "过滤器") {
+                //         return "过滤器编写成功1"
+                //     }
+                // }
+            },
+            methods: {
+
+            },
+            mounted: function mounted() {
+                // 全局注册为什么不能成功
+
+            }
+        });
+    </script>
+</body>

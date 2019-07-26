@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 知识点【1】【废弃】：v-el,v-rel都在2.0中被废弃 -->
+        <!-- 【技巧】不是：ref而是ref属性。获取的时候，是$refs,而不是$ref -->
+        <div ref="skycachce">怎么获取DOM并且获取内部值</div>
+        <button @click="sky_fun()">按钮</button>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                html_data: "<p>文本内容数据</p>"
+            },
+            methods: {
+                sky_fun: function sky_fun() {
+                    var this_ = this;
+                    var res = this_.$refs.skycachce.innerHTML;
+                    console.log(res);
+                }
+            }
+        })
+    </script>
+</body>

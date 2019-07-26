@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="msg">
+        <div class="sky">
+            {{msg}}
+        </div>
+        <!-- // 【1】知识点:1.0中的星号*一次渲染好像被2.0废弃 -->
+        <div class="moon">
+            <!-- {{*msg}} -->
+        </div>
+        <div class="moon22" v-once="msg">
+            {{msg}}
+        </div>
+        <!-- ================================================== -->
+        <div class="fly" v-html='msg2'>
+        </div>
+        <!-- // 【2】知识点:1.0好像有三花括号，2.0好像只能使用v-html来处理 -->
+        <div class="fuuny">
+            <!-- {{{msg2}}} -->
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+<script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+<!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+<!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+<script>
+    'use strict';
+    Vue.prototype.$ = $;
+    var app = new Vue({
+        el: "#app",
+        data: function() {
+            return {
+                msg: "测试",
+                // 【1】知识点:1.0好像有三花括号，2.0好像只能使用v-html来处理
+                msg2: '<p>带有标签的数据</p>',
+                prop_sky: "test_prop"
+            }
+        }
+    })
+</script>
+
+</html>

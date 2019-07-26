@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .sky {
+            color: red;
+            padding: 15px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <button @click="sky1('haha')">测试1</button>
+        <button @click="sky2">测试2</button>
+        <!-- 【1-知识点】获取原生 DOM 事件对象（注意此处是事件）-->
+        <button @click="sky2($event)">测试332</button>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+                sky1(param) {
+                    console.log(param + "滴滴");
+                },
+                sky2(event) {
+                    console.log(event.innnerHtml);
+                    debugger
+                }
+            }
+        })
+    </script>
+</body>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .class-a {
+            color: red;
+        }
+        
+        .class-b {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='app'>
+        <!-- 【01-class对象语法】class绑定对象语法 -->
+        <div :class="{'class-a':sky,'class-b':moon}">
+            大海
+        </div>
+        <!-- 【02-class数组语法】class绑定数组语法 -->
+        <div :class="[classA,classB]">
+            测试
+        </div>
+        <!-- 【03-style数组语法】class绑定数组语法 -->
+        <div :style="[style_a,style_b]">
+            测试style数组语法
+        </div>
+        <!-- 【03-style对象语法】class绑定数组语法 -->
+        <div :style="style_a">
+            测试style对象语法
+        </div>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                classA: 'class-a',
+                classB: 'class-b',
+                sky: true,
+                moon: false,
+                style_a: {
+                    fontStyle: "italic"
+                },
+                style_b: {
+                    color: "blue"
+                }
+            },
+            computed: {
+
+
+            }
+        })
+    </script>
+</body>
+
+</html>

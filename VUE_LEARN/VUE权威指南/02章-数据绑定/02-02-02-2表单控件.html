@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <div>
+            此处测试输入框
+            <div>
+                {{inpput_model}}
+            </div>
+            <!-- 【1-输入框】：v-mode直接绑定输入框的值 -->
+            <input type="text" placeholder="测试输入框之双向绑定" v-model="inpput_model">
+        </div>
+        <div>
+            <!-- 【2-radio】：使用vue处理单选和复选框的时候，是不需要使用name属性去控制的。仅仅包装model绑定的值一致就可以了 -->
+            <input type="radio" id="man" value="man" v-model="data.sex">
+            <label for="man">男</label>
+            <input type="radio" id="male" value="women" v-model="data.sex">
+            <label for="male">女</label>
+        </div>
+
+        <div>
+            <!-- 【3-checkbox】：需要使用数组去绑定复选框的值，不然是无法生效的 -->
+            <label for=""><input type="checkbox" value="11"  v-model="multiChecked">测试1</label>
+            <label for=""><input type="checkbox" value="22"  v-model="multiChecked">测试2</label>
+            <label for=""><input type="checkbox" value="33"  v-model="multiChecked">测试3</label>
+            <p>multiChecked:{{multiChecked | sky}}</p>
+        </div>
+        <div>
+            <input type="checkbox" v-model="checkbox_checked">
+            <span>checked:{{checkbox_checked}}</span>
+        </div>
+        <!-- 【警告】modifier -->
+        <div>
+            <select v-model="select_val">
+                <option selected>A</option>
+                <option>B</option>
+                <option>C</option>
+            </select>
+            <div>
+                Selected:{{select_val}}
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                inpput_model: "输入框的数据双向绑定",
+                input_NUM: "22",
+                data: {
+                    name: "",
+                    sex: "",
+                    interest: [],
+                    indentity: "",
+                },
+                checkbox_checked: "",
+                multiChecked: [],
+                select_val: []
+            },
+            filters: {
+                sky: function sky(value) {
+                    if (value) {
+                        return value.join("|")
+                    } else {
+                        return value
+                    }
+                },
+                moon: function moon(value) {
+                    console.log(value)
+                }
+            }
+        })
+    </script>
+</body>

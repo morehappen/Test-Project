@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- 知识点【1】：相比直接的双引号铺值，这种方法不会出现闪现 -->
+        <!-- 如果直接使用<div>{{msg}}</div>，在生命周期 beforeCompile 期间，此刻msg数 -->
+        <!-- 据尚未编译至{{msg}}中，用户能看到一瞬间的{{msg}}，然后闪现出真实数据， -->
+        <div v-text="text_data"></div>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                text_data: "文本内容数据"
+            }
+        })
+    </script>
+</body>

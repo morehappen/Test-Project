@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <didi-component></didi-component>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        // 【1】全局注册
+        Vue.components("my-component", {
+                template: "<div>这是一个全局注册的组件的语法糖写法</div>"
+            })
+            // 【2】局部注册
+        var Parent = Vue.extend({
+            template: "<div>i am parent<br><childh></childh></div>",
+            // 此处使用了实例选项components注册
+            // childh只能用在父组件Parent模板内使用，如果在根实例中调用childh则会抛出异常。
+            components: {
+                "childh": {
+                    template: "<div>i am child!</div>"
+                }
+            }
+        });
+    </script>
+</body>

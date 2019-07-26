@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            {{msg_num/20}}
+        </div>
+        <div>
+            {{msg_bullon?"是啊":"不是"}}
+        </div>
+        <div>
+            {{msg_arr.split("/")}}
+        </div>
+        <div>
+            <!-- 知识点【1】：1.0中的的小写转大写过滤符在2.0中被废弃 -->
+            {{msg_small | toUpperCase }}
+        </div>
+        <div>
+            {{msg_filter | fileter_fun}}
+            <!-- 知识点【2】：过滤器中传参语法不是这样的 -->
+            <!-- {{msg_filter | fileter_fun "sky" "moon"}} -->
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+<script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+<!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+<!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+<script>
+    'use strict';
+    Vue.prototype.$ = $;
+    var app = new Vue({
+        el: "#app",
+        data: function() {
+            return {
+                msg_num: 100,
+                msg_bullon: true,
+                msg_arr: "2019/11/02",
+                msg_small: "abc",
+                msg_filter: "ok"
+            }
+        },
+        filters: {
+            fileter_fun: function fileter_fun(value, param1, param2) {
+                var this_ = this;
+                debugger
+                var a = param1;
+                var b = param2;
+                if ("ok") {
+                    return "过滤生效"
+                }
+            }
+        }
+    })
+</script>
+
+</html>

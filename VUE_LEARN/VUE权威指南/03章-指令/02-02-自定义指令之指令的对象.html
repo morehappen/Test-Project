@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <div v-if="isExist" v-my-directive="param"></div> -->
+        <div v-if="isExist" v-my-directive="param"></div>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                param: "first",
+                isExist: true
+            },
+            methods: {
+
+            },
+            directives: {
+                //可以采用驼峰式命名
+                "my-directive": {
+                    bind: function() {
+                        console.log('bind', arguments)
+                    },
+                    update: function(newValue, oldValue) {
+                        // 此处输入 app.param = "second"
+                        debugger
+                        console.log('update', newValue, oldValue)
+                    },
+                    componentUpdated: function() {
+
+                    },
+                    unbind: function() {
+                        // 此处输入 app.isExist = false
+                        console.log("unbind", arguments)
+                    }
+                }
+            }
+        })
+    </script>
+</body>

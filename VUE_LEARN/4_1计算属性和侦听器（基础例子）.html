@@ -12,8 +12,8 @@
 <body>
 
     <div id="example">
-        <p>Original message: "{{ message }}"</p>
-        <p>Computed reversed message: "{{ reversedMessage }}"</p>
+        <p>Original message: {{message}}</p>
+        <p>Computed reversed message: {{ reversedMessage }}</p>
         <input type="text" v-model='reversedMessage'>
     </div>
 
@@ -29,9 +29,9 @@
                 }
             },
             methods: { //虽然方法也能做到，但是页面重新渲染必会再次调用一次，而计算属性使用的是缓存，只有发生变化才会去计算。
-                reversedMessage: function() {
-                    return this.message.split('').reverse().join('')
-                }
+                // reversedMessage: function() {
+                //     return this.message.split('').reverse().join('')
+                // }
             }
         })
     </script>

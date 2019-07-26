@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <div id='app' v-cloak>
+        <div class="moon">
+            <ul class="fun33">
+                <li v-for='(item,key,index) in users'>
+                    <!-- 知识点【1】：在vue2.0中，首参是value，2参是name，3参是索引 -->
+                    <!-- {{$index}}-{{$key}}-{{item}} -->
+                    {{index}}-{{key}}-{{item}}
+                </li>
+            </ul>
+            <ul class="fun33">
+                <!-- 知识点【2】：在vue1.0中，$key,$index这两个都在vue2.0中被废弃 -->
+                <li v-for='(key,value) in users'>
+                    <!-- {{$key}}-{{value}} -->
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        var app = new Vue({
+            el: ' #app ',
+            data: {
+                books: [{
+                    name: '《vue.js实战》'
+                }, {
+                    name: '《javascript语音精粹》'
+                }, {
+                    name: '《javascript高级程序设计》'
+                }],
+                users: {
+                    name: 'sky',
+                    gender: '男',
+                    age: 26
+                }
+
+            }
+        });
+    </script>
+</body>

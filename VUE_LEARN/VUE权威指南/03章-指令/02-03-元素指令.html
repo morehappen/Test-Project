@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        my-directive {
+            width: 100px;
+            background: gray;
+            height: 100px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <my-directive></my-directive>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        // 元素指令，在vue2.0中被移除，开始使用组件替代这部分的功能
+        Vue.elementDirective('my-directive', {
+            bind: function(el) {
+                debugger
+                el.style.background = 'red';
+            }
+        })
+
+        new Vue({
+            el: '#hook-arguments-example',
+            data: {
+                message: 'pink'
+            }
+        })
+    </script>
+</body>

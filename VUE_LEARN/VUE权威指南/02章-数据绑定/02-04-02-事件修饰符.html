@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            color: red;
+            border: 1px solid pink;
+            margin: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <div @click="sky1('haha')">
+            <!-- 【1】.stop等同于调用event.stopPropagation()。 -->
+            <div @click="sky2.stop">测试2</div>
+            <input @keyup.enter="sky3" placeholder="测试键盘抬起事件">
+        </div>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+                sky1(param) {
+                    console.log(param + "滴滴");
+                },
+                sky2() {
+                    console.log(11)
+                },
+                sky3() {
+                    alert(22)
+                }
+            }
+        })
+    </script>
+</body>

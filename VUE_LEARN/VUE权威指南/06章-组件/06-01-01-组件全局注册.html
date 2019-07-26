@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-component></my-component>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        // 【概念】基础vue构造器
+        // 使用基础 Vue 构造器，创建一个“子类”。参数是一个包含组件选项的对象。
+        // data 选项是特例，需要注意 - 在 Vue.extend() 中它必须是函数
+        var MyComponent = Vue.extend({
+            template: "<p>this is a {{test}}component</p>",
+            replace: true, //此处语法在2.0已经被移除
+            data: function() {
+                return {
+                    test: "测试"
+                }
+            }
+        });
+
+        // 全局注册组件
+        // 【语法】1参为组件名称，2参为组件的构造函数，也可以是对象
+        // 【组件的构造函数】指的是vue.extend()
+        // 【对象】指的是extend那样的构造函数实例化传参，vue内部自动去调用vue.extend函数
+        // 【附加】传入对象，被称为注册语法糖，是注册组件的简化的写法。
+        // Vue.component("my-component", {
+        //     template: "<div>测试全局注册之2参为对象</div>"
+        // });
+        Vue.component("my-component", MyComponent);
+        var app = new Vue({
+            el: "#app"
+        })
+    </script>
+</body>

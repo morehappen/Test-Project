@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input v-local-directive:html_data>
+        <input v-skyfocus>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        // 【知识点1】全局注册一个组件。注意此处使用的是directive
+        Vue.directive("skyfocus", {
+            inserted: function(el) {
+                // 聚焦元素
+                el.focus()
+            }
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {
+                html_data: "12"
+            },
+            methods: {
+                sky_fun: function sky_fun() {
+                    var this_ = this;
+                    this_.html_data = "事件变更数据"
+                }
+            },
+            // 【知道点2】注意此处是局部注册，使用的是复数directives
+            directives: {
+                //可以采用驼峰式命名
+                "localDirective": {
+                    inserted: function(el) {
+                        // 聚焦元素
+                        el.focus()
+                    },
+                    update: function(params) {
+
+                    }
+                }
+            }
+        })
+    </script>
+</body>

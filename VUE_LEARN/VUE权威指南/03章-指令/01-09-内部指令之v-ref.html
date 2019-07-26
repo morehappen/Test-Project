@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 知识点【1】【废弃】：v-el,v-rel都在2.0中被废弃 -->
+        <login ref="skyMoon"></login>
+        <button @click="sky_fun()">按钮</button>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                html_data: "<p>文本内容数据</p>"
+            },
+            methods: {
+                sky_fun: function sky_fun() {
+                    var this_ = this;
+                    //知识点【2】：获取组件对象的时候，能够直接访问其内部对象的数据
+                    var res1 = this_.$refs.skyMoon.subname;
+                    var res2 = this_.$refs.skyMoon.sky;
+                    console.log(res1, res2);
+                }
+            },
+            components: {
+                "login": {
+                    data: function() {
+                        return {
+                            subname: "子组件名字",
+                            sky: "测试数据"
+                        }
+                    },
+                    template: "<h2>这是一个组件</h2>"
+                }
+            }
+        })
+    </script>
+</body>

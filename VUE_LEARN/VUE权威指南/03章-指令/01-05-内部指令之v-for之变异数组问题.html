@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <div id='app' v-cloak>
+        <ul class="sky">
+            <li v-for='item in books'>
+                {{item.name}}
+            </li>
+        </ul>
+        <div class="moon">
+            <ul>
+                <!-- track-by【知识点】在列表渲染的时候，有个性能方面的小技巧，如果数组中有唯一标识id，例如： -->
+                <!-- 通过trace-by给数组设定唯一标识，我们将上述v-for作用于的li元素修改为： -->
+                <!-- 这样，Vue.js在渲染过程中会尽量复用原有对象的作用域及DOM元素。 -->
+                <li v-for='(item,index) in books' track-by="index">
+                    {{index}}-{{item.name}}
+                </li>
+            </ul>
+            <ul class="fun22">
+                <!-- 知识点【1】：遍历的数据源不是数组而是对象的时候，遍历索引值，key值，和属性值的形参位置关系 -->
+                <li v-for='(item,key,index) in users'>
+                    {{index}}-{{key}}-{{item}}
+                </li>
+            </ul>
+            <ul>
+                <li v-for='n in 10'>sd {{n}}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        //【1】遍历数组的时候，v-for的表达式支持一个可选参数作为当前项的索引。第一个是元素，第二个是索引
+        var app = new Vue({
+            el: ' #app ',
+            data: {
+                books: [{
+                    name: '《vue.js实战》'
+                }, {
+                    name: '《javascript语音精粹》'
+                }, {
+                    name: '《javascript高级程序设计》'
+                }],
+                // 【2】遍历对象的时候，v-for 的表达式支持两个个可选参数作为当前项的索引。第一个是元素，第二个是索引，第三个是key值
+                // 【3】除了数组外，对象的属性也是可以遍历的
+                users: {
+                    name: 'sky',
+                    gender: '男',
+                    age: 26
+                }
+                //【4】七种方法会让原有数组发生变化，从而立即影响到视图。
+                // •push()• pop()• shift()• unshi()• splice()• sort();•reverse()
+                //三种方法是不会影响原有数组的，这个时候需要我们使用新数组来替换
+                // •filter()   •concat()   •slice()
+
+            }
+        });
+        //【注意】我们操作数组的时候，有两种情况是无法触发视图更新的：
+        // （1）第一种更改了数组的其中某一个项：app.books[3]={...}
+        // （2）第二种更改了数组的长度：app.books.length=1是无法被vue检测到的;(小技巧：如果是length置为0，那么可以直接使用空数组进行置换)
+
+        //第一种情况的解决方案为：Vue.set()
+        //第二种情况的解决方案为：app.books.splice(l); 
+        // 【知识点】【1】使用Vue.set方法更改数组
+        // Vue.set(app.books, 2, {
+        //     name: '《css揭秘》测试数组变异111',
+        //     author: 'moon'
+        // });
+        app.$set(app.books, 2, {
+            name: '《css揭秘》测试数组变异222',
+            author: 'moon'
+        });
+        //this.$set这里不能用，报错this.$set is not a function，以后看看为什么
+        // this.$set(app.books, 4, {
+        //     name: '《故事》',
+        //     author: 'fly'
+        // })
+
+
+
+        // app.books.splice(3, 1, {
+        //     name: '《css 揭秘》测试数组变异2',
+        //     author: 'moon_again'
+        // });
+    </script>
+</body>
