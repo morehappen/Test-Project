@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="hello">
+            <h3>测试 inheritAttrs、$attrs、 $listeners</h3>
+            <child1 :text1="msg1" :text2="msg2" class="father" id="child" data-test="test"></child1>
+        </div>
+    </div>
+    <template id="sky">
+        <div class="child1-test">
+            <h3 @click="event1">{{text1}}</h3>
+            <p>在2.4中新增选项inheritAttrs  inheritAttrs的默认值为true, 
+                将inheritAttrs的值设为false, 这些默认的行为会禁止掉。但是通过实例属性$attrs ,可以将这些特性
+                生效，且可以通过v-bind 绑定到子组件的非根元素上。
+                <br>
+                比如此处测试$attrs：{{$attrs}}
+            </p>
+            <child2 v-bind="$attrs" v-on="$listeners"></child2>
+        </div>
+    </template>
+
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        // inheritAttrs属性语法：(默认值为true)
+        // 默认情况下父作用域的不被认作props的特性绑定 (attribute bindings) 将会“回退”且作为普通的HTML
+        // 特性应用在子组件的根元素上。撰写包裹一个目标元素或另一个组件的组件时，这可能不会总是符合预期行为。
+        // 【有的博客这样解释：】【$attrs--继承所有的父组件属性（除了prop传递的属性、class 和 style ），一般用在子组件的子元素上】
+        // 通过设置 inheritAttrs 到 false，这些默认行为将会被去掉。
+        // 而通过 (同样是 2.4 新增的) 实例属性 $attrs 可以让这些特性生效，且可以通过 v-bind 显性的绑定到非根元素上。
+
+        // 注意：这个选项不影响 class 和 style 绑定。
+        var app = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    msg1: '传入子组件的文字',
+                    msg2: '传入二级子组件的文字'
+                }
+            },
+            components: {
+                "child1": {
+                    template: "#sky",
+                    props: {
+                        text1: {
+                            type: String,
+                            default: ''
+                        }
+                    },
+                    // 这两段Vue组件中，在父组件的对子组件的引用中，除了传入了子组件中props定义的text1， 
+                    // text2、data-test、class、id都是未定义；此时子组件的inheritAttrs设置为true（默认即为true，此处写出来以便观察）。
+
+                    // 【观察】如果inheritAttrs为true，未定义的几个属性，都跑到子组件的根节点类名为child1-test的dom上面去了。
+                    // inheritAttrs: true,
+                    // 【观察】如果inheritAttrs为false，未定义的几个属性，不会跑到那里去。
+                    // inheritAttrs: false,
+                },
+            },
+        })
+    </script>
+
+</body>

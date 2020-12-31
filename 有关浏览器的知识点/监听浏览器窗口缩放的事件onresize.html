@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>onresize</title>
+    <style>
+        .img_li_box {
+            width: 100%;
+            height: 30px;
+            overflow: hidden;
+        }
+        
+        .img_li_con {
+            background-size: auto 100%;
+            background: url('../resources/test_img.png') no-repeat center center;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li class="position meeting_box li_box">
+            <div class="img_li_box">
+                <div class="img_li_con">
+                    <!-- <img src="../resources/test_img.png" alt=""> -->
+                </div>
+            </div>
+            <div class="article_box position_ab">
+                <div class="article_con">
+                    <div class="article_title">
+                        http://www.auvgo.com/html/web-site/meeting.html?position=study_anchor
+                    </div>
+                    <div class="article_main">
+                        鼠标悬停的时候，看到这个DOM里的图片放大了
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</body>
+<script src="../jquery.min.js"></script>
+<script>
+    $.getUrlParam = function(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return decodeURI(r[2]);
+        return null;
+    };
+    $(function() {
+
+        //控制屏幕跳转位置【开发过程中发现锚点跳转的时候不够准确，这个js跳转更加精准】
+        // $(".header .header_main li").eq(4).addClass("active").attr("data-flag", "1");
+        // var jump_sign = $.getUrlParam("position");
+        // var study_position = $('.study_box').offset().top;
+        // var meeting_position = $('.meeting_box').offset().top;
+        // var travel_position = $('.travel_box').offset().top;
+        // if (jump_sign == "study_anchor") {
+        //     $(document).scrollTop(study_position - 75);
+        // } else if (jump_sign == "meeting_anchor") {
+        //     // $(document).scrollTop(study_position-75);
+        //     $(document).scrollTop(meeting_position - 75);
+        // } else if (jump_sign == "travel_anchor") {
+        //     // $(document).scrollTop(study_position-75);
+        //     $(document).scrollTop(travel_position - 75);
+        // } else {
+        //     $(document).scrollTop(0);
+        // }
+
+
+        // 控制背景图片的显示问题【因为不同电脑屏幕宽度不同，所以一上去就要重新控制所有背景图片的background-size】
+        var width_screen = $(window).width();
+        var height_screen = $(window).height();
+        var wh = width_screen / height_screen;
+        var scale_NUM = 2.458061; //该比例是我手动计算了图片的比例
+        $(".li_box").height(width_screen / scale_NUM);
+        $(".img_li_con").css('background-size', 'auto 100%');
+        window.onresize = function(ev) {
+            var width_screen = $(window).width();
+            var height_screen = $(window).width();
+            var wh = width_screen / height_screen;
+            var scale_NUM = 2.458061; //该比例是我手动计算了图片的比例
+            $(".li_box").height(width_screen / scale_NUM);
+            $(".img_li_con").css('background-size', 'auto 100%');
+        }
+    })
+</script>
+
+</html>

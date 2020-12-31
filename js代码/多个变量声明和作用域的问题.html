@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function sky() {
+            // (1)正常的声明多个变量
+            var a = 9,
+                b = 9,
+                c = 9;
+            // （2）下面代码声明的则是a是当前局部变量，b和c都是全局变量
+            var a = b = c = 9;
+            var a = 9;
+            b = 9;
+            c = 9;
+            console.log(a);
+            console.log(b);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-child my-param="moontest"></my-child>
+    </div>
+    <div id="bpp">
+        <input type="text" v-model="msg">
+        <my-child v-bind:msg="msg"></my-child>
+    </div>
+    <div id="cpp">
+        <input type="text" v-model="msg">
+        <my-child :msg.sync="msg"></my-child>
+    </div>
+    <div>
+        ================================
+    </div>
+    <div id="dpp">
+        Number:
+        <input type="text" v-model="msg" placeholder="请输入...">
+        <my-child :prop-a="msg"></my-child>
+    </div>
+
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        // 【1】props的写法如果是驼峰写法，会带来html书写方法的改变。
+        // html属性不区分大小写，所以在组件<my-child>中的属性使用驼峰式不行的，这时候要是有横杠-进行间隔
+        var app = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            components: {
+                //【附加】此处演示的是父组件通过props向子组件传递数据，父组件其实就是app，子组件就是my-child
+                "my-child": {
+                    props: ['myParam'],
+                    template: "<h2>这是一个{{myParam}}组件</h2>"
+                }
+            }
+        });
+        // 【2】动态Props[这里有个地方要注意，就是子组件的属性名和父组件的data里的属性名一致的问题]
+        // 除了上述例子中传递静态数据的方式外，我们也可以通过v-bind的方式将父组件的data数据传递给子组件
+        // 如果直接传递一个数值给子组件，就必须借助动态Props。
+        var app = new Vue({
+            el: "#bpp",
+            data: {
+                msg: "父组件b数据"
+            },
+            components: {
+                //【附加】此处演示的是父组件通过props向子组件传递数据，父组件其实就是app，子组件就是my-child
+                "my-child": {
+                    props: ['msg'],
+                    template: "<h2>这是一个{{msg}}组件</h2>"
+                }
+            }
+        });
+        // 【3】绑定类型的问题
+        // （1）.sync和.once显示的声明绑定为双向或单次绑定。sync是双向绑定，once是单向绑定，在2.0中，这两个被废弃。
+        // 2.0中为了对父组件产生反向影响，子组件需要显式地传递一个事件而不是依赖于隐式地双向绑定。
+        var app = new Vue({
+            el: "#cpp",
+            data: {
+                msg: "测试"
+            },
+            components: {
+                //【附加】此处演示的是父组件通过props向子组件传递数据，父组件其实就是app，子组件就是my-child
+                "my-child": {
+                    props: ['msg'],
+                    template: "<input type='text' v-model='msg'/>"
+                }
+            }
+        });
+        // 【4】props验证
+        var app = new Vue({
+            el: "#dpp",
+            data: {
+                msg: 0
+            },
+            components: {
+                //【附加】此处演示的是父组件通过props向子组件传递数据，父组件其实就是app，子组件就是my-child
+                "my-child": {
+                    props: {
+                        // 1）基础类型检测：prop:Number。接受的参数为原生构造器，String、Number、
+                        // Boolean、Function、Object、Array。也可接受 null，意味任意类型均可。
+
+                        // Number类型
+                        propA: Number,
+                        // 2）多种类型：prop:[Number, String]，允许参数为多种类型之一，例如类型可以为数值或字符串。
+
+                        // 多种类型校验: String 或 Number类型
+                        propB: [String, Number],
+                        // 3）参数默认：prop: { type : Number, default : 10 }，参数具有默认值10。需要注意的
+                        // 是，如果默认值设置为数组或对象，需要像组件中data属性那样，通过函数返回值的形式赋值，如：
+
+                        // 布尔类型,默认值true
+                        propC: {
+                            type: Boolean,
+                            //【知识点】注意此处是默认值
+                            default: true
+                        },
+                        // 4）参数必需：prop:{ type : Number, required: true}，参数必须有值且为Number型。
+
+                        // String类型且必输
+                        propD: {
+                            type: String,
+                            //【知识点】注意此处是必填
+                            required: true
+                        },
+                        // Array类型,默认返回一个数组对象
+                        propE: {
+                            type: Array,
+                            default: function() {
+                                return [1, 2, 3]
+                            }
+                        },
+                        // Object类型,默认返回一个对象
+                        propF: {
+                            type: Object,
+                            default: function() {
+                                return {
+                                    a: 1
+                                }
+                            }
+                        },
+                        // 5）自定义验证函数：prop:{validator:function(value){return value < 10;}}，验证值必须大于10。
+                        // 自定义验证函数
+                        propG: {
+                            validator: function(value) {
+                                return value < 10;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>

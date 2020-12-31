@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <component-a ref="comA"></component-a>
+    </div>
+    <div id="app2">
+        <button @click='get'>btn_grand_father</button>
+        <app-father></app-father>
+    </div>
+    <template id="app-father">
+        <div>
+            <button @click='get'>btn_father</button>
+            <app-son></app-son>
+        </div>
+    </template>
+    <template id="app-son">
+        <div>
+            <button @click='get'>btn_son</button>
+        </div>
+    </template>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        // 【组件通信方法-6】$parent/$children/$root与ref方法
+        Vue.component('app-father', {
+            template: '#app-father',
+            data() {
+                return {
+                    message: 'father'
+                }
+            },
+            methods: {
+                get() {
+                    console.log(this);
+                    //【知识点1】$children:他返回的是一个组件集合，如果你能清楚的知道子组件的顺序，你也可以使用下标来操作；
+                    console.log(this.$children[0].message) // console.log(son)
+                }
+            }
+        })
+
+        Vue.component('app-son', {
+            template: '#app-son',
+            data() {
+                return {
+                    message: 'son'
+                }
+            },
+            methods: {
+                get() {
+                    console.log(this);
+                    //【知识点2】$parent:父实例，如果当前实例有的话。
+                    console.log(this.$parent.$parent.message); // console.log(app)
+                    //【知识点3】当前组件树的根 Vue 实例。如果当前实例没有父实例，此实例将会是其自己。
+                    console.log(this.$root.message); // console.log(app)
+                }
+            }
+
+        })
+
+        new Vue({
+            el: '#app2',
+            data: {
+                message: 'app'
+            },
+            methods: {
+                get() {
+                    console.log(this);
+                    console.log(this.$children[0].message) // console.log(father)
+                }
+            }
+        })
+    </script>
+    <script>
+        // 【组件通信方法-6】$parent / $children与 ref方法
+        // ref：如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；如果用在子组件上，引用就指向组件实例
+        // $parent / $children：访问父 / 子实例
+        // 不过，这两种方法的弊端是，无法在跨级或兄弟间通信。
+        var vm = new Vue({
+            el: '#app',
+            components: {
+                'component-a': {
+                    data() {
+                        return {
+                            title: 'Vue.js'
+                        }
+                    },
+                    methods: {
+                        sayHello() {
+                            console.log('====Hello====');
+                        }
+                    }
+                }
+            },
+            mounted() {
+                // comA直接获取了子组件的实例
+                const comA = this.$refs.comA;
+                console.log("====" + comA.title + "===="); // ====Vue.js====
+                comA.sayHello(); // ====Hello====
+            }
+        });
+        // 我们想在component-a中，访问到引用它的页面中（这里就是parent.vue）的两个component-b组件，
+        // 那这种情况下，就得配置额外的插件或工具了，比如Vuex和Bus的解决方案。
+    </script>
+
+</body>

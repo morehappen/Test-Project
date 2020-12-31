@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <h2>浪里行舟</h2>
+            <child-com1 :foo="foo" :boo="boo" :coo="coo" :doo="doo" title="前端工匠"></child-com1>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        // 【组件通信-04】
+        // 多级组件嵌套需要传递数据时，通常使用的方法是通过vuex。但如果仅仅是传递数据，而不做中间处理，
+        // 使用vuex处理，未免有点大材小用。为此Vue2.4版本提供了另一种方法----$attrs/$listeners
+
+        // $attrs：包含了父作用域中不被prop所识别(且获取)的特性绑定(class和style除外)。
+        // 当一个组件没有声明任何prop时，这里会包含所有父作用域的绑定 (class和style除外)，
+        // 并且可以通过v-bind="$attrs"传入内部组件。通常配合interitAttrs选项一起使用。
+
+        // $listeners：包含了父作用域中的 (不含.native 修饰器的)v-on事件监听器。它可以通过v-on="$listeners"传入内部组件
+        var app = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    foo: "Javascript",
+                    boo: "Html",
+                    coo: "CSS",
+                    doo: "Vue"
+                }
+            },
+            components: {
+                "childCom1": {
+                    //【知识点-1】 inheritAttrs ：默认值true,在这种情况下父作用域的不被认作props的特性绑定(attribute bindings) 
+                    // 将会“回退”且作为普通的 HTML 特性应用在子组件的根元素上 
+                    inheritAttrs: false,
+                    props: {
+                        foo: String // foo作为props属性绑定
+                    },
+                    template: `<div>
+                                    <p>foo: {{ foo }}</p>
+                                    <p>childCom1的$attrs: {{ $attrs }}</p>
+                                    <child-com2 v-bind="$attrs"></child-com2>
+                                </div>`,
+                    created() {
+                        console.log(this.$attrs); // { "boo": "Html", "coo": "CSS", "doo": "Vue", "title": "前端工匠" }
+                    },
+                    components: {
+                        "childCom2": {
+                            template: ` <div class="border">
+                                        <p>boo: {{ boo }}</p>
+                                        <p>childCom2: {{ $attrs }}</p>
+                                        <child-com3 v-bind="$attrs"></child-com3>
+                                    </div>`,
+                            inheritAttrs: false,
+                            props: {
+                                boo: String
+                            },
+                            created() {
+                                console.log(this.$attrs); // { "boo": "Html", "coo": "CSS", "doo": "Vue", "title": "前端工匠" }
+                            },
+                            components: {
+                                "childCom3": {
+                                    template: `<div class="border">
+                                                <p>childCom3: {{ $attrs }}</p>
+                                            </div>`,
+                                    props: {
+                                        coo: String,
+                                        title: String
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .sky {
+            background: pink;
+            border: 2px solid yellow;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        A{{msg}}
+        <my-button :msg="msg" @todo="handleClick"></my-button>
+    </div>
+
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '100'
+            },
+            methods: {
+                handleClick() {
+                    console.log('点击事件')
+                }
+            },
+            components: {
+                'MyButton': {
+                    template: `<div>B<my-radio v-on="$listeners"></my-radio></div>`,
+                    components: {
+                        'MyRadio': {
+                            template: `<div @click="$listeners.todo" class="sky">C</div>`,
+                        }
+                    },
+                    created() {
+                        console.log(this.$listeners)
+                    },
+                },
+            }
+        })
+    </script>
+
+</body>

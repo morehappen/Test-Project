@@ -21,20 +21,14 @@
         var Child = Vue.extend({
             template: "<div>i am child!</div>"
         });
-        var Parent = Vue.extend({
-            template: "<div>i am parent<br><childh></childh></div>",
-            // 此处使用了实例选项components注册
-            // childh只能用在父组件Parent模板内使用，如果在根实例中调用childh则会抛出异常。
-            components: {
-                "childh": Child
-            }
-        });
-        var app = new Vue({
-            el: "#app",
-            components: {
-                "didi-component": Parent
-            }
-        });
+        // var Parent = Vue.extend({
+        //     template: "<div>i am parent<br><childh></childh></div>",
+        //     // 此处使用了实例选项components注册
+        //     // childh只能用在父组件Parent模板内使用，如果在根实例中调用childh则会抛出异常。
+        //     components: {
+        //         "childh": Child
+        //     }
+        // });
         // 【2】这是第二种写法
         var Parent = Vue.extend({
             template: "<div>i am parent<br><childh></childh></div>",
@@ -44,6 +38,13 @@
                 "childh": {
                     template: "<div>i am child!</div>"
                 }
+            }
+        });
+        // 【附加】上面两个构造器都要写在vue的实例化代码之前才能生效。
+        var app = new Vue({
+            el: "#app",
+            components: {
+                "didi-component": Parent
             }
         });
     </script>

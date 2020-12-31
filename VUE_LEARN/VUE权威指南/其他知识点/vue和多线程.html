@@ -1,0 +1,118 @@
+<template>
+        <div class="hello">
+        <div v-for="(item, index) in msgList" :key="index">{{ item }}</div>
+        </div>
+        </template>
+
+<script>
+    // 然后我用vue + webworker 重新写了一遍 。你看效果
+    // 网上大神封装的webworker插件
+    // npm i -s vue-worker
+    export default {
+        name: "HelloWorld",
+        props: {
+            msg: String
+        },
+        data() {
+            return {
+                workerList: [],
+                msgList: [],
+                arr: []
+            };
+        },
+        mounted() {
+            for (let i = 0; i < 1000000; i++) {
+                this.arr.push(i);
+            }
+            // 通过this.$worker.run这个方法，跑起一个worker，
+            // worker是在另外的线程里面跑的，所以可以在run的第一个参数函数里面执行一个非常大计算的操作
+            // run方法像Promise一样提供.then和.catch，then的参数就是run第一个参数函数的返回值
+
+            for (let i = 0; i < 5; i++) {
+                let str = `cb${i + 1}`;
+                let a = this.$worker
+                    .run(
+                        fn => {
+                            let arr = [];
+                            for (let i = 0; i < 1000000; i++) {
+                                arr[i] = i;
+                            }
+
+                            let cb1 = function() {
+                                let result = [];
+                                for (let i = 0, len = arr.length; i < len; i++) {
+                                    result[i] = arr[i];
+                                }
+                            }
+
+                            let cb2 = function() {
+                                let result = [];
+                                for (let i in arr) {
+                                    result[i] = i;
+                                }
+                            }
+
+                            let cb3 = function() {
+                                let result = [];
+                                arr.forEach((item, i) => {
+                                    result[i] = item;
+                                });
+                            }
+
+                            let cb4 = function() {
+                                let result = [];
+                                for (let i of arr) {
+                                    result[i] = i;
+                                }
+                            }
+
+                            let cb5 = function() {
+                                let result = [];
+                                result = arr.map(item => item);
+                            }
+                            let _startTime = +new Date();
+                            for (let k = 0; k < 20; k++) {
+                                console.log(fn)
+                            }
+                            return (+new Date() - _startTime) / 20 + "ms";
+                        }, [str]
+                    )
+                    .then(res => {
+                        console.log(res);
+                        this.$set(this.msgList, i, res);
+                    })
+                    .catch(e => console.log(e));
+                this.workerList.push(a);
+            }
+            console.log(this.workerList);
+        },
+        destroyed() {
+            // 通过赋值null的方式，释放掉worker引用，这样就可以关闭worker，这是作者在github上说的
+            for (let i = 0, len = this.workerList.length; i < len; i++) {
+                this.$set(this.msgList, i, null);
+            }
+        }
+    };
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+
+<style scoped>
+    h3 {
+        margin: 40px 0 0;
+    }
+    
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    li {
+        display: inline-block;
+        margin: 0 10px;
+    }
+    
+    a {
+        color: #42b983;
+    }
+</style>

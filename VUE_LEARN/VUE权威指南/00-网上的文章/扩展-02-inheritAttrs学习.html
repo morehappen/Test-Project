@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="hello">
+            <h3>测试 inheritAttrs、$attrs、 $listeners</h3>
+            <child1 :text1="msg1" :text2="msg2" class="father" id="child" data-test="test" @event1="event1_top" @event2_top="event2_top"></child1>
+        </div>
+
+
+    </div>
+    </div>
+    <template id="sky">
+        <div class="child1-test">
+            <!-- <h3 @click="event1">{{text1}}</h3> -->
+            <h3 @click="$emit('event1','moon','fly')">{{text1}}</h3>
+            <child2 v-bind="$attrs" v-on="$listeners"></child2>
+            <!-- 【知识点】.native - 监听组件根元素的原生事件。主要是给自定义的组件添加原生事件。 -->
+            <!-- 【有的博客这样解释：】$listeners--属性，它是一个对象，里面包含了作用在这个组件上的所有监听器，
+            你就可以配合 v-on="$listeners" 将所有的事件监听器指向这个组件的某个特定的子元素。
+            （相当于子组件继承父组件的事件）注意：使用.native修饰符的事件，不会体现在$listeners属性上。 -->
+        </div>
+    </template>
+
+
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        // inheritAttrs属性语法：(默认值为true)
+        // 默认情况下父作用域的不被认作props的特性绑定 (attribute bindings) 将会“回退”且作为普通的HTML
+        // 特性应用在子组件的根元素上。撰写包裹一个目标元素或另一个组件的组件时，这可能不会总是符合预期行为。
+        // 通过设置 inheritAttrs 到 false，这些默认行为将会被去掉。
+        // 而通过 (同样是 2.4 新增的) 实例属性 $attrs 可以让这些特性生效，且可以通过 v-bind 显性的绑定到非根元素上。
+
+        // 注意：这个选项不影响 class 和 style 绑定。
+
+        // 【总结：】$listeners 和 $attrs 两者表面层都是一个意思，$attrs 是向下传递数据，$listeners 是向下传递方法，
+        // 通过手动去调用 $listeners 对象里的方法，原理就是 $emit 监听事件，$listeners 
+        // 也可以看成一个包裹监听事件的一个对象。
+        var app = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    msg1: '传入子组件的文字',
+                    msg2: '传入二级子组件的文字'
+                }
+            },
+            components: {
+                "child1": {
+                    template: "#sky",
+                    props: {
+                        text1: {
+                            type: String,
+                            default: ''
+                        }
+                    },
+                    // 这两段Vue组件中，在父组件的对子组件的引用中，除了传入了子组件中props定义的text1， 
+                    // text2、data-test、class、id都是未定义；此时子组件的inheritAttrs设置为true（默认即为true，此处写出来以便观察）。
+
+                    // 【观察】如果inheritAttrs为true，未定义的几个属性，都跑到子组件的根节点类名为child1-test的dom上面去了。
+                    // inheritAttrs: true,
+                    // 【观察】如果inheritAttrs为false，未定义的几个属性，不会跑到那里去。
+                    inheritAttrs: false,
+                    components: {
+                        "child2": {
+                            template: `<div>
+                                            <h3 @click.stop="$listeners.event2_top('二级子页面点击')">{{text2}}</h3>
+                                        </div>`,
+                            props: {
+                                text2: {
+                                    type: String,
+                                    default: ''
+                                }
+                            },
+                            mounted() {
+                                console.log(this.$attrs)
+                            },
+                            methods: {
+                                // event2_flag() {
+                                //     debugger
+                                //     this.$emit('event2_sign', '二级子页面点击')
+                                // }
+                            }
+                        }
+                    },
+                    mounted() {
+                        console.log(this.$attrs);
+                    },
+                    methods: {
+                        event1() {
+                            debugger
+                            this.$emit('event1', '这是一级子组件点击事件')
+                        }
+                    }
+
+                },
+
+            },
+            methods: {
+                event1_top(val_1, val_2) {
+                    debugger
+                    console.log(val_1);
+                    console.log(val_2);
+                    console.log(23);
+                },
+                event2_top(val) {
+                    debugger
+                    console.log(val);
+                    console.log(98);
+                }
+            }
+        })
+    </script>
+
+</body>

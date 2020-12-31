@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div id="itany">
+            <my-a></my-a>
+            <my-b></my-b>
+            <my-c></my-c>
+        </div>
+        <template id="a">
+            <div>
+                <h3>A组件：{{name}}</h3>
+                <button @click="send">将数据发送给C组件</button>
+            </div>
+        </template>
+        <template id="b">
+            <div>
+                <h3>B组件：{{age}}</h3>
+                <button @click="send">将数组发送给C组件</button>
+            </div>
+        </template>
+        <template id="c">
+            <div>
+                <h3>C组件：{{name}}，{{age}}</h3>
+            </div>
+        </template>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        // 【标记】第二种方法：公共事件巴士方法
+        // 使用bus bus事件总线 
+        var bus = new Vue(); //定义一个空的Vue实例
+        var A = {
+            template: '#a',
+            data() {
+                return {
+                    name: 'tom'
+                }
+            },
+            methods: {
+                send() {
+                    //【数据发射】传递数据的组件里通过vue实例方法$emit发送事件名称和需要传递的数据。(发送数据组件)
+                    bus.$emit('data-a', this.name);
+                }
+            }
+        }
+        var B = {
+            template: '#b',
+            data() {
+                return {
+                    age: 20
+                }
+            },
+            methods: {
+                send() {
+                    bus.$emit('data-b', this.age);
+                }
+            }
+        }
+        var C = {
+            template: '#c',
+            data() {
+                return {
+                    name: '',
+                    age: ""
+                }
+            },
+            mounted() {
+                //在模板编译完成后执行
+                // 【知识点】注意此处箭头函数的写法和this的指向问题
+                //【数据监听】被传递数据的组件内通过vue实例方法$on监听到事件和接受到数据。
+                //  （接收数据的组件）这里通常挂载监听在vue生命周期created和mounted当中的一个，
+                //  具体使用场景需要具体的分析，这里不说这个。
+                bus.$on('data-a', name => {
+                    this.name = name; //箭头函数内部不会产生新的this，这边如果不用=>,this指代bus
+                })
+                bus.$on('data-b', age => {
+                    this.age = age;
+                })
+            }
+        }
+        var vm = new Vue({
+            el: '#itany',
+            components: {
+                'my-a': A,
+                'my-b': B,
+                'my-c': C
+            }
+        });
+    </script>
+</body>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 【1-错误】updateTitle不能写成updateTitle() -->
+        <!-- 【2-错误】 titlechanged此处有驼峰命名带来的错误-->
+        <!-- $emit传入的事件名称只能使用小写，不能使用大写的驼峰规则命名 -->
+        <app-header v-on:titlechanged="updateTitle"></app-header>
+        <!-- //与子组件titleChanged自定义事件保持一致 -->
+        <!-- // updateTitle($event)接受传递过来的文字 -->
+        <h2>{{title}}</h2>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        //【方法一】props/$emit
+        // 父组件A通过props的方式向子组件B传递，B to A 通过在B组件中$emit, A组件中v-on的方式实现。
+        //【2】子组件向父组件传递数据
+        // 总结：子组件通过 events 给父组件发送消息，实际上就是子组件把自己的数据发送到父组件。
+        var app = new Vue({
+            el: "#app",
+            data: {
+                title: "传递的是一个值"
+            },
+            methods: {
+                updateTitle(e) { //声明这个函数
+                    debugger
+                    this.title = e;
+                }
+            },
+            components: {
+                "app-header": {
+                    data() {
+                        return {
+                            title: "Vue.js Demo"
+                        }
+                    },
+                    //绑定一个点击事件
+                    template: '<header><h1 @click="changeTitle">{{title}}</h1></header>',
+                    methods: {
+                        changeTitle() {
+                            // var this_ = this;
+                            console.log(2);
+                            this.$emit("titlechanged", "子向父组件1传值"); //自定义事件  传递值“子向父组件传值”
+                        }
+                    }
+                }
+            }
+        });
+        //【2】子组件向父组件传值（通过事件形式）
+    </script>
+</body>

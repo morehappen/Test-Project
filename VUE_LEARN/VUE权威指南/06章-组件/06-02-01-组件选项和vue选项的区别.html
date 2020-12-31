@@ -17,20 +17,23 @@
     <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
     <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
     <script>
-        // 【1】全局注册
-        Vue.components("my-component", {
-            template: "<div>这是一个全局注册的组件的语法糖写法</div>"
-        });
-        // 【2】局部注册
-        var Parent = Vue.extend({
-            template: "<div>i am parent<br><childh></childh></div>",
-            // 此处使用了实例选项components注册
-            // childh只能用在父组件Parent模板内使用，如果在根实例中调用childh则会抛出异常。
-            components: {
-                "childh": {
-                    template: "<div>i am child!</div>"
-                }
+        //【1】组件选项中的el和data与vue构造器选项中这两个属性的赋值会稍微有些不同，
+        //（1）在组件选项中，el是没有的【目前我看到的是这样】
+        //（2）data在构造器中是直接赋值，而在组件中，data是函数，且以return对象的形式声明数据
+        //【1-1】构造器的写法
+        var app = new Vue({
+            el: "#app",
+            data: {
+                name: "name"
             }
         });
+        //【1-2】组件的写法
+        var MyComponent = Vue.extend({
+            data: function() {
+                return {
+                    name: "component"
+                }
+            }
+        })
     </script>
 </body>

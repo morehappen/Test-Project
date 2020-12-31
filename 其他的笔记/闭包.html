@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闭包的笔记</title>
+</head>
+
+<body>
+    <script>
+        //【1】MDN的定义：函数和对其周围状态（词法环境）的引用捆绑一起构成闭包。 
+
+        //【2】prototype
+        // （1）每个对象都有
+        // （2）存放 对象原型 的引用 
+        // （3）可以使用 _proto_ 读写 
+
+        //【3】[[Environment]]
+        // （1）每个函数都有
+        // （2）存放 词法环境 的引用 
+        // （3）V8引擎中无法读写  
+
+        //【4】闭包不断产生的问题，
+        // 每当函数被创建（指的是函数实例的创建），就会在函数生成时候产生闭包。其实，js本身的垃圾回收机制，生成闭包，
+        // 如果没访问函数外部作用域的变量，会被干掉优化，看到的闭包是优化后的闭包。
+        function fout() {
+            let a = 1;
+
+            function fin() {
+                console.log(a++);
+            }
+            return fin;
+        }
+        const fa = fout();
+        const fb = fout();
+        fa();
+        fa();
+        fb();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- //前者自定义名称便于子组件调用，后者要传递数据名 -->
+        <users v-bind:users1="users"></users>
+    </div>
+    <script type="text/javascript" src="../../../../commonJS/vue.js"></script>
+    <script type="text/javascript" src="../../../../commonJS/zepto-1.2.0.js"></script>
+    <!-- <script type="text/javascript" src="../../../../commonJS/moment.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../../commonJS/common.js"></script> -->
+    <script>
+        //【方法一】props/$emit
+        // 父组件A通过props的方式向子组件B传递，B to A 通过在B组件中$emit, A组件中v-on的方式实现。
+        //【1】父组件向子组件传递数据
+        //总结：父组件通过 props 向下传递数据给子组件。注：组件中的数据共有三种形式：data、props、computed
+        var app = new Vue({
+            el: "#app",
+            data: {
+                users: ["Henry", "Bucky", "Emily"]
+            },
+            components: {
+                "users": {
+                    props: {
+                        users1: {
+                            type: Array,
+                            required: true
+                        },
+                    },
+                    template: "<div class='hello'><ul><li v-for='user in users1'>{{user}}</li></ul></div>",
+                }
+            }
+        });
+        //【2】子组件向父组件传值（通过事件形式）
+    </script>
+</body>
